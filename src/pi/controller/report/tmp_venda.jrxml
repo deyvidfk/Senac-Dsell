@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="scriptlet" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="782" leftMargin="30" rightMargin="30" topMargin="30" bottomMargin="30" whenResourceMissingType="Empty">
+    <property name="ireport.zoom" value="0.75"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="144"/>
+    <parameter name="TOTAL_REGISTRO" class="java.lang.Integer"/>
+    <parameter name="QUANT_FORNECEDORES_INATIVOS" class="java.lang.Integer"/>
+    <parameter name="QUANT_FORNECEDORES_ATIVOS" class="java.lang.Integer"/>
+    <parameter name="LABEL_2" class="java.lang.String"/>
+    <parameter name="LABEL_3" class="java.lang.String"/>
+    <parameter name="LABEL_4" class="java.lang.String"/>
+    <parameter name="LABEL_5" class="java.lang.String"/>
+    <parameter name="SERIE_1" class="java.lang.Double"/>
+    <parameter name="SERIE_2" class="java.lang.Double"/>
+    <parameter name="SERIE_3" class="java.lang.Double"/>
+    <parameter name="SERIE_4" class="java.lang.Double"/>
+    <parameter name="LABEL_1" class="java.lang.String"/>
+    <background>
+        <band/>
+    </background>
+    <title>
+        <band height="57">
+            <staticText>
+                <reportElement x="0" y="33" width="297" height="24"/>
+                <textElement lineSpacing="Single">
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Vendas]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="612" y="0" width="89" height="33" forecolor="#3366FF"/>
+                <textElement lineSpacing="Single">
+                    <font size="24"/>
+                </textElement>
+                <text><![CDATA[D'SELL]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="701" y="10" width="81" height="23" forecolor="#3366FF"/>
+                <textElement lineSpacing="Single">
+                    <font size="14"/>
+                </textElement>
+                <text><![CDATA[SISTEMAS]]></text>
+            </staticText>
+        </band>
+    </title>
+    <pageHeader>
+        <band/>
+    </pageHeader>
+    <columnHeader>
+        <band height="26"/>
+    </columnHeader>
+    <detail>
+        <band height="386">
+            <pie3DChart>
+                <chart>
+                    <reportElement x="0" y="0" width="379" height="238"/>
+                    <chartTitle/>
+                    <chartSubtitle/>
+                    <chartLegend/>
+                </chart>
+                <pieDataset>
+                    <pieSeries>
+                        <keyExpression><![CDATA["1 Trimestre"]]></keyExpression>
+                        <valueExpression><![CDATA[$P{SERIE_1}]]></valueExpression>
+                    </pieSeries>
+                    <pieSeries>
+                        <keyExpression><![CDATA["2 Trimestre"]]></keyExpression>
+                        <valueExpression><![CDATA[$P{SERIE_2}]]></valueExpression>
+                    </pieSeries>
+                    <pieSeries>
+                        <keyExpression><![CDATA["3 Trimestre"]]></keyExpression>
+                        <valueExpression><![CDATA[$P{SERIE_3}]]></valueExpression>
+                    </pieSeries>
+                    <pieSeries>
+                        <keyExpression><![CDATA["4 Trimestre"]]></keyExpression>
+                        <valueExpression><![CDATA[$P{SERIE_4}]]></valueExpression>
+                    </pieSeries>
+                </pieDataset>
+                <pie3DPlot>
+                    <plot/>
+                    <itemLabel/>
+                </pie3DPlot>
+            </pie3DChart>
+            <frame>
+                <reportElement x="0" y="238" width="782" height="148"/>
+                <textField>
+                    <reportElement x="0" y="36" width="782" height="20"/>
+                    <textElement lineSpacing="Single"/>
+                    <textFieldExpression class="java.lang.String"><![CDATA[$P{LABEL_2}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="0" y="56" width="782" height="20"/>
+                    <textElement lineSpacing="Single"/>
+                    <textFieldExpression class="java.lang.String"><![CDATA[$P{LABEL_3}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="0" y="76" width="782" height="20"/>
+                    <textElement lineSpacing="Single"/>
+                    <textFieldExpression class="java.lang.String"><![CDATA[$P{LABEL_4}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="0" y="106" width="782" height="20"/>
+                    <textElement lineSpacing="Single"/>
+                    <textFieldExpression class="java.lang.String"><![CDATA[$P{LABEL_5}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="0" y="16" width="782" height="20"/>
+                    <textElement lineSpacing="Single"/>
+                    <textFieldExpression class="java.lang.String"><![CDATA[$P{LABEL_1}]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="17"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="21"/>
+    </pageFooter>
+    <summary>
+        <band height="18"/>
+    </summary>
+</jasperReport>
