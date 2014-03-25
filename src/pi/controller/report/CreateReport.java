@@ -1,14 +1,17 @@
 package pi.controller.report;
 
+import static java.lang.Thread.sleep;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
+import static net.sf.jasperreports.engine.JasperCompileManager.compileReport;
+import static net.sf.jasperreports.engine.JasperFillManager.fillReport;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -23,15 +26,15 @@ public class CreateReport implements Runnable {
     /**
      * LISTA DE DADOS
      */
-    private List<?> dados;
+    private final List<?> dados;
     /**
      * NOME DO TEMPLATE (ARQUIVO)
      */
-    private String fileName;
+    private final String fileName;
     /**
      * PARAMETROS DE TIPO HASHMAP
      */
-    private HashMap<String, Object> param;
+    private final HashMap<String, Object> param;
 
     public CreateReport(List list, String fileNameTemplate, HashMap param) {
         this.dados = list;
@@ -45,19 +48,17 @@ public class CreateReport implements Runnable {
     @Override
     public void run() {
         try {
-            Thread.sleep(2);
+            sleep(2);
             newReport();
         } catch (JRException | SQLException | InterruptedException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), null, JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(CreateReport.class.getName()).log(Level.SEVERE, null, ex);
+            showMessageDialog(null, ex.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+            getLogger(CreateReport.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void newReport() throws JRException, SQLException {
 
-        System.out.println("Montando relatório...");
-
-        JasperReport template = JasperCompileManager.compileReport(this.getClass().getResourceAsStream(this.fileName)); // compilacao do JRXML
+        JasperReport template = compileReport(this.getClass().getResourceAsStream(this.fileName)); // compilacao do JRXML
 
         // preenchimento do relatório. Note que o método recebe 3 parâmetros:
         // 1 - o relatório
@@ -68,8 +69,7 @@ public class CreateReport implements Runnable {
         // 3 - o dataSource. Note que não devemos passar a lista diretamente,
         // e sim "transformar" em um data source utilizando a classe
         // JRBeanCollectionDataSource
-
-        JasperPrint print = JasperFillManager.fillReport(template, this.param, new JRBeanCollectionDataSource(this.dados));
+        JasperPrint print = fillReport(template, this.param, new JRBeanCollectionDataSource(this.dados));
         //exibe o resultado
         JasperViewer viewer = new JasperViewer(print, false);
         viewer.setVisible(true);
@@ -81,5 +81,9 @@ public class CreateReport implements Runnable {
         public static final String TMPL_FORNECEDOR_CADASTRO_RESUMIDO = "tpm_fornecedor_resumo.jrxml";
         public static final String TMPL_FORNECEDOR_CADASTRO_COMPLETO = "tpm_fornecedor_geral.jrxml";
         public static final String TMPL_VENDAS_GRAFICO = "tmp_venda.jrxml";
+
+        private Templates() {
+        }
     }
+    private static final Logger LOG = getLogger(CreateReport.class.getName());
 }

@@ -4,7 +4,10 @@
  */
 package pi.model;
 
-import pi.controller.Jtable.Coluna;
+import static java.lang.Math.floor;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+import util.jTable.Tabela;
 
 /**
  *
@@ -26,7 +29,7 @@ public class ModelVenda {
     private int hora;
     private int totalDeVendas;
 
-    @Coluna(nome = "ID", indice = 0)
+    @Tabela(Coluna = "ID", Indice = 0)
     public int getId() {
         return id;
     }
@@ -37,7 +40,7 @@ public class ModelVenda {
         }
     }
 
-    @Coluna(nome = "ID Produto", indice = 3)
+    @Tabela(Coluna = "ID Produto", Indice = 3)
     public int getIdProduto() {
         return idProduto;
     }
@@ -50,7 +53,7 @@ public class ModelVenda {
         }
     }
 
-    @Coluna(nome = "Comprador", indice = 2)
+    @Tabela(Coluna = "Comprador", Indice = 2)
     public int getIdComprador() {
         return idComprador;
     }
@@ -63,7 +66,7 @@ public class ModelVenda {
         }
     }
 
-    @Coluna(nome = "Preço", indice = 4)
+    @Tabela(Coluna = "Preço", Indice = 4)
     public double getPreco() {
         return preco;
     }
@@ -77,9 +80,9 @@ public class ModelVenda {
 
     }
 
-    @Coluna(nome = "Total", indice = 6)
+    @Tabela(Coluna = "Total", Indice = 6)
     public double getPrecoFinal() {
-        return precoFinal = (Math.floor((this.getPreco() * this.getDesconto()) / 100));
+        return precoFinal = (floor((this.getPreco() * this.getDesconto()) / 100));
     }
 
     public void setPrecoFinal(double precoFinal) {
@@ -90,7 +93,7 @@ public class ModelVenda {
         }
     }
 
-    @Coluna(nome = "Desconto", indice = 5)
+    @Tabela(Coluna = "Desconto", Indice = 5)
     public double getDesconto() {
         return desconto;
     }
@@ -103,13 +106,13 @@ public class ModelVenda {
         }
     }
 
-    @Coluna(nome = "Data da venda", indice = 1)
+    @Tabela(Coluna = "Data da venda", Indice = 1)
     public String getDataDaVenda() {
         return dataDaVenda;
     }
 
     public void setDataDaVenda(String dataDaVenda) {
-        if (!dataDaVenda.equals("")) {
+        if (!dataDaVenda.isEmpty()) {
             this.dataDaVenda = dataDaVenda;
         } else {
             throw new IllegalArgumentException("Data invalida.");
@@ -122,7 +125,7 @@ public class ModelVenda {
     }
 
     public void setData(String data) {
-        if (!data.equals("")) {
+        if (!data.isEmpty()) {
             this.data = data;
         } else {
             throw new IllegalArgumentException("Data invalida.");
@@ -178,4 +181,5 @@ public class ModelVenda {
             throw new IllegalArgumentException("O valor deve ser maior ou igual a zero.");
         }
     }
+    private static final Logger LOG = getLogger(ModelVenda.class.getName());
 }

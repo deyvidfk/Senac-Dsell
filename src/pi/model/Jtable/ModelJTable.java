@@ -4,7 +4,7 @@
  */
 package pi.model.Jtable;
 
-import pi.controller.Jtable.Coluna;
+import pi.controller.Jtable.Tabela;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -38,7 +38,7 @@ public class ModelJTable extends AbstractTableModel {
     public int getColumnCount() {
         int colunas = 0;
         for (Method metodo : classe.getDeclaredMethods()) {
-            if (metodo.isAnnotationPresent(Coluna.class)) {
+            if (metodo.isAnnotationPresent(Tabela.class)) {
                 colunas++;
             }
         }
@@ -48,10 +48,10 @@ public class ModelJTable extends AbstractTableModel {
     @Override
     public String getColumnName(int coluna) {
         for (Method metodo : classe.getDeclaredMethods()) {
-            if (metodo.isAnnotationPresent(Coluna.class)) {
-                Coluna anotacao = metodo.getAnnotation(Coluna.class);
-                if (anotacao.indice() == coluna) {
-                    return anotacao.nome();
+            if (metodo.isAnnotationPresent(Tabela.class)) {
+                Tabela anotacao = metodo.getAnnotation(Tabela.class);
+                if (anotacao.indiceColuna() == coluna) {
+                    return anotacao.nomeColuna();
                 }
             }
         }
@@ -63,9 +63,9 @@ public class ModelJTable extends AbstractTableModel {
         try {
             Object objeto = lista.get(linha);
             for (Method metodo : classe.getDeclaredMethods()) {
-                if (metodo.isAnnotationPresent(Coluna.class)) {
-                    Coluna anotacao = metodo.getAnnotation(Coluna.class);
-                    if (anotacao.indice() == coluna) {
+                if (metodo.isAnnotationPresent(Tabela.class)) {
+                    Tabela anotacao = metodo.getAnnotation(Tabela.class);
+                    if (anotacao.indiceColuna() == coluna) {
                         return metodo.invoke(objeto);
                     }
                 }

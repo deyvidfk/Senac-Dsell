@@ -1,17 +1,19 @@
 package pi.controller;
 
 import java.util.ArrayList;
-import pi.dao.DaoProduto;
+import static java.util.Collections.unmodifiableList;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
-import javax.swing.JOptionPane;
-import util.ValidaForm;
+import static javax.swing.JOptionPane.showMessageDialog;
+import pi.dao.DaoProduto;
 import pi.model.ModelProduto;
+import static util.ValidaForm.isValid;
 
-public final class CadastrarProduto {
+public class CadastrarProduto {
 
     private static final DaoProduto DAO_PROD = new DaoProduto();
     @SuppressWarnings("unchecked")
@@ -19,18 +21,35 @@ public final class CadastrarProduto {
     private static List<ModelProduto> listaAuxiliar;
 
     public static List<ModelProduto> getProduto() {
-        return PRODUTO_LIST;
+        return (PRODUTO_LIST);
     }
 
     static public void insertIntoXml(List<ModelProduto> data) {
         DAO_PROD.createXml(data);
     }
 
-    private boolean validarDados(ModelProduto usu) {
-        if (ValidaForm.isValid(usu)) {
-            return true;
+    public static String searchNome(int id) {
+        return getProduto().get(id).getNome();
+    }
+
+    public static int searchRecordSize(int idFornecedor) {
+        if (!getProduto().isEmpty()) {
+            CadastrarProduto.listaAuxiliar = new ArrayList<>(getProduto());
+            CadastrarProduto.listaAuxiliar.clear();
+            for (int index = 0; index < getProduto().size(); index++) {
+                if (getProduto().get(index).getIdFornecedor() == idFornecedor) {
+                    if (getProduto().size() > 0) {
+                        CadastrarProduto.listaAuxiliar.add(getProduto().get(index));
+                    }
+                }
+            }
+            return CadastrarProduto.listaAuxiliar.size();
         }
-        return false;
+        return 0;
+    }
+
+    private boolean validarDados(ModelProduto usu) {
+        return isValid(usu);
     }
 
     public boolean creat(int txtIdFornecedor, String txtNome, String txtCategoria, String txtMarca, String txtModelo, String txtTipo, String txtCor, Double txtPreco, Integer txtDesconto, String txtGarantia) {
@@ -56,8 +75,8 @@ public final class CadastrarProduto {
                 return true;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            Logger.getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
+            showMessageDialog(null, e.getMessage());
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
     }
@@ -90,32 +109,10 @@ public final class CadastrarProduto {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            Logger.getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
+            showMessageDialog(null, e.getMessage());
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
-        return CadastrarProduto.listaAuxiliar;
-    }
-
-    public static String searchNome(int id) {
-
-        return getProduto().get(id).getNome();
-    }
-
-    public static int searchRecordSize(int idFornecedor) {
-
-        if (!getProduto().isEmpty()) {
-            CadastrarProduto.listaAuxiliar = new ArrayList<>(getProduto());
-            CadastrarProduto.listaAuxiliar.clear();
-            for (int index = 0; index < getProduto().size(); index++) {
-                if (getProduto().get(index).getIdFornecedor() == idFornecedor) {
-                    if (getProduto().size() > 0) {
-                        CadastrarProduto.listaAuxiliar.add(getProduto().get(index));
-                    }
-                }
-            }
-            return CadastrarProduto.listaAuxiliar.size();
-        }
-        return 0;
+        return unmodifiableList(CadastrarProduto.listaAuxiliar);
     }
 
     public List<ModelProduto> searchRecord(String Output, int idFornecedor) {
@@ -134,12 +131,11 @@ public final class CadastrarProduto {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            Logger
-                    .getLogger(Resource.class
+            showMessageDialog(null, e.getMessage());
+            getLogger(Resource.class
                     .getName()).log(Level.SEVERE, null, e);
         }
-        return CadastrarProduto.listaAuxiliar;
+        return unmodifiableList(CadastrarProduto.listaAuxiliar);
     }
 
     public List<ModelProduto> searchRecordFiltro(String Output, int idFornecedor) {
@@ -157,11 +153,10 @@ public final class CadastrarProduto {
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            Logger
-                    .getLogger(Resource.class
-                    .getName()).log(Level.SEVERE, null, e);
+            showMessageDialog(null, e.getMessage());
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
-        return CadastrarProduto.listaAuxiliar;
+        return unmodifiableList(CadastrarProduto.listaAuxiliar);
     }
+    private static final Logger LOG = getLogger(CadastrarProduto.class.getName());
 }

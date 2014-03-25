@@ -2,29 +2,34 @@ package pi.controller.Jtable;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collections;
+import static java.util.Collections.sort;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
-import pi.model.Jtable.ModelJTable;
+import static javax.swing.JOptionPane.showMessageDialog;
+import javax.swing.table.AbstractTableModel;
+import static pi.dao.DaoPessoaFisica.getUsuario;
 import pi.model.ModelPessoaFisica;
-import pi.views.FrmCadastrarPF;
+import pi.views.FrmCadastrarPF_;
+import util.jTable.CellRenderer;
+import util.jTable.ModelJTable;
 
-public final class JtableUsuario {
+public class JtableUsuario {
 
     /**
      * PROPRIEDADES
      */
     private static ModelJTable _modelJtable;
-    private static FrmCadastrarPF _viewForm;
+    private static FrmCadastrarPF_ _viewForm;
 
     /**
      * CONSTRUTOR DA CLASSE
      */
-    public JtableUsuario(FrmCadastrarPF ViewUsuario) {
+    public JtableUsuario(FrmCadastrarPF_ ViewUsuario) {
         setViewFrm(ViewUsuario);
     }
 
@@ -37,12 +42,12 @@ public final class JtableUsuario {
     public void popularJtable() {
         ordenarPorNome();
         try {
-            ModelJTable tabela = new ModelJTable((ArrayList) pi.controller.CadastrarUsuario.getUsuario());
+            ModelJTable tabela = new ModelJTable(getUsuario());
             this.getViewForm().getjTableLoadUsers().setModel(tabela);
             this.getViewForm().getjTableLoadUsers().setDefaultRenderer(Object.class, new CellRenderer());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
+            showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -50,27 +55,27 @@ public final class JtableUsuario {
      * ATUALIZA A TABELA "JTable"
      */
     public void updateJtable() {
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).fireTableDataChanged();
+        ((AbstractTableModel) this.getViewForm().getjTableLoadUsers().getModel()).fireTableDataChanged();
     }
 
     /**
      * ATUALIZA REGISTRO NA LINHA ALTERADA INDICADA PELO ID
      */
     public void updateRow(int i, String nome, String rg, String cpf, String telefone, String email, String site, String cidade, String estado, String pais, String bairro, String rua, String numero, String complemento, String cep) {
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(nome, i, 0);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(rg, i, 1);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(cpf, i, 2);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(telefone, i, 3);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(email, i, 4);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(site, i, 5);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(cidade, i, 6);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(estado, i, 7);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(pais, i, 8);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(bairro, i, 9);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(rua, i, 10);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(numero, i, 11);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(complemento, i, 12);
-        ((ModelJTable) this.getViewForm().getjTableLoadUsers().getModel()).setValueAt(cep, i, 13);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(nome, i, 0);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(rg, i, 1);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(cpf, i, 2);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(telefone, i, 3);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(email, i, 4);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(site, i, 5);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(cidade, i, 6);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(estado, i, 7);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(pais, i, 8);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(bairro, i, 9);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(rua, i, 10);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(numero, i, 11);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(complemento, i, 12);
+        this.getViewForm().getjTableLoadUsers().getModel().setValueAt(cep, i, 13);
     }
 
     /**
@@ -78,7 +83,7 @@ public final class JtableUsuario {
      */
     public void ordenarPorNome() {
         //ordena pelo nome
-        Collections.sort(pi.controller.CadastrarUsuario.getUsuario(), new Comparator<ModelPessoaFisica>() {
+        sort(getUsuario(), new Comparator<ModelPessoaFisica>() {
             @Override
             public int compare(ModelPessoaFisica o1, ModelPessoaFisica o2) {
                 return o1.getNome().compareTo(o2.getNome());
@@ -87,20 +92,20 @@ public final class JtableUsuario {
     }
 
     public void moveRecord(int i) {
-        this.getViewForm().getTxtNome().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getNome());
-        this.getViewForm().getTxtRg().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getRg());
-        this.getViewForm().getTxtCpf().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getCpf());
-        this.getViewForm().getTxtTelefone().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getTelefone());
-        this.getViewForm().getTxtEmail().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getEmail());
-        this.getViewForm().getTxtSite().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getSite());
-        this.getViewForm().getTxtCidade().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getCidade());
-        this.getViewForm().getTxtEstado().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getEstado());
-        this.getViewForm().getTxtPais().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getPais());
-        this.getViewForm().getTxtBairro().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getBairro());
-        this.getViewForm().getTxtRua().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getRua());
-        this.getViewForm().getTxtNumero().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getNumero());
-        this.getViewForm().getTxtComplemento().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getComplemento());
-        this.getViewForm().getTxtCep().setText(pi.controller.CadastrarUsuario.getUsuario().get(i).getCep());
+        this.getViewForm().getTxtNome().setText(getUsuario().get(i).getNome());
+        this.getViewForm().getTxtRg().setText(getUsuario().get(i).getRg());
+        this.getViewForm().getTxtCpf().setText(getUsuario().get(i).getCpf());
+        this.getViewForm().getTxtTelefone().setText(getUsuario().get(i).getTelefone());
+        this.getViewForm().getTxtEmail().setText(getUsuario().get(i).getEmail());
+        this.getViewForm().getTxtSite().setText(getUsuario().get(i).getSite());
+        this.getViewForm().getTxtCidade().setText(getUsuario().get(i).getCidade());
+        this.getViewForm().getTxtEstado().setText(getUsuario().get(i).getEstado());
+        this.getViewForm().getTxtPais().setText(getUsuario().get(i).getPais());
+        this.getViewForm().getTxtBairro().setText(getUsuario().get(i).getBairro());
+        this.getViewForm().getTxtRua().setText(getUsuario().get(i).getRua());
+        this.getViewForm().getTxtNumero().setText(getUsuario().get(i).getNumero());
+        this.getViewForm().getTxtComplemento().setText(getUsuario().get(i).getComplemento());
+        this.getViewForm().getTxtCep().setText(getUsuario().get(i).getCep());
         this.getViewForm().getTxtID().setText(Integer.toString(i));
     }
 
@@ -112,12 +117,12 @@ public final class JtableUsuario {
     public void searchRecord(String Output) {
         if (!Output.isEmpty()) {
             String txtOutput = Output.toUpperCase(Locale.ROOT);
-            ArrayList<ModelPessoaFisica> ListaAuxiliar = new ArrayList<>(pi.controller.CadastrarUsuario.getUsuario());
+            ArrayList<ModelPessoaFisica> ListaAuxiliar = new ArrayList<>(getUsuario());
             ListaAuxiliar.clear();
-            for (int index = 0; index < pi.controller.CadastrarUsuario.getUsuario().size(); index++) {
-                if (pi.controller.CadastrarUsuario.getUsuario().get(index).getRg().toUpperCase(Locale.ROOT).contains(txtOutput) || pi.controller.CadastrarUsuario.getUsuario().get(index).getCpf().toUpperCase(Locale.ROOT).contains(txtOutput) || pi.controller.CadastrarUsuario.getUsuario().get(index).getNome().toUpperCase(Locale.ROOT).contains(txtOutput)) {
-                    if (pi.controller.CadastrarUsuario.getUsuario().size() > 0) {
-                        ListaAuxiliar.add(pi.controller.CadastrarUsuario.getUsuario().get(index));
+            for (int index = 0; index < getUsuario().size(); index++) {
+                if (getUsuario().get(index).getRg().toUpperCase(Locale.ROOT).contains(txtOutput) || getUsuario().get(index).getCpf().toUpperCase(Locale.ROOT).contains(txtOutput) || getUsuario().get(index).getNome().toUpperCase(Locale.ROOT).contains(txtOutput)) {
+                    if (getUsuario().size() > 0) {
+                        ListaAuxiliar.add(getUsuario().get(index));
                     }
                 }
             }
@@ -131,11 +136,11 @@ public final class JtableUsuario {
     /**
      * GETTERS E SETTERS *
      */
-    private pi.views.FrmCadastrarPF getViewForm() {
+    private pi.views.FrmCadastrarPF_ getViewForm() {
         return _viewForm;
     }
 
-    private void setViewFrm(FrmCadastrarPF ViewFrmFornecedor) {
+    private void setViewFrm(FrmCadastrarPF_ ViewFrmFornecedor) {
         JtableUsuario._viewForm = ViewFrmFornecedor;
     }
 
@@ -146,4 +151,5 @@ public final class JtableUsuario {
     private void setModelJtable(ModelJTable ModelJtable) {
         JtableUsuario._modelJtable = ModelJtable;
     }
+    private static final Logger LOG = getLogger(JtableUsuario.class.getName());
 }

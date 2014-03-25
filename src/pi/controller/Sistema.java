@@ -88,4 +88,6 @@ public class Sistema extends JWindow {
     private JProgressBar getBarra() {
         return barra;
     }
+    
+    
 }

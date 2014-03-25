@@ -68,10 +68,10 @@ public enum Regex {
      */
     LOGIN_ADM("(\\W|^)(adm|admin|)(\\W|$)");
     public String expressao;
-    
-    public String getExpressao(){
-        
-    return this.expressao;
+
+    public String getExpressao() {
+
+        return this.expressao;
     }
 
     Regex(String exp) {

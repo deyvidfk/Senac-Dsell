@@ -12,9 +12,9 @@ import java.lang.annotation.*;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Coluna {
+public @interface Tabela {
 
-    String nome();
+    String nomeColuna();
 
-    int indice();
+    int indiceColuna();
 }

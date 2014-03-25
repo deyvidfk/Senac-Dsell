@@ -9,6 +9,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import util.Regex;
 
 /**
  *
@@ -19,7 +20,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RegularExpressionValidator {
 
-    String ValidationExpression();
+    Regex ValidationExpression();
 
     String Label();
 

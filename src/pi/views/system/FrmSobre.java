@@ -4,6 +4,9 @@
  */
 package pi.views.system;
 
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+
 /**
  *
  * @author deyvid.fk
@@ -120,4 +123,5 @@ public class FrmSobre extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+    private static final Logger LOG = getLogger(FrmSobre.class.getName());
 }

@@ -6,17 +6,18 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import static java.net.URLDecoder.decode;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
-import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Source {
 
     private static String relativePath;
-    private static XStream XSTREAM = new XStream();
+    private static final XStream XSTREAM = new XStream();
 
     /**
      * @return the XSTREAM
@@ -35,13 +36,12 @@ public class Source {
 
         String path = Source.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         try {
-            relativePath = URLDecoder.decode(path, "UTF-8");
-            int lastSlash = relativePath.lastIndexOf("/");
+            relativePath = decode(path, "UTF-8");
+            int lastSlash = relativePath.lastIndexOf('/');
             relativePath = relativePath.substring(0, lastSlash + 1);
-            System.out.println("Relative path: " + relativePath);
         } catch (UnsupportedEncodingException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            Logger.getLogger(Resource.class.getName()).log(Level.SEVERE, null, ex);
+            showMessageDialog(null, ex.getMessage());
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -63,7 +63,7 @@ public class Source {
                 return file;
 
             } catch (IOException ex) {
-                Logger.getLogger(Resource.class.getName()).log(Level.SEVERE, null, ex);
+                getLogger(Resource.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return file;
@@ -81,9 +81,10 @@ public class Source {
                     BufferedWriter w = new BufferedWriter(fw)) {
                 w.write(getXSTREAM().toXML(dados));
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            Logger.getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
+        } catch (IOException e) {
+            showMessageDialog(null, e.getMessage());
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+    private static final Logger LOG = getLogger(Source.class.getName());
 }

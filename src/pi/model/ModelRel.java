@@ -4,6 +4,9 @@
  */
 package pi.model;
 
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+
 /**
  *
  * @author deyvid.fk
@@ -28,4 +31,5 @@ public class ModelRel {
     public void setRendimento(double rendimento) {
         this.rendimento = rendimento;
     }
+    private static final Logger LOG = getLogger(ModelRel.class.getName());
 }

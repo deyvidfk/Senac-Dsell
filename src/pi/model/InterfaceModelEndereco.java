@@ -41,5 +41,5 @@ public interface InterfaceModelEndereco {
     void setPais(String pais);
 
     void setRua(String rua);
-    
+
 }

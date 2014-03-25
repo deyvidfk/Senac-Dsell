@@ -1,9 +1,14 @@
 package util;
 
-import util.anotacao.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
+import static util.RegexTest.TestarRegex;
+import util.anotacao.RegularExpressionValidator;
+import util.anotacao.RequiredValidation;
 
 /**
  *
@@ -20,10 +25,9 @@ public class ValidaForm {
      *
      * Class Pessoa {
      *
-     * @RegularExpressionValidator(ValidationExpression =
-     * ExpressaoRegular.EMAIL, Label = "E-mail", RegexErrorMessage = "E-mail
-     * Inválido", EnableErrorMessage = true) public String getEmail() { return
-     * email; } }
+     * @RegularExpressionValidator(ValidationExpression = RegexTest.EMAIL, Label
+     * = "E-mail", RegexErrorMessage = "E-mail Inválido", EnableErrorMessage =
+     * true) public String getEmail() { return email; } }
      */
     public static boolean isValid(Object obj) {
         Class<?> classe = obj.getClass();
@@ -50,7 +54,7 @@ public class ValidaForm {
                         }
                     }
                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage(), null, JOptionPane.WARNING_MESSAGE);
+                    showMessageDialog(null, e.getMessage(), null, JOptionPane.WARNING_MESSAGE);
                     return false;
                 }
             }
@@ -61,15 +65,15 @@ public class ValidaForm {
                     RegularExpressionValidator annotation = m.getAnnotation(RegularExpressionValidator.class);
                     if (!m.getReturnType().getName().equals("void")) {
 
-                        if (!annotation.ValidationExpression().isEmpty()) {
+                        if (annotation.ValidationExpression().equals(obj)) {
                             Object object1 = m.invoke(obj);
-                            if (ExpressaoRegular.TestarRegex(annotation.ValidationExpression(), object1.toString()) == false) {
+                            if (TestarRegex(annotation.ValidationExpression(), object1.toString()) == false) {
                                 throw new IllegalArgumentException(annotation.RegexErrorMessage());
                             }
                         }
                     }
                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage(), null, JOptionPane.WARNING_MESSAGE);
+                    showMessageDialog(null, e.getMessage(), null, JOptionPane.WARNING_MESSAGE);
                     return false;
                 }
             }
@@ -77,32 +81,24 @@ public class ValidaForm {
         return check;
     }
 
-    public static boolean isValid(String str, boolean requerid, String re) {
-
+    public static boolean isValid(String str, boolean requerid, Regex re) {
         if (requerid == true) {
-            if (!str.equals("")) {
-                if (!re.equals("")) {
-                    boolean validaExp = ExpressaoRegular.TestarRegex(re, str);
-                    if (validaExp) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+            if (!str.isEmpty()) {
+                if (re != null) {
+                    return TestarRegex(re, str);
                 }
                 return true;
             }
             return false;
         } else {
-
-            if (!re.equals("")) {
-                boolean validaExp = ExpressaoRegular.TestarRegex(re, str);
-                if (validaExp) {
-                    return true;
-                } else {
-                    return false;
-                }
+            if (re != null) {
+                return TestarRegex(re, str);
             }
             return true;
         }
+    }
+    private static final Logger LOG = getLogger(ValidaForm.class.getName());
+
+    private ValidaForm() {
     }
 }

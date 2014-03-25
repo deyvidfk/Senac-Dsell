@@ -6,15 +6,16 @@ package pi.dao;
 
 import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
-import java.util.Collections;
+import static java.util.Collections.sort;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import pi.controller.CadastrarFornecedor;
-import static pi.controller.CadastrarFornecedor.getFornecedor;
-import pi.controller.CadastrarProduto;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+import static pi.controller.CadastrarProduto.getProduto;
+import static pi.dao.DaoPessoaJuridica.getFornecedor;
 import pi.model.ModelPessoaJuridica;
 
 /**
@@ -23,39 +24,7 @@ import pi.model.ModelPessoaJuridica;
  */
 public class DaoPessoaJuridica implements DaoInterface {
 
-    private final Source CONEXAO_DB;
-    private final String FILE_XML_PJ;
-    private final XStream XSTREAM;
     private static List<ModelPessoaJuridica> _pessoaJuridica;
-
-    public DaoPessoaJuridica() {
-        this.FILE_XML_PJ = "db.pessoa-juridica.xml";
-        this.XSTREAM = new XStream();
-        this.CONEXAO_DB = new Source();
-        DaoPessoaJuridica._pessoaJuridica = readXml();
-    }
-
-    @Override
-    public void createXml(List<?> data) {
-        CONEXAO_DB.insertXml(this.FILE_XML_PJ, data);
-    }
-
-    @Override
-    public void updateXml(List<?> data) {
-        createXml(data);
-    }
-
-    @Override
-    public void deleteXml(int id) {
-        _pessoaJuridica.remove(id);
-        createXml(_pessoaJuridica);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<ModelPessoaJuridica> readXml() {
-        return (ArrayList<ModelPessoaJuridica>) XSTREAM.fromXML(CONEXAO_DB.readXml(this.FILE_XML_PJ));
-    }
 
     /**
      * Lista dos fornecedores ativos, ordenados por quantidade de produtos.
@@ -66,10 +35,10 @@ public class DaoPessoaJuridica implements DaoInterface {
     public static List<ModelPessoaJuridica> getFornecedorAtivo() {
         Map<Integer, Integer> map = new HashMap<>();
         int cont;
-        for (int i = 0; i < CadastrarFornecedor.getFornecedor().size(); i++) {
+        for (int i = 0; i < getFornecedor().size(); i++) {
             cont = 0;
-            for (int j = 0; j < CadastrarProduto.getProduto().size(); j++) {
-                if (CadastrarFornecedor.getFornecedor().get(i).getId() == CadastrarProduto.getProduto().get(j).getIdFornecedor()) {
+            for (int j = 0; j < getProduto().size(); j++) {
+                if (getFornecedor().get(i).getId() == getProduto().get(j).getIdFornecedor()) {
                     if (map.containsKey(i)) {
                         map.remove(i);
                         map.put(i, cont++);
@@ -79,10 +48,10 @@ public class DaoPessoaJuridica implements DaoInterface {
                 }
             }
             // Atribuindo os produos aos fornecedores;
-            CadastrarFornecedor.getFornecedor().get(i).setQtdProduto(cont);
+            getFornecedor().get(i).setQtdProduto(cont);
         }
 
-        List<ModelPessoaJuridica> ListaAuxiliar = new ArrayList<>(CadastrarFornecedor.getFornecedor());
+        List<ModelPessoaJuridica> ListaAuxiliar = new ArrayList<>(getFornecedor());
 
         for (int i = 0; i < ListaAuxiliar.size(); i++) {
             if (i == ListaAuxiliar.size()) {
@@ -101,7 +70,7 @@ public class DaoPessoaJuridica implements DaoInterface {
         }
 
         /* Ordena os fornecedores pela quantidade de produtos, em ordem decrescente. */
-        Collections.sort(ListaAuxiliar, new Comparator() {
+        sort(ListaAuxiliar, new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
                 ModelPessoaJuridica p1 = (ModelPessoaJuridica) o1;
@@ -121,10 +90,10 @@ public class DaoPessoaJuridica implements DaoInterface {
     public static List<ModelPessoaJuridica> getForInativos() {
         Map<Integer, Integer> map = new HashMap<>();
         int cont;
-        for (int i = 0; i < CadastrarFornecedor.getFornecedor().size(); i++) {
+        for (int i = 0; i < getFornecedor().size(); i++) {
             cont = 0;
-            for (int j = 0; j < CadastrarProduto.getProduto().size(); j++) {
-                if (CadastrarFornecedor.getFornecedor().get(i).getId() == CadastrarProduto.getProduto().get(j).getIdFornecedor()) {
+            for (int j = 0; j < getProduto().size(); j++) {
+                if (getFornecedor().get(i).getId() == getProduto().get(j).getIdFornecedor()) {
                     if (map.containsKey(i)) {
                         map.remove(i);
                         map.put(i, cont++);
@@ -134,10 +103,10 @@ public class DaoPessoaJuridica implements DaoInterface {
                 }
             }
             // Atribuindo os produos aos fornecedores;
-            CadastrarFornecedor.getFornecedor().get(i).setQtdProduto(cont);
+            getFornecedor().get(i).setQtdProduto(cont);
         }
 
-        List<ModelPessoaJuridica> listaAuxiliar = new ArrayList<>(CadastrarFornecedor.getFornecedor());
+        List<ModelPessoaJuridica> listaAuxiliar = new ArrayList<>(getFornecedor());
 
         for (int i = 0; i < listaAuxiliar.size(); i++) {
             if (i == listaAuxiliar.size()) {
@@ -157,7 +126,7 @@ public class DaoPessoaJuridica implements DaoInterface {
             }
         }
         // Ordena os fornecedores pela quantidade de produtos em ordem decrescente.
-        Collections.sort(listaAuxiliar, new Comparator() {
+        sort(listaAuxiliar, new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
                 ModelPessoaJuridica p1 = (ModelPessoaJuridica) o1;
@@ -198,6 +167,41 @@ public class DaoPessoaJuridica implements DaoInterface {
      * @return
      */
     public static List<ModelPessoaJuridica> getFornecedor() {
-        return DaoPessoaJuridica._pessoaJuridica;
+        // return unmodifiableList(DaoPessoaJuridica._pessoaJuridica);
+        return (DaoPessoaJuridica._pessoaJuridica);
     }
+
+    private final Source CONEXAO_DB;
+    private final String FILE_XML;
+    private final XStream XSTREAM;
+
+    public DaoPessoaJuridica() {
+        this.FILE_XML = "db.pessoa-juridica.xml";
+        this.XSTREAM = new XStream();
+        this.CONEXAO_DB = new Source();
+        DaoPessoaJuridica._pessoaJuridica = readXml();
+    }
+
+    @Override
+    public void createXml(List<?> data) {
+        CONEXAO_DB.insertXml(this.FILE_XML, data);
+    }
+
+    @Override
+    public void updateXml(List<?> data) {
+        createXml(data);
+    }
+
+    @Override
+    public void deleteXml(int id) {
+        _pessoaJuridica.remove(id);
+        createXml(_pessoaJuridica);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<ModelPessoaJuridica> readXml() {
+        return (List<ModelPessoaJuridica>) XSTREAM.fromXML(CONEXAO_DB.readXml(this.FILE_XML));
+    }
+    private static final Logger LOG = getLogger(DaoPessoaJuridica.class.getName());
 }

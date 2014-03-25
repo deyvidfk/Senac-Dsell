@@ -1,6 +1,10 @@
 package util;
 
-public final class Chronometer {
+import static java.lang.System.currentTimeMillis;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+
+public class Chronometer {
 
     private static long startValue;
     private static long stopValue;
@@ -11,7 +15,7 @@ public final class Chronometer {
      */
     public static void start() {
         // Obtém a hora atual em milissegundos.
-        startValue = System.currentTimeMillis();
+        startValue = currentTimeMillis();
         stopValue = 0;
         timeDiff = 0;
     }
@@ -20,7 +24,7 @@ public final class Chronometer {
      * Calcula a diferença temporal
      */
     public static void stop() {
-        stopValue = System.currentTimeMillis();
+        stopValue = currentTimeMillis();
         timeDiff = stopValue - startValue;
     }
 
@@ -32,4 +36,9 @@ public final class Chronometer {
     public static long elapsedTime() {
         return timeDiff;
     }
+    private static final Logger LOG = getLogger(Chronometer.class.getName());
+
+    private Chronometer() {
+    }
+
 }

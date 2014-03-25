@@ -21,5 +21,5 @@ public interface InterfaceModelContato {
     void setSite(String site);
 
     void setTelefone(String telefone);
-    
+
 }

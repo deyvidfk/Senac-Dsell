@@ -4,13 +4,15 @@
  */
 package pi.model;
 
-import pi.controller.Jtable.Coluna;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+import util.jTable.Tabela;
 
 /**
  *
  * @author deyvid.fk
  */
-public final class ModelProduto {
+public class ModelProduto {
 
     private int id;
     private int idFornecedor;
@@ -30,13 +32,13 @@ public final class ModelProduto {
     private String dataFrabricacao;
     private String dataValidade;
 
-    @Coluna(nome = "Nome", indice = 0)
+    @Tabela(Coluna = "Nome", Indice = 0)
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
-        if (!nome.equals("")) {
+        if (!nome.isEmpty()) {
             this.nome = nome;
         }
     }
@@ -46,12 +48,12 @@ public final class ModelProduto {
     }
 
     public void setDescricao(String descricao) {
-        if (!descricao.equals("")) {
+        if (!descricao.isEmpty()) {
             this.descricao = descricao;
         }
     }
 
-    @Coluna(nome = "Preço", indice = 3)
+    @Tabela(Coluna = "Preço", Indice = 3)
     public double getPreco() {
         return preco;
     }
@@ -62,7 +64,7 @@ public final class ModelProduto {
         }
     }
 
-    @Coluna(nome = "Descricao", indice = 4)
+    @Tabela(Coluna = "Descricao", Indice = 4)
     public int getDesconto() {
         return desconto;
     }
@@ -78,29 +80,29 @@ public final class ModelProduto {
     }
 
     public void setFornecedor(String fornecedor) {
-        if (!fornecedor.equals("")) {
+        if (!fornecedor.isEmpty()) {
             this.fornecedor = fornecedor;
         }
     }
 
-    @Coluna(nome = "Marca", indice = 1)
+    @Tabela(Coluna = "Marca", Indice = 1)
     public String getMarca() {
         return marca;
     }
 
     public void setMarca(String marca) {
-        if (!marca.equals("")) {
+        if (!marca.isEmpty()) {
             this.marca = marca;
         }
     }
 
-    @Coluna(nome = "Modelo", indice = 2)
+    @Tabela(Coluna = "Modelo", Indice = 2)
     public String getModelo() {
         return modelo;
     }
 
     public void setModelo(String modelo) {
-        if (!modelo.equals("")) {
+        if (!modelo.isEmpty()) {
             this.modelo = modelo;
         }
     }
@@ -110,7 +112,7 @@ public final class ModelProduto {
     }
 
     public void setCor(String cor) {
-        if (!cor.equals("")) {
+        if (!cor.isEmpty()) {
             this.cor = cor;
         }
     }
@@ -120,7 +122,7 @@ public final class ModelProduto {
     }
 
     public void setTamanho(String tamanho) {
-        if (!tamanho.equals("")) {
+        if (!tamanho.isEmpty()) {
             this.tamanho = tamanho;
         }
     }
@@ -129,9 +131,9 @@ public final class ModelProduto {
         return garantia;
     }
 
-    @Coluna(nome = "Garantia", indice = 5)
+    @Tabela(Coluna = "Garantia", Indice = 5)
     public void setGarantia(String garantia) {
-        if (!garantia.equals("")) {
+        if (!garantia.isEmpty()) {
             this.garantia = garantia;
         }
     }
@@ -161,7 +163,7 @@ public final class ModelProduto {
     }
 
     public void setTipo(String tipo) {
-        if (!tipo.equals("")) {
+        if (!tipo.isEmpty()) {
             this.tipo = tipo;
         }
     }
@@ -171,7 +173,7 @@ public final class ModelProduto {
     }
 
     public void setDataFrabricacao(String dataFrabricacao) {
-        if (!dataFrabricacao.equals("")) {
+        if (!dataFrabricacao.isEmpty()) {
             this.dataFrabricacao = dataFrabricacao;
         }
     }
@@ -181,7 +183,7 @@ public final class ModelProduto {
     }
 
     public void setDataValidade(String dataValidade) {
-        if (!dataValidade.equals("")) {
+        if (!dataValidade.isEmpty()) {
             this.dataValidade = dataValidade;
         }
     }
@@ -211,8 +213,9 @@ public final class ModelProduto {
     }
 
     public void setCategoria(String categoria) {
-        if (!categoria.equals("")) {
+        if (!categoria.isEmpty()) {
             this.categoria = categoria;
         }
     }
+    private static final Logger LOG = getLogger(ModelProduto.class.getName());
 }

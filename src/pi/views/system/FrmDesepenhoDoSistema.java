@@ -1,21 +1,27 @@
 package pi.views.system;
 
-import util.Chronometer;
-import pi.controller.Sistema;
-import pi.controller.TesteDeDesepenhoDoSistema;
+import static java.lang.String.valueOf;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+import static javax.swing.BorderFactory.createTitledBorder;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showConfirmDialog;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import pi.model.ModelGrafico;
-import org.jfree.chart.ChartFactory;
+import static org.jfree.chart.ChartFactory.createBarChart3D;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import pi.controller.sis.TesteDeDesepenhoDoSistema;
+import pi.model.ModelGrafico;
 import pi.views.FrmConsultarFornecedor;
+import static util.Chronometer.elapsedTime;
+import static util.Chronometer.start;
+import static util.Chronometer.stop;
+import static util.Time.getDate;
 
 /**
  *
@@ -24,22 +30,22 @@ import pi.views.FrmConsultarFornecedor;
 public class FrmDesepenhoDoSistema extends javax.swing.JInternalFrame {
 
     private static final TesteDeDesepenhoDoSistema TESTE_SISTEMA = new TesteDeDesepenhoDoSistema();
-    private ArrayList<ModelGrafico> graficoList;
+    private final ArrayList<ModelGrafico> graficoList;
     int cont;
 
     public FrmDesepenhoDoSistema() {
         this.graficoList = new ArrayList<>();
         this.cont = 1;
         initComponents();
-        jSliderQtdRegistro.setBorder(BorderFactory.createTitledBorder("Quant."));
-        jSliderQtdRegistro.setMajorTickSpacing(1000);
+        jSliderQtdRegistro.setBorder(createTitledBorder("Quant."));
+        jSliderQtdRegistro.setMajorTickSpacing(1_000);
         jSliderQtdRegistro.setMinorTickSpacing(10);
         jSliderQtdRegistro.setPaintTicks(true);
         jSliderQtdRegistro.setPaintLabels(true);
         jSliderQtdRegistro.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                labelNumeroRegistro.setText(String.valueOf(jSliderQtdRegistro.getValue()));
+                labelNumeroRegistro.setText(valueOf(jSliderQtdRegistro.getValue()));
 
             }
         });
@@ -62,7 +68,7 @@ public class FrmDesepenhoDoSistema extends javax.swing.JInternalFrame {
         boolean legenda = true;
         boolean tooltips = true;
         boolean urls = true;
-        JFreeChart graf = ChartFactory.createBarChart3D(titulo, txt_legenda, eixoy, cds, PlotOrientation.VERTICAL, legenda, tooltips, urls);
+        JFreeChart graf = createBarChart3D(titulo, txt_legenda, eixoy, cds, PlotOrientation.VERTICAL, legenda, tooltips, urls);
         ChartPanel myChartPanel = new ChartPanel(graf, true);
         myChartPanel.setSize(jPanel1.getWidth(), jPanel1.getHeight());
         myChartPanel.setVisible(true);
@@ -317,12 +323,12 @@ public class FrmDesepenhoDoSistema extends javax.swing.JInternalFrame {
             switch (selecionado) {
                 case 1:
                     /* Inicializa o contador.*/
-                    Chronometer.start();
+                    start();
                     if (TESTE_SISTEMA.creatFornecedor(jSliderQtdRegistro.getValue())) {
-                        Chronometer.stop();
+                        stop();
 
                         /* Gerar relatório */
-                        int selectedOption = JOptionPane.showConfirmDialog(null, "Deseja visualizar o relatório?", "Sistema informa:", JOptionPane.YES_NO_OPTION);
+                        int selectedOption = showConfirmDialog(null, "Deseja visualizar o relatório?", "Sistema informa:", JOptionPane.YES_NO_OPTION);
                         /* Ao confimar a mensagem, o relatorio é gerado. */
                         if (selectedOption == JOptionPane.YES_NO_OPTION) {
                             FrmConsultarFornecedor form = new FrmConsultarFornecedor();
@@ -331,14 +337,14 @@ public class FrmDesepenhoDoSistema extends javax.swing.JInternalFrame {
                         }
 
                         /* Adiciona o processo ao histórico */
-                        labelLog01.setText(jSliderQtdRegistro.getValue() + " Fornecedor(es) adicionado(s) a base de dados em " + Chronometer.elapsedTime() + " ms" + '\n');
-                        listaDeLosg += jSliderQtdRegistro.getValue() + " Fornecedor(es) adicionado(s) a base de dados em " + Chronometer.elapsedTime() + " ms" + '\n';
+                        labelLog01.setText(jSliderQtdRegistro.getValue() + " Fornecedor(es) adicionado(s) a base de dados em " + elapsedTime() + " ms" + '\n');
+                        listaDeLosg += jSliderQtdRegistro.getValue() + " Fornecedor(es) adicionado(s) a base de dados em " + elapsedTime() + " ms" + '\n';
                         listaDeLosg += txtLogs.getText();
-                        txtLogs.setText(Sistema.getDate() + " | " + listaDeLosg);
+                        txtLogs.setText(getDate() + " | " + listaDeLosg);
 
                         /*Adiciona o resultado a lista para posteriormente ser exibido no gráfico.*/
                         ModelGrafico grafico = new ModelGrafico();
-                        grafico.setValue(Chronometer.elapsedTime());
+                        grafico.setValue(elapsedTime());
                         grafico.setLabel("Fornecedor - Teste: " + cont);
                         grafico.setTitle("Fornecedor - Teste: " + cont);
 
@@ -348,9 +354,9 @@ public class FrmDesepenhoDoSistema extends javax.swing.JInternalFrame {
                     break;
                 case 2:
                     /* Inicializa o contador.*/
-                    Chronometer.start();
+                    start();
                     if (TESTE_SISTEMA.creatUser(jSliderQtdRegistro.getValue())) {
-                        Chronometer.stop();
+                        stop();
 
 //                        /* Gerar relatório */
 //                        int selectedOption = JOptionPane.showConfirmDialog(null, "Deseja visualizar o relatório?", "Sistema informa:", JOptionPane.YES_NO_OPTION);
@@ -360,13 +366,13 @@ public class FrmDesepenhoDoSistema extends javax.swing.JInternalFrame {
 
                         /* Adiciona o processo ao histórico */
                         labelLog01.setText(jSliderQtdRegistro.getValue() + " Usuário(s) adicionado(s) a base de dados.");
-                        listaDeLosg += jSliderQtdRegistro.getValue() + " Usuário(s) adicionado(s) a base de dados em " + Chronometer.elapsedTime() + " ms" + '\n';
+                        listaDeLosg += jSliderQtdRegistro.getValue() + " Usuário(s) adicionado(s) a base de dados em " + elapsedTime() + " ms" + '\n';
                         listaDeLosg += txtLogs.getText();
-                        txtLogs.setText(Sistema.getDate() + " | " + listaDeLosg);
+                        txtLogs.setText(getDate() + " | " + listaDeLosg);
 
                         /* Adiciona o resultado a lista para posteriormente ser exibido no gráfico.*/
                         ModelGrafico grafico = new ModelGrafico();
-                        grafico.setValue(Chronometer.elapsedTime());
+                        grafico.setValue(elapsedTime());
                         grafico.setLabel("Usuário - Teste: " + cont);
                         grafico.setTitle("Usuário - Teste: " + cont);
 
@@ -376,20 +382,20 @@ public class FrmDesepenhoDoSistema extends javax.swing.JInternalFrame {
                     break;
                 case 3:
                     /* Inicializa o contador.*/
-                    Chronometer.start();
+                    start();
                     if (TESTE_SISTEMA.creatProduto(jSliderQtdRegistro.getValue())) {
-                        Chronometer.stop();
+                        stop();
 
 
                         /* Adiciona o processo ao histórico */
                         labelLog01.setText(jSliderQtdRegistro.getValue() + " Produto(s) adicionado(s) a base de dados.");
-                        listaDeLosg += jSliderQtdRegistro.getValue() + " Produto(s) adicionado(s) a base de dados em " + Chronometer.elapsedTime() + " ms" + '\n';
+                        listaDeLosg += jSliderQtdRegistro.getValue() + " Produto(s) adicionado(s) a base de dados em " + elapsedTime() + " ms" + '\n';
                         listaDeLosg += txtLogs.getText();
-                        txtLogs.setText(Sistema.getDate() + " | " + listaDeLosg);
+                        txtLogs.setText(getDate() + " | " + listaDeLosg);
 
                         /* Adiciona o resultado a lista para posteriormente ser exibido no gráfico.*/
                         ModelGrafico grafico = new ModelGrafico();
-                        grafico.setValue(Chronometer.elapsedTime());
+                        grafico.setValue(elapsedTime());
                         grafico.setLabel("Produtos - Teste: " + cont);
                         grafico.setTitle("Produtos - Teste: " + cont);
 
@@ -400,26 +406,24 @@ public class FrmDesepenhoDoSistema extends javax.swing.JInternalFrame {
                     break;
                 case 4:
                     /* Inicializa o contador.*/
-                    Chronometer.start();
-                    if (TESTE_SISTEMA.creatVenda(jSliderQtdRegistro.getValue())) {
-                        Chronometer.stop();
+                    start();
+                    if (TESTE_SISTEMA.criarVendaAleatoria(jSliderQtdRegistro.getValue())) {
+                        stop();
 
                         /* Adiciona o processo ao histórico */
                         labelLog01.setText(jSliderQtdRegistro.getValue() + " Venda(s) adicionado(s) a base de dados.");
-                        listaDeLosg += jSliderQtdRegistro.getValue() + " Venda(s) adicionado(s) a base de dados em " + Chronometer.elapsedTime() + " ms" + '\n';
+                        listaDeLosg += jSliderQtdRegistro.getValue() + " Venda(s) adicionado(s) a base de dados em " + elapsedTime() + " ms" + '\n';
                         listaDeLosg += txtLogs.getText();
-                        txtLogs.setText(Sistema.getDate() + " | " + listaDeLosg);
+                        txtLogs.setText(getDate() + " | " + listaDeLosg);
 
                         /* Adiciona o resultado a lista para posteriormente ser exibido no gráfico.*/
                         ModelGrafico grafico4 = new ModelGrafico();
-                        grafico4.setValue(Chronometer.elapsedTime());
+                        grafico4.setValue(elapsedTime());
                         grafico4.setLabel("Vendas - Teste: " + cont);
                         grafico4.setTitle("Vendas - Teste: " + cont);
 
                         /* Adiciona os dados a lista.*/
                         graficoList.add(grafico4);
-
-
 
                     }
                     break;
@@ -456,4 +460,5 @@ public class FrmDesepenhoDoSistema extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton radioBtnCreatUser;
     private javax.swing.JTextArea txtLogs;
     // End of variables declaration//GEN-END:variables
+    private static final Logger LOG = getLogger(FrmDesepenhoDoSistema.class.getName());
 }

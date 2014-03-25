@@ -1,19 +1,22 @@
 package pi.controller.Jtable;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import static java.util.Collections.sort;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
-import pi.model.Jtable.ModelJTable;
-
+import static javax.swing.JOptionPane.showMessageDialog;
+import static pi.dao.DaoPessoaJuridica.getFornecedor;
 import pi.model.ModelPessoaJuridica;
 import pi.views.FrmCadastrarPJ;
+import util.jTable.CellRenderer;
+import util.jTable.ModelJTable;
 
-public final class JtableFornecedor {
+public class JtableFornecedor {
 
     /**
      * PROPRIEDADES
@@ -41,12 +44,12 @@ public final class JtableFornecedor {
     public void popularJtable() {
         ordenarPorNome();
         try {
-            ModelJTable tabela = new ModelJTable((ArrayList) pi.controller.CadastrarFornecedor.getFornecedor());
+            ModelJTable tabela = new ModelJTable(getFornecedor());
             this.getViewFrm().getjTableFornecedor().setModel(tabela);
             this.getViewFrm().getjTableFornecedor().setDefaultRenderer(Object.class, new CellRenderer());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
+            showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }
@@ -59,20 +62,20 @@ public final class JtableFornecedor {
      * ATUALIZA REGISTRO NA LINHA ALTERADA INDICADA PELO ID
      */
     public void updateRow(int i, String txtCnpj, String txtRazaoS, String txtSetorDeAtuacao, String telefone, String email, String site, String cidade, String estado, String pais, String bairro, String rua, String numero, String complemento, String cep) {
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(txtCnpj, i, 1);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(txtRazaoS, i, 2);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(txtSetorDeAtuacao, i, 3);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(telefone, i, 4);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(email, i, 5);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(site, i, 6);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(cidade, i, 7);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(estado, i, 8);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(pais, i, 9);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(bairro, i, 10);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(rua, i, 11);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(numero, i, 12);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(complemento, i, 13);
-        ((ModelJTable) this.getViewFrm().getjTableFornecedor().getModel()).setValueAt(cep, i, 14);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(txtCnpj, i, 1);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(txtRazaoS, i, 2);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(txtSetorDeAtuacao, i, 3);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(telefone, i, 4);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(email, i, 5);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(site, i, 6);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(cidade, i, 7);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(estado, i, 8);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(pais, i, 9);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(bairro, i, 10);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(rua, i, 11);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(numero, i, 12);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(complemento, i, 13);
+        this.getViewFrm().getjTableFornecedor().getModel().setValueAt(cep, i, 14);
     }
 
     public void deleteRow(int id) {
@@ -84,7 +87,7 @@ public final class JtableFornecedor {
      */
     public void ordenarPorNome() {
         //ordena pelo nome
-        Collections.sort(pi.controller.CadastrarFornecedor.getFornecedor(), new Comparator<ModelPessoaJuridica>() {
+        sort(getFornecedor(), new Comparator<ModelPessoaJuridica>() {
             @Override
             public int compare(ModelPessoaJuridica o1, ModelPessoaJuridica o2) {
                 return o1.getNome().compareTo(o2.getNome());
@@ -93,20 +96,20 @@ public final class JtableFornecedor {
     }
 
     public void moveRecord(int i) {
-        this.getViewFrm().getTxtRazaoS().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getNome());
-        this.getViewFrm().getTxtCnpj().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getCnpj());
-        this.getViewFrm().getTxtSetorAt().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getSetorDeAtuacao());
-        this.getViewFrm().getTxtTelefone().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getTelefone());
-        this.getViewFrm().getTxtEmail().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getEmail());
-        this.getViewFrm().getTxtSite().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getSite());
-        this.getViewFrm().getTxtCidade().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getCidade());
-        this.getViewFrm().getTxtEstado().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getEstado());
-        this.getViewFrm().getTxtPais().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getPais());
-        this.getViewFrm().getTxtBairro().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getBairro());
-        this.getViewFrm().getTxtRua().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getRua());
-        this.getViewFrm().getTxtNumero().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getNumero());
-        this.getViewFrm().getTxtComplemento().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getComplemento());
-        this.getViewFrm().getTxtCep().setText(pi.controller.CadastrarFornecedor.getFornecedor().get(i).getCep());
+        this.getViewFrm().getTxtRazaoS().setText(getFornecedor().get(i).getNome());
+        this.getViewFrm().getTxtCnpj().setText(getFornecedor().get(i).getCnpj());
+        this.getViewFrm().getTxtSetorAt().setText(getFornecedor().get(i).getSetorDeAtuacao());
+        this.getViewFrm().getTxtTelefone().setText(getFornecedor().get(i).getTelefone());
+        this.getViewFrm().getTxtEmail().setText(getFornecedor().get(i).getEmail());
+        this.getViewFrm().getTxtSite().setText(getFornecedor().get(i).getSite());
+        this.getViewFrm().getTxtCidade().setText(getFornecedor().get(i).getCidade());
+        this.getViewFrm().getTxtEstado().setText(getFornecedor().get(i).getEstado());
+        this.getViewFrm().getTxtPais().setText(getFornecedor().get(i).getPais());
+        this.getViewFrm().getTxtBairro().setText(getFornecedor().get(i).getBairro());
+        this.getViewFrm().getTxtRua().setText(getFornecedor().get(i).getRua());
+        this.getViewFrm().getTxtNumero().setText(getFornecedor().get(i).getNumero());
+        this.getViewFrm().getTxtComplemento().setText(getFornecedor().get(i).getComplemento());
+        this.getViewFrm().getTxtCep().setText(getFornecedor().get(i).getCep());
         this.getViewFrm().getTxtID().setText(Integer.toString(i));
     }
 
@@ -118,12 +121,12 @@ public final class JtableFornecedor {
     public void searchRecord(String Output) {
         if (!Output.isEmpty()) {
             String txtOutput = Output.toUpperCase(Locale.ROOT);
-            ArrayList<ModelPessoaJuridica> ListaAuxiliar = new ArrayList<>(pi.controller.CadastrarFornecedor.getFornecedor());
+            ArrayList<ModelPessoaJuridica> ListaAuxiliar = new ArrayList<>(getFornecedor());
             ListaAuxiliar.clear();
-            for (int index = 0; index < pi.controller.CadastrarFornecedor.getFornecedor().size(); index++) {
-                if (pi.controller.CadastrarFornecedor.getFornecedor().get(index).getCnpj().toUpperCase(Locale.ROOT).contains(txtOutput) || pi.controller.CadastrarFornecedor.getFornecedor().get(index).getCnpj().toUpperCase(Locale.ROOT).contains(txtOutput)) {
-                    if (pi.controller.CadastrarFornecedor.getFornecedor().size() > 0) {
-                        ListaAuxiliar.add(pi.controller.CadastrarFornecedor.getFornecedor().get(index));
+            for (int index = 0; index < getFornecedor().size(); index++) {
+                if (getFornecedor().get(index).getCnpj().toUpperCase(Locale.ROOT).contains(txtOutput) || getFornecedor().get(index).getCnpj().toUpperCase(Locale.ROOT).contains(txtOutput)) {
+                    if (getFornecedor().size() > 0) {
+                        ListaAuxiliar.add(getFornecedor().get(index));
                     }
                 }
             }
@@ -150,4 +153,5 @@ public final class JtableFornecedor {
     private void setModelJtable(ModelJTable ModelJtable) {
         JtableFornecedor._modelJtable = ModelJtable;
     }
+    private static final Logger LOG = getLogger(JtableFornecedor.class.getName());
 }

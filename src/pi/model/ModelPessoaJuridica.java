@@ -4,10 +4,12 @@
  */
 package pi.model;
 
-import util.ExpressaoRegular;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+import util.Regex;
 import util.anotacao.RegularExpressionValidator;
 import util.anotacao.RequiredValidation;
-import pi.controller.Jtable.Coluna;
+import util.jTable.Tabela;
 
 /**
  *
@@ -15,7 +17,7 @@ import pi.controller.Jtable.Coluna;
  */
 // If you want you can define the order in which the fields are written
 // Optional
-public final class ModelPessoaJuridica implements InterfaceModelContato, InterfaceModelEndereco {
+public class ModelPessoaJuridica implements InterfaceModelContato, InterfaceModelEndereco {
 
     private int id;
     private String nome;
@@ -36,44 +38,44 @@ public final class ModelPessoaJuridica implements InterfaceModelContato, Interfa
     private String site;
 
     @RequiredValidation(Required = true, label = "NOME", MaximumValue = 50, MinimumValue = 1)
-    @RegularExpressionValidator(ValidationExpression = ExpressaoRegular.QualquerCaractere, Label = "Nome", RegexErrorMessage = "Nome Inválido", EnableErrorMessage = true)
-    @Coluna(nome = "Nome", indice = 1)
+    @RegularExpressionValidator(ValidationExpression = Regex.QualquerCaractere, Label = "Nome", RegexErrorMessage = "Nome Inválido", EnableErrorMessage = true)
+    @Tabela(Coluna = "Nome", Indice = 1)
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
-        if (!nome.equals("")) {
+        if (!nome.isEmpty()) {
             this.nome = nome;
         }
     }
 
     @RequiredValidation(Required = true, label = "CNPJ", MaximumValue = 50, MinimumValue = 1)
-    @RegularExpressionValidator(ValidationExpression = ExpressaoRegular.CNPJ, Label = "CNPJ", RegexErrorMessage = "CNPJ Inválido", EnableErrorMessage = true)
-    @Coluna(nome = "CNPJ", indice = 0)
+    @RegularExpressionValidator(ValidationExpression = Regex.CNPJ, Label = "CNPJ", RegexErrorMessage = "CNPJ Inválido", EnableErrorMessage = true)
+    @Tabela(Coluna = "CNPJ", Indice = 0)
     public String getCnpj() {
 
         return cnpj;
     }
 
     public void setCnpj(String cnpj) {
-        if (!cnpj.equals("")) {
+        if (!cnpj.isEmpty()) {
             this.cnpj = cnpj;
         }
     }
 
-    @Coluna(nome = "CNPJ", indice = 2)
+    @Tabela(Coluna = "CNPJ", Indice = 2)
     public String getSetorDeAtuacao() {
         return setorDeAtuacao;
     }
 
     public void setSetorDeAtuacao(String setorDeAtuacao) {
-        if (!setorDeAtuacao.equals("")) {
+        if (!setorDeAtuacao.isEmpty()) {
             this.setorDeAtuacao = setorDeAtuacao;
         }
     }
 
-    @Coluna(nome = "ID", indice = 13)
+    @Tabela(Coluna = "ID", Indice = 13)
     public int getId() {
         return id;
     }
@@ -105,8 +107,8 @@ public final class ModelPessoaJuridica implements InterfaceModelContato, Interfa
     }
 
     @RequiredValidation(Required = true, label = "E-MAIL", MaximumValue = 50, MinimumValue = 1)
-    @RegularExpressionValidator(ValidationExpression = ExpressaoRegular.EMAIL, Label = "E-mail", RegexErrorMessage = "E-mail Inválido", EnableErrorMessage = true)
-    @Coluna(nome = "E-Mail", indice = 4)
+    @RegularExpressionValidator(ValidationExpression = Regex.EMAIL, Label = "E-mail", RegexErrorMessage = "E-mail Inválido", EnableErrorMessage = true)
+    @Tabela(Coluna = "E-Mail", Indice = 4)
     @Override
     public String getEmail() {
         return email;
@@ -126,8 +128,8 @@ public final class ModelPessoaJuridica implements InterfaceModelContato, Interfa
     }
 
     @RequiredValidation(Required = true, label = "TELEFONE", MaximumValue = 50, MinimumValue = 1)
-    @RegularExpressionValidator(ValidationExpression = ExpressaoRegular.TELEFONE, Label = "Telefone", RegexErrorMessage = "Telefone Inválido", EnableErrorMessage = true)
-    @Coluna(nome = "Telefone", indice = 3)
+    @RegularExpressionValidator(ValidationExpression = Regex.TELEFONE, Label = "Telefone", RegexErrorMessage = "Telefone Inválido", EnableErrorMessage = true)
+    @Tabela(Coluna = "Telefone", Indice = 3)
     @Override
     public String getTelefone() {
         return this.telefone;
@@ -146,21 +148,21 @@ public final class ModelPessoaJuridica implements InterfaceModelContato, Interfa
 
     }
 
-    @Coluna(nome = "Bairro", indice = 8)
+    @Tabela(Coluna = "Bairro", Indice = 8)
     @Override
     public String getBairro() {
         return this.bairro;
         //
     }
 
-    @Coluna(nome = "CEP", indice = 12)
+    @Tabela(Coluna = "CEP", Indice = 12)
     @Override
     public String getCep() {
         return this.cep;
         //
     }
 
-    @Coluna(nome = "Cidade", indice = 5)
+    @Tabela(Coluna = "Cidade", Indice = 5)
     @Override
     public String getCidade() {
 
@@ -168,35 +170,35 @@ public final class ModelPessoaJuridica implements InterfaceModelContato, Interfa
         //
     }
 
-    @Coluna(nome = "Complemento", indice = 11)
+    @Tabela(Coluna = "Complemento", Indice = 11)
     @Override
     public String getComplemento() {
         return this.complemento;
         //
     }
 
-    @Coluna(nome = "Estado", indice = 6)
+    @Tabela(Coluna = "Estado", Indice = 6)
     @Override
     public String getEstado() {
         return this.estado;
         //
     }
 
-    @Coluna(nome = "Numero", indice = 10)
+    @Tabela(Coluna = "Numero", Indice = 10)
     @Override
     public String getNumero() {
         return this.numero;
 
     }
 
-    @Coluna(nome = "Pais", indice = 7)
+    @Tabela(Coluna = "Pais", Indice = 7)
     @Override
     public String getPais() {
         return this.pais;
 
     }
 
-    @Coluna(nome = "Rua", indice = 9)
+    @Tabela(Coluna = "Rua", Indice = 9)
     @Override
     public String getRua() {
         return this.rua;
@@ -242,4 +244,5 @@ public final class ModelPessoaJuridica implements InterfaceModelContato, Interfa
     public void setRua(String rua) {
         this.rua = rua;
     }
+    private static final Logger LOG = getLogger(ModelPessoaJuridica.class.getName());
 }

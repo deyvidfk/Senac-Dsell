@@ -4,17 +4,20 @@
  */
 package pi.model;
 
-import util.ExpressaoRegular;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+import util.Regex;
 import util.anotacao.RegularExpressionValidator;
 import util.anotacao.RequiredValidation;
-import pi.controller.Jtable.Coluna;
+import util.jTable.Tabela;
 
 /**
  * @author deyvid.fk
  * @version 2.0
  */
-public final class ModelPessoaFisica implements InterfaceModelContato, InterfaceModelEndereco {
+public class ModelPessoaFisica implements InterfaceModelContato, InterfaceModelEndereco {
 
+    private String idUser;
     private int id;
     private int bonus;
     private String apelido;
@@ -39,14 +42,14 @@ public final class ModelPessoaFisica implements InterfaceModelContato, Interface
     }
 
     public void setApelido(String apelido) {
-        if (!apelido.equals("")) {
+        if (!apelido.isEmpty()) {
             this.apelido = apelido;
         }
     }
 
     @RequiredValidation(Required = true, label = "E-MAIL", MaximumValue = 50, MinimumValue = 1)
-    @RegularExpressionValidator(ValidationExpression = ExpressaoRegular.EMAIL, Label = "E-mail", RegexErrorMessage = "E-mail Inválido", EnableErrorMessage = true)
-    @Coluna(nome = "E-Mail", indice = 4)
+    @RegularExpressionValidator(ValidationExpression = Regex.EMAIL, Label = "E-mail", RegexErrorMessage = "E-mail Inválido")
+    @Tabela(Coluna = "E-Mail", Indice = 4)
     @Override
     public String getEmail() {
         return email;
@@ -60,46 +63,46 @@ public final class ModelPessoaFisica implements InterfaceModelContato, Interface
     }
 
     @RequiredValidation(Required = true, label = "CPF", MaximumValue = 50, MinimumValue = 1)
-    @RegularExpressionValidator(ValidationExpression = ExpressaoRegular.CPF, Label = "CPF", RegexErrorMessage = "CPF Inválido", EnableErrorMessage = true)
-    @Coluna(nome = "CPF", indice = 2)
+    @RegularExpressionValidator(ValidationExpression = Regex.CPF, Label = "CPF", RegexErrorMessage = "CPF Inválido")
+    @Tabela(Coluna = "CPF", Indice = 2)
     public String getCpf() {
         return cpf;
     }
 
     public void setCpf(String cpf) {
-        if (!cpf.equals("")) {
+        if (!cpf.isEmpty()) {
             this.cpf = cpf;
         }
     }
 
     @RequiredValidation(Required = true, label = "RG", MaximumValue = 50, MinimumValue = 1)
-    @RegularExpressionValidator(ValidationExpression = ExpressaoRegular.RG, Label = "RG", RegexErrorMessage = "RG Inválido", EnableErrorMessage = true)
-    @Coluna(nome = "RG", indice = 1)
+    @RegularExpressionValidator(ValidationExpression = Regex.RG, Label = "RG", RegexErrorMessage = "RG Inválido")
+    @Tabela(Coluna = "RG", Indice = 1)
     public String getRg() {
         return rg;
     }
 
     public void setRg(String rg) {
-        if (!rg.equals("")) {
+        if (!rg.isEmpty()) {
             this.rg = rg;
         }
     }
 
     /**
-     * @return the nome
+     * @return the Coluna
      */
     @RequiredValidation(Required = true, label = "Nome", MaximumValue = 50, MinimumValue = 1)
-    @RegularExpressionValidator(ValidationExpression = ExpressaoRegular.QualquerCaractere, Label = "Nome", RegexErrorMessage = "Nome Inválido", EnableErrorMessage = true)
-    @Coluna(nome = "Nome", indice = 0)
+    @RegularExpressionValidator(ValidationExpression = Regex.QualquerCaractere, Label = "Nome", RegexErrorMessage = "Nome Inválido")
+    @Tabela(Coluna = "Nome", Indice = 0)
     public String getNome() {
         return nome;
     }
 
     /**
-     * @param nome the nome to set
+     * @param Coluna the Coluna to set
      */
     public void setNome(String nome) {
-        if (!nome.equals("")) {
+        if (!nome.isEmpty()) {
             this.nome = nome;
         }
     }
@@ -121,7 +124,7 @@ public final class ModelPessoaFisica implements InterfaceModelContato, Interface
     }
 
     @RequiredValidation(Required = true, label = "ID", MaximumValue = 50, MinimumValue = 1)
-    @Coluna(nome = "ID", indice = 13)
+    @Tabela(Coluna = "ID", Indice = 13)
     public int getId() {
         return id;
     }
@@ -149,8 +152,8 @@ public final class ModelPessoaFisica implements InterfaceModelContato, Interface
     }
 
     @RequiredValidation(Required = true, label = "Telefone", MinimumValue = 1, MaximumValue = 20)
-    @RegularExpressionValidator(ValidationExpression = ExpressaoRegular.TELEFONE, Label = "Telefone", RegexErrorMessage = "Telefone Inválido", EnableErrorMessage = true)
-    @Coluna(nome = "Telefone", indice = 3)
+    @RegularExpressionValidator(ValidationExpression = Regex.TELEFONE, Label = "Telefone", RegexErrorMessage = "Telefone Inválido")
+    @Tabela(Coluna = "Telefone", Indice = 3)
     @Override
     public String getTelefone() {
         return this.telefone;
@@ -169,21 +172,21 @@ public final class ModelPessoaFisica implements InterfaceModelContato, Interface
 
     }
 
-    @Coluna(nome = "Bairro", indice = 8)
+    @Tabela(Coluna = "Bairro", Indice = 8)
     @Override
     public String getBairro() {
         return this.bairro;
         //
     }
 
-    @Coluna(nome = "CEP", indice = 12)
+    @Tabela(Coluna = "CEP", Indice = 12)
     @Override
     public String getCep() {
         return this.cep;
         //
     }
 
-    @Coluna(nome = "Cidade", indice = 5)
+    @Tabela(Coluna = "Cidade", Indice = 5)
     @Override
     public String getCidade() {
 
@@ -191,35 +194,35 @@ public final class ModelPessoaFisica implements InterfaceModelContato, Interface
         //
     }
 
-    @Coluna(nome = "Complemento", indice = 11)
+    @Tabela(Coluna = "Complemento", Indice = 11)
     @Override
     public String getComplemento() {
         return this.complemento;
         //
     }
 
-    @Coluna(nome = "Estado", indice = 6)
+    @Tabela(Coluna = "Estado", Indice = 6)
     @Override
     public String getEstado() {
         return this.estado;
         //
     }
 
-    @Coluna(nome = "Numero", indice = 10)
+    @Tabela(Coluna = "Numero", Indice = 10)
     @Override
     public String getNumero() {
         return this.numero;
 
     }
 
-    @Coluna(nome = "Pais", indice = 7)
+    @Tabela(Coluna = "Pais", Indice = 7)
     @Override
     public String getPais() {
         return this.pais;
 
     }
 
-    @Coluna(nome = "Rua", indice = 9)
+    @Tabela(Coluna = "Rua", Indice = 9)
     @Override
     public String getRua() {
         return this.rua;
@@ -265,4 +268,19 @@ public final class ModelPessoaFisica implements InterfaceModelContato, Interface
     public void setRua(String rua) {
         this.rua = rua;
     }
+
+    /**
+     * @return the idUser
+     */
+    public String getIdUser() {
+        return idUser;
+    }
+
+    /**
+     * @param idUser the idUser to set
+     */
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+    private static final Logger LOG = getLogger(ModelPessoaFisica.class.getName());
 }

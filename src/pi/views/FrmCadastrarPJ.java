@@ -1,20 +1,25 @@
 package pi.views;
 
+import java.awt.Color;
+import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import static java.util.Collections.unmodifiableList;
+import java.util.List;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showConfirmDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
 import pi.controller.CadastrarFornecedor;
 import pi.controller.Jtable.JtableFornecedor;
 import pi.controller.report.CreateReport;
-
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JOptionPane;
-import pi.model.Jtable.ModelJTable;
 import pi.model.ModelPessoaJuridica;
+import util.jTable.ModelJTable;
 
 public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
 
     private CadastrarFornecedor instanceControllerCadastrarFornecedor;
-    private JtableFornecedor instanceControllerJtable;
+    private final JtableFornecedor instanceControllerJtable;
     private int jTableLinhaSelecionada = -1;
     private List<pi.model.ModelPessoaJuridica> fornecedor;
     private ModelJTable model;
@@ -60,7 +65,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
     }
 
     public void iniciarTabela() {
-        model = new ModelJTable((ArrayList) getFornecedor());
+        model = new ModelJTable(getFornecedor());
         getjTableFornecedor().setModel(model);
     }
 
@@ -660,7 +665,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
-        if (!this.getTxtBuscar().getText().trim().equals("")) {
+        if (!this.getTxtBuscar().getText().trim().isEmpty()) {
             instanceControllerJtable.searchRecord(this.getTxtBuscar().getText());
 
         } else {
@@ -672,7 +677,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
 
     private void btnInsertEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertEmpresaActionPerformed
 
-        if (!this.getTxtRazaoS().getText().equals("") && !this.getTxtCnpj().getText().equals("") && !this.getTxtEmail().getText().equals("")) {
+        if (!this.getTxtRazaoS().getText().isEmpty() && !this.getTxtCnpj().getText().isEmpty() && !this.getTxtEmail().getText().isEmpty()) {
             ModelPessoaJuridica passagem = instanceControllerCadastrarFornecedor.passagem(0, this.getTxtCnpj().getText(),
                     this.getTxtRazaoS().getText(),
                     this.getTxtSetorAt().getText(),
@@ -688,21 +693,20 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
                     this.getTxtComplemento().getText(),
                     this.getTxtCep().getText());
 
-
             boolean creat = instanceControllerCadastrarFornecedor.creat(passagem);
             if (creat == true) {
                 resetForm();
 
                 instanceControllerJtable.updateJtable();
                 getjTableFornecedor().setBackground(Color.gray);
-                JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
+                showMessageDialog(null, "Cadastrado com Sucesso!");
             }
         }
     }//GEN-LAST:event_btnInsertEmpresaActionPerformed
 
     private void btnUpdateEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEmpresaActionPerformed
         ModelPessoaJuridica passagem = instanceControllerCadastrarFornecedor.passagem(
-                Integer.parseInt(getTxtID().getText()),
+                parseInt(getTxtID().getText()),
                 this.getTxtCnpj().getText(),
                 this.getTxtRazaoS().getText(),
                 this.getTxtSetorAt().getText(),
@@ -717,7 +721,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
                 this.getTxtNumero().getText(),
                 this.getTxtComplemento().getText(),
                 this.getTxtCep().getText());
-        boolean update = instanceControllerCadastrarFornecedor.update(Integer.parseInt(getTxtID().getText()), passagem);
+        boolean update = instanceControllerCadastrarFornecedor.update(parseInt(getTxtID().getText()), passagem);
         if (update) {
             resetForm();
             /*// Visibilidade dos botões.*/
@@ -731,7 +735,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
 
     private void btnDeletePJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePJActionPerformed
 
-        int selectedOption = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir esse cadastro?", "Sistema informa:", JOptionPane.YES_NO_OPTION);
+        int selectedOption = showConfirmDialog(null, "Deseja realmente excluir esse cadastro?", "Sistema informa:", JOptionPane.YES_NO_OPTION);
         if (selectedOption == JOptionPane.YES_NO_OPTION) {
             int linha = jTableFornecedor.getSelectedRow();
             instanceControllerCadastrarFornecedor.delete(linha); // Deleta o registro do xml.
@@ -761,7 +765,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
             this.getBtnUpdateEmpresa().setEnabled(true);
             this.getBtnDeletePJ().setVisible(true);
             this.getBtnDeletePJ().setEnabled(true);
-            int ProximoIndice = Integer.parseInt(getTxtID().getText()) - 1;
+            int ProximoIndice = parseInt(getTxtID().getText()) - 1;
             if (ProximoIndice >= 0) {
                 instanceControllerJtable.moveRecord(ProximoIndice);
                 jTableLinhaSelecionada--;
@@ -800,10 +804,10 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRadioButtonOrdenarPorNomeKeyPressed
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-        if (Integer.parseInt(getTxtID().getText()) >= 0) {
+        if (parseInt(getTxtID().getText()) >= 0) {
             ArrayList<ModelPessoaJuridica> ListaAuxiliar = new ArrayList<>(pi.controller.CadastrarFornecedor.getFornecedor());
             ListaAuxiliar.clear(); // Limpa a lista para adicionar somente o registro selecionado.
-            ListaAuxiliar.add(pi.controller.CadastrarFornecedor.getFornecedor().get(Integer.parseInt(getTxtID().getText()))); // Passa o id do cadastro.
+            ListaAuxiliar.add(pi.controller.CadastrarFornecedor.getFornecedor().get(parseInt(getTxtID().getText()))); // Passa o id do cadastro.
             if (ListaAuxiliar.size() == 1) { // Verifica se a lista realmente contem somente 1 registro.
                 CreateReport relport = new CreateReport(ListaAuxiliar, CreateReport.Templates.TMPL_FORNECEDOR_CADASTRO_RESUMIDO, null); // Passa a lista contendo somente um registro.
                 new Thread(relport).start();
@@ -1257,10 +1261,11 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
     }
 
     public List getFornecedor() {
-        return fornecedor;
+        return unmodifiableList(fornecedor);
     }
 
     public void setFornecedor(ArrayList fornecedor) {
         this.fornecedor = fornecedor;
     }
+    private static final Logger LOG = getLogger(FrmCadastrarPJ.class.getName());
 }

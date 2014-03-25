@@ -1,27 +1,32 @@
 package pi.views;
 
-import pi.controller.CadastrarFornecedor;
-import pi.controller.CadastrarVenda;
-import pi.controller.report.CreateReport;
 import java.awt.Graphics;
 import java.text.DecimalFormat;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import javax.swing.JOptionPane;
-import pi.model.ModelGrafico;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+import static javax.swing.JOptionPane.showMessageDialog;
 import net.sourceforge.openforecast.DataPoint;
 import net.sourceforge.openforecast.DataSet;
-import net.sourceforge.openforecast.Forecaster;
+import static net.sourceforge.openforecast.Forecaster.getBestForecast;
 import net.sourceforge.openforecast.ForecastingModel;
 import net.sourceforge.openforecast.Observation;
-import org.jfree.chart.ChartFactory;
+import static org.jfree.chart.ChartFactory.createBarChart3D;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import pi.controller.CadastrarVenda;
+import static pi.controller.CadastrarVenda.getRendimentoVendaPorTrimestre;
+import pi.controller.report.CreateReport;
+import static pi.dao.DaoPessoaJuridica.getForInativos;
+import static pi.dao.DaoPessoaJuridica.getFornecedor;
+import static pi.dao.DaoPessoaJuridica.getFornecedorAtivo;
+import static pi.dao.DaoVenda.getVENDAS;
+import pi.model.ModelGrafico;
 
 /**
  *
@@ -41,11 +46,11 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        if (CadastrarVenda.getVENDAS().size() > 0) {
+        if (getVENDAS().size() > 0) {
             criarGrafico(graficoList);
         }
     }
-    private static ArrayList<ModelGrafico> graficoList = new ArrayList<>();
+    private static final ArrayList<ModelGrafico> graficoList = new ArrayList<>();
 
     /**
      * @param args the command line arguments
@@ -68,7 +73,7 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
         boolean legenda = true;
         boolean tooltips = true;
         boolean urls = true;
-        JFreeChart graf = ChartFactory.createBarChart3D(titulo, txt_legenda, eixoy, cds, PlotOrientation.VERTICAL, legenda, tooltips, urls);
+        JFreeChart graf = createBarChart3D(titulo, txt_legenda, eixoy, cds, PlotOrientation.VERTICAL, legenda, tooltips, urls);
         ChartPanel myChartPanel = new ChartPanel(graf, true);
         myChartPanel.setSize(jPanel1.getWidth(), jPanel1.getHeight());
         myChartPanel.setVisible(true);
@@ -173,31 +178,31 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        if (CadastrarVenda.getVENDAS().size() > 0) {
-            int ano = 2013;
+        if (getVENDAS().size() > 0) {
+            int ano = 2_013;
             if (cboAno.getSelectedIndex() == 0) {
-                ano = 2013;
+                ano = 2_013;
             }
 
             if (cboAno.getSelectedIndex() == 1) {
-                ano = 2012;
+                ano = 2_012;
             }
 
             if (cboAno.getSelectedIndex() == 2) {
-                ano = 2012;
+                ano = 2_012;
             }
 
             if (cboAno.getSelectedIndex() == 3) {
-                ano = 2010;
+                ano = 2_010;
             }
 
             HashMap<String, Object> parametros = new HashMap<>();
             DecimalFormat fmt = new DecimalFormat("#.##");
             DecimalFormat fmtDinDin = new DecimalFormat("R$ #,##0.00");
-            double rentabilidade_1 = CadastrarVenda.getDinheiroVendaPorTrimestre(1, 2, 3, ano);
-            double rentabilidade_2 = CadastrarVenda.getDinheiroVendaPorTrimestre(4, 5, 6, ano);
-            double rentabilidade_3 = CadastrarVenda.getDinheiroVendaPorTrimestre(7, 8, 9, ano);
-            double rentabilidade_4 = CadastrarVenda.getDinheiroVendaPorTrimestre(10, 11, 12, ano);
+            double rentabilidade_1 = getRendimentoVendaPorTrimestre(1, 2, 3, ano);
+            double rentabilidade_2 = getRendimentoVendaPorTrimestre(4, 5, 6, ano);
+            double rentabilidade_3 = getRendimentoVendaPorTrimestre(7, 8, 9, ano);
+            double rentabilidade_4 = getRendimentoVendaPorTrimestre(10, 11, 12, ano);
 
             double serie_1 = geraTextoscimoDaRentabilidade(rentabilidade_1, rentabilidade_2);
             double serie_2 = geraTextoscimoDaRentabilidade(rentabilidade_2, rentabilidade_3);
@@ -215,9 +220,9 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
             parametros.put("LABEL_4", "Rentabilidade do 4º trimestre de " + ano + " : " + fmtDinDin.format(rentabilidade_4) + " com " + geraTexto(serie_3) + " de " + fmt.format(serie_3) + "% com base no trimestre anterior.");
             parametros.put("SERIE_4", rentabilidade_4);
 
-            parametros.put("QUANT_FORNECEDORES_INATIVOS", CadastrarFornecedor.getForInativos().size());
-            parametros.put("QUANT_FORNECEDORES_ATIVOS", CadastrarFornecedor.getFornecedorAtivo().size());
-            parametros.put("TOTAL_REGISTRO", CadastrarFornecedor.getFornecedor().size());
+            parametros.put("QUANT_FORNECEDORES_INATIVOS", getForInativos().size());
+            parametros.put("QUANT_FORNECEDORES_ATIVOS", getFornecedorAtivo().size());
+            parametros.put("TOTAL_REGISTRO", getFornecedor().size());
             ArrayList list = new ArrayList<>();
             list.add("");
             Thread relport = new Thread(new CreateReport(list, CreateReport.Templates.TMPL_VENDAS_GRAFICO, parametros), "Thread: Imprimir Fornecedor");
@@ -249,7 +254,7 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
             dataSet.add(observacao4);
 
             /* Criar o modelo de previsão */
-            ForecastingModel modelo = Forecaster.getBestForecast(dataSet);
+            ForecastingModel modelo = getBestForecast(dataSet);
             modelo.init(dataSet);
 
             /* Criar próximo ponto de previsão, o qual será previsto */
@@ -270,9 +275,8 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
             parametros.put("LABEL_5", "Rentabilidade do 1º trimestre de " + (ano + 1) + "pode ter o " + geraTexto(serie_3) + " de " + fmt.format(fcDataPoint.getDependentValue()) + "% com base nos trimestres anteriores." + '\n');
 
         } else {
-            JOptionPane.showMessageDialog(null, "Não existem vendas realizadas no sistema.");
+            showMessageDialog(null, "Não existem vendas realizadas no sistema.");
         }
-
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -285,10 +289,10 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
     }
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (CadastrarVenda.getVENDAS().size() > 0) {
+        if (getVENDAS().size() > 0) {
             popularGrafico();
         } else {
-            JOptionPane.showMessageDialog(null, "Não existem vendas realizadas no sistema.");
+            showMessageDialog(null, "Não existem vendas realizadas no sistema.");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -308,46 +312,43 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
 
     public void popularGrafico() {
 
-        int ano = 2013;
+        int ano = 2_013;
 
         /* Obtém filtro (Ano) */
-
         if (cboAno.getSelectedIndex() == 0) {
-            ano = 2013;
+            ano = 2_013;
         }
 
         if (cboAno.getSelectedIndex() == 1) {
-            ano = 2012;
+            ano = 2_012;
         }
 
         if (cboAno.getSelectedIndex() == 2) {
-            ano = 2012;
+            ano = 2_012;
         }
 
         if (cboAno.getSelectedIndex() == 3) {
-            ano = 2010;
+            ano = 2_010;
         }
 
         /* End*/
-
-
         /**
          * Previsão *
          */
         /* Criar Observação de venda realizada no primeiro trimesmtre do ano. */
-        Observation observacao1 = new Observation(CadastrarVenda.getDinheiroVendaPorTrimestre(1, 2, 3, ano));
+        Observation observacao1 = new Observation(getRendimentoVendaPorTrimestre(1, 2, 3, ano));
         observacao1.setIndependentValue("serie", 1);
 
         /* Criar Observação de venda realizada no segundo trimesmtre do ano. */
-        Observation observacao2 = new Observation(CadastrarVenda.getDinheiroVendaPorTrimestre(4, 5, 6, ano));
+        Observation observacao2 = new Observation(getRendimentoVendaPorTrimestre(4, 5, 6, ano));
         observacao2.setIndependentValue("serie", 2);
 
         /* Criar Observação de venda realizada no terceiro trimesmtre do ano. */
-        Observation observacao3 = new Observation(CadastrarVenda.getDinheiroVendaPorTrimestre(7, 8, 9, ano));
+        Observation observacao3 = new Observation(getRendimentoVendaPorTrimestre(7, 8, 9, ano));
         observacao3.setIndependentValue("serie", 3);
 
         /* Criar Observação de venda realizada no quarto trimesmtre do ano. */
-        Observation observacao4 = new Observation(CadastrarVenda.getDinheiroVendaPorTrimestre(10, 11, 12, ano));
+        Observation observacao4 = new Observation(getRendimentoVendaPorTrimestre(10, 11, 12, ano));
         observacao4.setIndependentValue("serie", 4);
 
         DataSet dataSet = new DataSet();
@@ -359,7 +360,7 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
         dataSet.add(observacao4);
 
         /* Criar o modelo de previsão */
-        ForecastingModel modelo = Forecaster.getBestForecast(dataSet);
+        ForecastingModel modelo = getBestForecast(dataSet);
         modelo.init(dataSet);
 
         /* Criar próximo ponto de previsão, o qual será previsto */
@@ -393,13 +394,13 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
          */
 
         /* 1º Trimestre (Jan, Fev, Març) */
-        double rentabilidade_1 = CadastrarVenda.getDinheiroVendaPorTrimestre(1, 2, 3, ano);
+        double rentabilidade_1 = getRendimentoVendaPorTrimestre(1, 2, 3, ano);
         /* 2º Trimestre (Abri, Mai, Junh) */
-        double rentabilidade_2 = CadastrarVenda.getDinheiroVendaPorTrimestre(4, 5, 6, ano);
+        double rentabilidade_2 = getRendimentoVendaPorTrimestre(4, 5, 6, ano);
         /* 3º Trimestre (Julh, Agos, Set) */
-        double rentabilidade_3 = CadastrarVenda.getDinheiroVendaPorTrimestre(7, 8, 9, ano);
+        double rentabilidade_3 = getRendimentoVendaPorTrimestre(7, 8, 9, ano);
         /* 4º Trimestre (Out, Nov, Dez) */
-        double rentabilidade_4 = CadastrarVenda.getDinheiroVendaPorTrimestre(10, 11, 12, ano);
+        double rentabilidade_4 = getRendimentoVendaPorTrimestre(10, 11, 12, ano);
 
         /**
          * End *
@@ -462,4 +463,5 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+    private static final Logger LOG = getLogger(FrmConsultarVenda.class.getName());
 }

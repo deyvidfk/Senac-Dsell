@@ -3,8 +3,42 @@ package util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+import static util.RegexTest.TestarRegex;
 
 public class GeraString {
+
+    public static int getMesDoAno() {
+        List<Integer> desconto = new ArrayList<>();
+        desconto.add(1);
+        desconto.add(2);
+        desconto.add(3);
+        desconto.add(4);
+        desconto.add(5);
+        desconto.add(6);
+        desconto.add(7);
+        desconto.add(9);
+        desconto.add(10);
+        desconto.add(11);
+        desconto.add(12);
+        Random ramdom = new Random();
+        return desconto.get(ramdom.nextInt(desconto.size()));
+    }
+
+    public static int getAno() {
+        List<Integer> desconto = new ArrayList<>();
+        desconto.add(2_010);
+        desconto.add(2_011);
+        desconto.add(2_012);
+        desconto.add(2_013);
+
+        Random ramdom;
+        ramdom = new Random();
+
+        int string = desconto.get(ramdom.nextInt(desconto.size()));
+        return string;
+    }
 
     public String getStringQualquer() {
         // Determia as letras que poderão estar presente nas chaves
@@ -29,7 +63,7 @@ public class GeraString {
 
     public String getCep() {
         String cep = "04872-290";
-        if (ExpressaoRegular.TestarRegex(ExpressaoRegular.CEP, cep)) {
+        if (TestarRegex(Regex.CEP, cep)) {
             return cep;
         }
         return "04872-290";
@@ -37,7 +71,7 @@ public class GeraString {
 
     public String getCnpj() {
         String str = "49.765.854/0001-58";
-        if (ExpressaoRegular.TestarRegex(ExpressaoRegular.CNPJ, str)) {
+        if (TestarRegex(Regex.CNPJ, str)) {
             return str;
         }
         return "111.111.111/111-11";
@@ -202,7 +236,7 @@ public class GeraString {
         lista.add("(11) 5058-2775");
         Random ramdom = new Random();
         String numeroTelefone = lista.get(ramdom.nextInt(lista.size())).toString();
-        boolean validarTelefone = ExpressaoRegular.TestarRegex(ExpressaoRegular.TELEFONE, numeroTelefone);
+        boolean validarTelefone = TestarRegex(Regex.TELEFONE, numeroTelefone);
         if (validarTelefone) {
             return numeroTelefone;
         }
@@ -742,37 +776,6 @@ public class GeraString {
         return desconto.get(ramdom.nextInt(desconto.size()));
     }
 
-    public static int getMesDoAno() {
-        List<Integer> desconto = new ArrayList<>();
-        desconto.add(1);
-        desconto.add(2);
-        desconto.add(3);
-        desconto.add(4);
-        desconto.add(5);
-        desconto.add(6);
-        desconto.add(7);
-        desconto.add(9);
-        desconto.add(10);
-        desconto.add(11);
-        desconto.add(12);
-        Random ramdom = new Random();
-        return desconto.get(ramdom.nextInt(desconto.size()));
-    }
-
-    public static int getAno() {
-        List<Integer> desconto = new ArrayList<>();
-        desconto.add(2010);
-        desconto.add(2011);
-        desconto.add(2012);
-        desconto.add(2013);
-
-        Random ramdom;
-        ramdom = new Random();
-
-        int string = desconto.get(ramdom.nextInt(desconto.size()));
-        return string;
-    }
-
     public double getPrecoQualquer() {
         List<Double> preco = new ArrayList<>();
         preco.add(10.00);
@@ -893,4 +896,5 @@ public class GeraString {
         Random ramdom = new Random();
         return nome.get(ramdom.nextInt(nome.size()));
     }
+    private static final Logger LOG = getLogger(GeraString.class.getName());
 }

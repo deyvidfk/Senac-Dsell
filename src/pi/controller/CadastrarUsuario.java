@@ -1,14 +1,16 @@
 package pi.controller;
 
-import pi.dao.DaoPessoaFisica;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
-import util.ValidaForm;
+import static javax.swing.JOptionPane.showMessageDialog;
+import pi.dao.DaoPessoaFisica;
 import pi.model.ModelPessoaFisica;
+import static util.ValidaForm.isValid;
 
-public final class CadastrarUsuario extends DaoPessoaFisica {
+public class CadastrarUsuario extends DaoPessoaFisica {
 
     public boolean creat(String cnpj, String txtRg, String txtCpf, String telefone, String email, String site, String cidade, String estado, String pais, String bairro, String rua, String numero, String complemento, String cep) {
 
@@ -32,16 +34,15 @@ public final class CadastrarUsuario extends DaoPessoaFisica {
             pj.setCep(cep);
             pj.setTelefone(telefone);
 
-            if (ValidaForm.isValid(pj)) {
+            if (isValid(pj)) {
                 getUsuario().add(pj);
                 createXml(getUsuario());
                 return true;
             }
 
-
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
+            showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
     }
@@ -73,8 +74,7 @@ public final class CadastrarUsuario extends DaoPessoaFisica {
             pj.setComplemento(txtComplemento);
             pj.setCep(txtCep);
 
-
-            if (ValidaForm.isValid(pj)) {
+            if (isValid(pj)) {
                 getUsuario().get(id).setNome(pj.getNome());
                 getUsuario().get(id).setRg(pj.getRg());
                 getUsuario().get(id).setCpf(pj.getCpf());
@@ -93,12 +93,11 @@ public final class CadastrarUsuario extends DaoPessoaFisica {
                 return true;
             }
 
-
-
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
+            showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
         return false;
     }
+    private static final Logger LOG = getLogger(CadastrarUsuario.class.getName());
 }

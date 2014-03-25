@@ -1,56 +1,24 @@
 package pi.controller.Jtable;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 import pi.controller.CadastrarVenda;
-import pi.model.Jtable.ModelJTable;
+import static pi.dao.DaoVenda.getVENDAS;
 import pi.views.FrmCadastrarVenda;
+import util.jTable.CellRenderer;
+import util.jTable.ModelJTable;
 
-public final class JtableVenda {
+public class JtableVenda {
 
     /**
      * PROPRIEDADES
      */
     private static ModelJTable _Jtable;
     private static FrmCadastrarVenda _frmVenda;
-
-    /**
-     * CONSTRUTOR DA CLASSE
-     */
-    public JtableVenda(FrmCadastrarVenda frm) {
-        JtableVenda._frmVenda = frm;
-
-    }
-
-    /**
-     * MÉTODOS *
-     */
-    /**
-     * POPULA A TABELA "JTable" COM OS DADOS
-     */
-    public void popularJtable() {
-        try {
-            ModelJTable tabela = new ModelJTable((ArrayList) pi.controller.CadastrarVenda.getVENDAS());
-            JtableVenda.getFrmVenda().getjTableVenda().setModel(tabela);
-            JtableVenda.getFrmVenda().getjTableVenda().setDefaultRenderer(Object.class, new CellRenderer());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
-        }
-    }
-
-    public void searchRecord(int Output) {
-        setJtable(new ModelJTable((ArrayList) CadastrarVenda.searchRecord(Output)));
-        JtableVenda.getFrmVenda().getjTableVenda().setModel(getJtable());
-    }
-
-    public void searchRecordByUser(int Output) {
-        setJtable(new ModelJTable((ArrayList) CadastrarVenda.searchRecordByUser(Output)));
-        JtableVenda.getFrmVenda().getjTableVenda().setModel(getJtable());
-    }
 
     /**
      * GETTERS E SETTERS *
@@ -79,4 +47,40 @@ public final class JtableVenda {
     public static void setFrmVenda(FrmCadastrarVenda aFrmVenda) {
         _frmVenda = aFrmVenda;
     }
+
+    /**
+     * CONSTRUTOR DA CLASSE
+     */
+    public JtableVenda(FrmCadastrarVenda frm) {
+        JtableVenda._frmVenda = frm;
+
+    }
+
+    /**
+     * MÉTODOS *
+     */
+    /**
+     * POPULA A TABELA "JTable" COM OS DADOS
+     */
+    public void popularJtable() {
+        try {
+            ModelJTable tabela = new ModelJTable(getVENDAS());
+            getFrmVenda().getjTableVenda().setModel(tabela);
+            getFrmVenda().getjTableVenda().setDefaultRenderer(Object.class, new CellRenderer());
+        } catch (Exception e) {
+            showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
+
+    public void searchRecord(int Output) {
+        setJtable(new ModelJTable(CadastrarVenda.searchRecord(Output)));
+        getFrmVenda().getjTableVenda().setModel(getJtable());
+    }
+
+    public void searchRecordByUser(int Output) {
+        setJtable(new ModelJTable(CadastrarVenda.searchRecordByUser(Output)));
+        getFrmVenda().getjTableVenda().setModel(getJtable());
+    }
+    private static final Logger LOG = getLogger(JtableVenda.class.getName());
 }

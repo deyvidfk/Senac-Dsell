@@ -4,6 +4,9 @@
  */
 package pi.model;
 
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+
 /**
  *
  * @author deyvid.fk
@@ -58,4 +61,5 @@ public class ModelGrafico {
     public void setValue2(int value2) {
         this.value2 = value2;
     }
+    private static final Logger LOG = getLogger(ModelGrafico.class.getName());
 }

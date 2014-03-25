@@ -4,6 +4,9 @@
  */
 package pi.views;
 
+import static java.lang.Integer.parseInt;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import pi.controller.Jtable.JtableVenda;
 
 /**
@@ -12,7 +15,7 @@ import pi.controller.Jtable.JtableVenda;
  */
 public class FrmCadastrarVenda extends javax.swing.JInternalFrame {
 
-    private JtableVenda instanceControllerJtable;
+    private final JtableVenda instanceControllerJtable;
 
     /**
      * Creates new form FrmCadastrarVenda
@@ -113,9 +116,9 @@ public class FrmCadastrarVenda extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if (cboFiltro1.getSelectedIndex() == 0) {
-            instanceControllerJtable.searchRecord(Integer.parseInt(jTextField1.getText()));
+            instanceControllerJtable.searchRecord(parseInt(jTextField1.getText()));
         } else if (cboFiltro1.getSelectedIndex() == 1) {
-            instanceControllerJtable.searchRecordByUser(Integer.parseInt(jTextField1.getText()));
+            instanceControllerJtable.searchRecordByUser(parseInt(jTextField1.getText()));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -134,4 +137,5 @@ public class FrmCadastrarVenda extends javax.swing.JInternalFrame {
     public void setjTableVenda(javax.swing.JTable jTableVenda) {
         this.jTableVenda = jTableVenda;
     }
+    private static final Logger LOG = getLogger(FrmCadastrarVenda.class.getName());
 }

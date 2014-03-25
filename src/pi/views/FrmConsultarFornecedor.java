@@ -4,21 +4,26 @@
  */
 package pi.views;
 
-import pi.controller.CadastrarFornecedor;
-import util.Chronometer;
-import pi.controller.Sistema;
-import pi.controller.report.CreateReport;
-
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashMap;
-import pi.model.ModelGrafico;
-import org.jfree.chart.ChartFactory;
+import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
+import static org.jfree.chart.ChartFactory.createBarChart3D;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import pi.controller.report.CreateReport;
+import static pi.dao.DaoPessoaJuridica.getForInativos;
+import static pi.dao.DaoPessoaJuridica.getFornecedor;
+import static pi.dao.DaoPessoaJuridica.getFornecedorAtivo;
+import pi.model.ModelGrafico;
+import static util.Chronometer.elapsedTime;
+import static util.Chronometer.start;
+import static util.Chronometer.stop;
+import static util.Time.getTime;
 
 /**
  *
@@ -50,12 +55,12 @@ public class FrmConsultarFornecedor extends javax.swing.JInternalFrame {
         ArrayList<ModelGrafico> list = new ArrayList<>();
         grafico.setLabel("Fornecedores com produtos cadastrados no sistema");
         grafico.setTitle("Ativos");
-        grafico.setValue2(CadastrarFornecedor.getFornecedorAtivo().size());
+        grafico.setValue2(getFornecedorAtivo().size());
         list.add(grafico);
         grafico = new ModelGrafico();
         grafico.setLabel("Fornecedores com produtos cadastrados no sistema");
         grafico.setTitle("Inativos");
-        grafico.setValue2(CadastrarFornecedor.getForInativos().size());
+        grafico.setValue2(getForInativos().size());
         list.add(grafico);
         this.criaGrafico(list, "Fornecedores");
     }
@@ -78,7 +83,7 @@ public class FrmConsultarFornecedor extends javax.swing.JInternalFrame {
         boolean legenda = true;
         boolean tooltips = true;
         boolean urls = true;
-        JFreeChart graf = ChartFactory.createBarChart3D(titulo, txt_legenda, eixoy, cds, PlotOrientation.VERTICAL, legenda, tooltips, urls);
+        JFreeChart graf = createBarChart3D(titulo, txt_legenda, eixoy, cds, PlotOrientation.VERTICAL, legenda, tooltips, urls);
         ChartPanel myChartPanel = new ChartPanel(graf, true);
         myChartPanel.setSize(jPanel2.getWidth(), jPanel2.getHeight());
         myChartPanel.setVisible(true);
@@ -207,29 +212,29 @@ public class FrmConsultarFornecedor extends javax.swing.JInternalFrame {
 
         switch (cboFiltro2.getSelectedIndex()) {
             case 0:
-                Chronometer.start();
-                Thread relport = new Thread(new CreateReport(CadastrarFornecedor.getFornecedorAtivo(), CreateReport.Templates.TMPL_FORNECEDOR_CADASTRO_RESUMIDO, null), "Thread: Imprimir Fornecedor");
+                start();
+                Thread relport = new Thread(new CreateReport(getFornecedorAtivo(), CreateReport.Templates.TMPL_FORNECEDOR_CADASTRO_RESUMIDO, null), "Thread: Imprimir Fornecedor");
                 relport.start();
-                Chronometer.stop();
-                log += Sistema.getTime() + " | Relatório com " + CadastrarFornecedor.getFornecedorAtivo().size() + "   fornecedor(es) gerado em: " + Chronometer.elapsedTime() + " ms." + '\n';
+                stop();
+                log += getTime() + " | Relatório com " + getFornecedorAtivo().size() + "   fornecedor(es) gerado em: " + elapsedTime() + " ms." + '\n';
                 break;
             case 1:
-                Chronometer.start();
-                Thread relport1 = new Thread(new CreateReport(CadastrarFornecedor.getForInativos(), CreateReport.Templates.TMPL_FORNECEDOR_CADASTRO_RESUMIDO, null), "Thread: Imprimir Fornecedor");
+                start();
+                Thread relport1 = new Thread(new CreateReport(getForInativos(), CreateReport.Templates.TMPL_FORNECEDOR_CADASTRO_RESUMIDO, null), "Thread: Imprimir Fornecedor");
                 relport1.start();
-                Chronometer.stop();
-                log += Sistema.getTime() + " | Relatório com " + CadastrarFornecedor.getForInativos().size() + "   fornecedor(es) gerado em: " + Chronometer.elapsedTime() + " ms." + '\n';
+                stop();
+                log += getTime() + " | Relatório com " + getForInativos().size() + "   fornecedor(es) gerado em: " + elapsedTime() + " ms." + '\n';
                 break;
             default:
                 HashMap<String, Object> parametros = new HashMap<>();
-                parametros.put("QUANT_FORNECEDORES_INATIVOS", CadastrarFornecedor.getForInativos().size());
-                parametros.put("QUANT_FORNECEDORES_ATIVOS", CadastrarFornecedor.getFornecedorAtivo().size());
-                parametros.put("TOTAL_REGISTRO", CadastrarFornecedor.getFornecedor().size());
-                Chronometer.start();
-                Thread relport2 = new Thread(new CreateReport(CadastrarFornecedor.getFornecedor(), CreateReport.Templates.TMPL_FORNECEDOR_CADASTRO_COMPLETO, parametros), "Thread: Imprimir Fornecedor");
+                parametros.put("QUANT_FORNECEDORES_INATIVOS", getForInativos().size());
+                parametros.put("QUANT_FORNECEDORES_ATIVOS", getFornecedorAtivo().size());
+                parametros.put("TOTAL_REGISTRO", getFornecedor().size());
+                start();
+                Thread relport2 = new Thread(new CreateReport(getFornecedor(), CreateReport.Templates.TMPL_FORNECEDOR_CADASTRO_COMPLETO, parametros), "Thread: Imprimir Fornecedor");
                 relport2.start();
-                Chronometer.stop();
-                log += Sistema.getTime() + " | Relatório com " + CadastrarFornecedor.getFornecedor().size() + "   fornecedor(es) gerado em: " + Chronometer.elapsedTime() + " ms." + '\n';
+                stop();
+                log += getTime() + " | Relatório com " + getFornecedor().size() + "   fornecedor(es) gerado em: " + elapsedTime() + " ms." + '\n';
                 break;
         }
 
@@ -261,4 +266,5 @@ public class FrmConsultarFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
+    private static final Logger LOG = getLogger(FrmConsultarFornecedor.class.getName());
 }
