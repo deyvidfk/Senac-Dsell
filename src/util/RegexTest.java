@@ -18,15 +18,12 @@ public class RegexTest {
 
     public static boolean TestarRegex(Regex expressao, String str) {
         try {
-            boolean isValid = false;
-            if (str != null && str.length() > 0) {
+            if (str != null && str.length() > 0 && expressao != null) {
                 Pattern pattern = compile(expressao.getExpressao(), Pattern.CASE_INSENSITIVE);
                 Matcher matcher = pattern.matcher(str);
-                if (matcher.matches()) {
-                    isValid = true;
-                }
+                return matcher.matches();
             }
-            return isValid;
+
         } catch (Exception e) {
             showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
             getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
@@ -34,7 +31,4 @@ public class RegexTest {
         return false;
     }
     private static final Logger LOG = getLogger(RegexTest.class.getName());
-
-    private RegexTest() {
-    }
 }

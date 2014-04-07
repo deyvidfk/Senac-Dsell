@@ -82,21 +82,12 @@ public class ValidaForm {
     }
 
     public static boolean isValid(String str, boolean requerid, Regex re) {
-        if (requerid == true) {
-            if (!str.isEmpty()) {
-                if (re != null) {
-                    return TestarRegex(re, str);
-                }
-                return true;
+            if (str != null && str.length() > 0  && re != null) {
+                 return TestarRegex(re, str);
             }
-            return false;
-        } else {
-            if (re != null) {
-                return TestarRegex(re, str);
-            }
-            return true;
-        }
+         return false;
     }
+    
     private static final Logger LOG = getLogger(ValidaForm.class.getName());
 
     private ValidaForm() {
