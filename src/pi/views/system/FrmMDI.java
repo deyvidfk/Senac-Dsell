@@ -69,7 +69,7 @@ public final class FrmMDI extends javax.swing.JFrame {
         FrmSobre formSobre = new FrmSobre();
         getDesktopPane().add(formSobre);
         menu1Visivel(listaMenu);
-        lblDadosSessao.setText("Ola " + getSessao().get(0).getUser().getNome());
+        lblDadosSessao.setText("Olá " + getSessao().get(0).getUser().getNome());
         formSobre.setVisible(true);
     }
 
