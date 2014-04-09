@@ -112,7 +112,7 @@ public class TesteDeDesepenhoDoSistema {
                 }
                 return true;
             } else {
-                throw new IllegalArgumentException("Você não pode cadastrar produtos sem antes haver fornecedores cadastrados no sistema.");
+                throw new IllegalArgumentException(MensagensDoSistema.SISTEMA.MSG_001_000.getCodigo() + "\n" + MensagensDoSistema.SISTEMA.MSG_001_000.getMenssagem());
             }
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -141,7 +141,7 @@ public class TesteDeDesepenhoDoSistema {
                 }
                 return true;
             } else {
-                throw new IllegalArgumentException("Você não pode gerar vendas sem antes haver produtos ou usuários cadastrados.");
+                throw new IllegalArgumentException(MensagensDoSistema.SISTEMA.MSG_001_001.getCodigo() + "\n" + MensagensDoSistema.SISTEMA.MSG_001_001.getMenssagem());
             }
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());

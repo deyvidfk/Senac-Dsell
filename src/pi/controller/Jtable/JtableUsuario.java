@@ -40,7 +40,7 @@ public class JtableUsuario {
      * POPULA A TABELA "JTable" COM OS DADOS
      */
     public void popularJtable() {
-        ordenarPorNome();
+//        ordenarPorNome();
         try {
             ModelJTable tabela = new ModelJTable(getUsuario());
             this.getViewForm().getjTableLoadUsers().setModel(tabela);

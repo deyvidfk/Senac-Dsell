@@ -24,7 +24,7 @@ public final class DaoProduto implements DaoInterface {
 
     public DaoProduto() {
         this.XSTREAM = new XStream();
-        this.FILE_XML_PJ = "db.produto.xml";
+        this.FILE_XML_PJ = "dsell-db-produto.xml";
         this.CONEXAO_DB = new Source();
         DaoProduto._produto = readXml();
     }

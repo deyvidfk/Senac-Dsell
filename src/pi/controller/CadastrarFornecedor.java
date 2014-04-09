@@ -13,9 +13,11 @@ import pi.model.ModelPessoaJuridica;
 import static util.ValidaForm.isValid;
 
 public class CadastrarFornecedor extends DaoPessoaJuridica {
+
     private static final Logger LOG = getLogger(CadastrarFornecedor.class.getName());
+
     static {
-    System.out.println(LOG.getName());
+        System.out.println(LOG.getName());
     }
 
     public CadastrarFornecedor() {
@@ -28,6 +30,8 @@ public class CadastrarFornecedor extends DaoPessoaJuridica {
             if (isValid(pj)) {
                 getFornecedor().add(pj);
                 createXml(getFornecedor());
+
+
                 return true;
             }
         } catch (Exception e) {
@@ -53,7 +57,7 @@ public class CadastrarFornecedor extends DaoPessoaJuridica {
             } else {
                 /* Exceção!
                  * As regras de negocio do sistema não permitiram excluir o registro, caso contenha dependências. */
-                throw new IllegalArgumentException("Você não pode excluir este fornecedor, pois existem dependencências.  Ele cotem produtos cadastrados no sistema.");
+                throw new IllegalArgumentException(MensagensDoSistema.SISTEMA.MSG_002_000.getCodigo() + "\n" + MensagensDoSistema.SISTEMA.MSG_002_000.getMenssagem());
             }
         } catch (IllegalArgumentException e) {
             showMessageDialog(null, e.getMessage());

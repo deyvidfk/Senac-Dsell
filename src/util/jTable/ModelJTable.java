@@ -22,11 +22,11 @@ public class ModelJTable extends AbstractTableModel {
     private final Class<?> classe;
 
     public ModelJTable(List<?> lista) {
-        if (lista.isEmpty()) {
-            throw new NullPointerException("Lista vazia");
-        } else {
+        if (!lista.isEmpty()) {
             this.lista = lista;
             this.classe = lista.get(0).getClass();
+        } else {
+            throw new NullPointerException("Lista vazia");
         }
     }
 

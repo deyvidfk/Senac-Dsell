@@ -87,6 +87,7 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
         jLabel4.setText("Nome de Usuario");
 
         btnSistema.setText("Nao");
+        btnSistema.setToolTipText("Habilitar módulo: Config. do Sistema");
         btnSistema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSistemaActionPerformed(evt);
@@ -103,6 +104,7 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
         });
 
         jToggleButton2.setText("Nao");
+        jToggleButton2.setToolTipText("Habilitar módulo: Relatórios");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);
@@ -110,6 +112,7 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
         });
 
         jToggleButton1.setText("Nao");
+        jToggleButton1.setToolTipText("Habilitar módulo: Cadastro");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
@@ -218,8 +221,10 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
         if (jToggleButton2.isSelected()) {
             menus.add(Menu.RELATORIO);
             jToggleButton2.setText("Ok");
+            jToggleButton2.setToolTipText("Módulo Habilitado");
         } else {
             jToggleButton2.setText("Nao");
+            jToggleButton2.setToolTipText("Módulo Desabilitado");
             menus.remove(Menu.RELATORIO);
         }
     }//GEN-LAST:event_jToggleButton2ActionPerformed
@@ -228,8 +233,10 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
         if (jToggleButton1.isSelected()) {
             menus.add(Menu.CADASTRO);
             jToggleButton1.setText("Ok");
+            jToggleButton1.setToolTipText("Módulo Habilitado");
         } else {
             jToggleButton1.setText("Nao");
+            jToggleButton1.setToolTipText("Módulo Desabilitado");
             menus.remove(Menu.CADASTRO);
         }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
@@ -263,7 +270,6 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnSistema;
     private javax.swing.JButton jButton1;

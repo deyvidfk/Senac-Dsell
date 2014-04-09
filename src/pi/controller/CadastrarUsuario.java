@@ -12,6 +12,8 @@ import static util.ValidaForm.isValid;
 
 public class CadastrarUsuario extends DaoPessoaFisica {
 
+    private static final Logger LOG = getLogger(CadastrarUsuario.class.getName());
+    
     public boolean creat(String cnpj, String txtRg, String txtCpf, String telefone, String email, String site, String cidade, String estado, String pais, String bairro, String rua, String numero, String complemento, String cep) {
 
         try {
@@ -99,5 +101,5 @@ public class CadastrarUsuario extends DaoPessoaFisica {
         }
         return false;
     }
-    private static final Logger LOG = getLogger(CadastrarUsuario.class.getName());
+     
 }

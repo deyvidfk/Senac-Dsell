@@ -23,7 +23,7 @@ public final class DaoSessao implements DaoInterface {
     private final String FILE_XML;
 
     public DaoSessao() {
-        this.FILE_XML = "db.sessao.xml";
+        this.FILE_XML = "dsell-db-sessao.xml";
         this.XSTREAM = new XStream();
         this.CONEXAO_DB = new Source();
         _sessao = readXml();

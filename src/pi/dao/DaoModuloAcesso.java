@@ -24,7 +24,7 @@ public class DaoModuloAcesso implements DaoInterface {
     private final String FILE_XML;
 
     public DaoModuloAcesso() {
-        this.FILE_XML = "db.pessoa-fisica-modulo-acesso.xml";
+        this.FILE_XML = "dsell-db-pessoa-fisica-modulo-acesso.xml";
         this.XSTREAM = new XStream();
         this.CONEXAO_DB = new Source();
         _moduloAcesso = (List<ModelModuloAcesso>) readXml();

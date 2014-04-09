@@ -20,7 +20,7 @@ public class DaoLogin implements DaoInterface {
     private final String FILE_XML;
 
     public DaoLogin() {
-        this.FILE_XML = "db.security.xml";
+        this.FILE_XML = "dsell-db-security.xml";
         this.XSTREAM = new XStream();
         this.CONEXAO_DB = new Source();
         DaoLogin._login = readXml();

@@ -23,7 +23,7 @@ public class DaoPessoaFisica implements DaoInterface {
     private final String FILE_XML_PJ;
 
     public DaoPessoaFisica() {
-        this.FILE_XML_PJ = "db.pessoa-fisica.xml";
+        this.FILE_XML_PJ = "dsell-db-pessoa-fisica.xml";
         this.XSTREAM = new XStream();
         this.CONEXAO_DB = new Source();
         DaoPessoaFisica._pessoaJuridica = readXml();

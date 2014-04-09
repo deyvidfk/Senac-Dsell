@@ -180,7 +180,7 @@ public class DaoPessoaJuridica implements DaoInterface {
     private final XStream XSTREAM;
 
     public DaoPessoaJuridica() {
-        this.FILE_XML = "db.pessoa-juridica.xml";
+        this.FILE_XML = "dsell-db-pessoa-juridica.xml";
         this.XSTREAM = new XStream();
         this.CONEXAO_DB = new Source();
         DaoPessoaJuridica._pessoaJuridica = readXml();

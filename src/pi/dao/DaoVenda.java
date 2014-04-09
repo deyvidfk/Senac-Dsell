@@ -57,7 +57,7 @@ public class DaoVenda implements DaoInterface {
 
     public DaoVenda() {
         this.XSTREAM = new XStream();
-        this.FILE_XML_PJ = "db.venda.xml";
+        this.FILE_XML_PJ = "dsell-db-vendas.xml";
         _venda = readXml();
     }
 

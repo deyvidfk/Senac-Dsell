@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import static javax.swing.JOptionPane.showMessageDialog;
 import pi.controller.CadastrarLogin;
+import pi.controller.MensagensDoSistema;
 import pi.controller.seguranca.ModuloAcesso;
 import pi.controller.seguranca.Sessao;
 import pi.dao.DaoPessoaFisica;
@@ -85,8 +86,6 @@ public class UserDefault extends DaoPessoaFisica {
             Sessao sessao = new Sessao(loginCallBack);
             sessao.newSessao();
         }
-        showMessageDialog(null, "CONFIGURAÇÃO DEFAULT DO SISTEMA CRIADA COM SUCESSO.\n"
-                + "Para segurança do sistema altere a senha padrão para uma senha de sua escolha. \n"
-                + "Obs:  Os menus estão desativados. Altere seus dados e os Ative-os, após isso faça o logon novamente.");
+        showMessageDialog(null, MensagensDoSistema.SISTEMA.MSG_000_0.getCodigo() + "\n" + MensagensDoSistema.SISTEMA.MSG_000_0.getMenssagem());
     }
 }

@@ -11,6 +11,7 @@ import pi.controller.CadastrarProduto;
 import static pi.controller.CadastrarProduto.getProduto;
 import pi.controller.CadastrarUsuario;
 import pi.controller.CadastrarVenda;
+import pi.controller.MensagensDoSistema;
 import static pi.dao.DaoPessoaFisica.getUsuario;
 import static pi.dao.DaoPessoaJuridica.getFornecedor;
 import pi.model.ModelPessoaJuridica;
@@ -23,7 +24,6 @@ import util.GeraString;
 public class TesteDeDesepenhoDoSistema {
 
     private static final GeraString instanceControllerGerarString = new GeraString();
-
     private CadastrarUsuario instanceControllerCadastrarUsuario;
     private CadastrarFornecedor instanceControllerCadastrarFornecedor;
     private CadastrarProduto instanceControllerCadastrarPrdoduto;
@@ -121,7 +121,7 @@ public class TesteDeDesepenhoDoSistema {
                 }
                 return true;
             } else {
-                throw new IllegalArgumentException("Você não pode cadastrar produtos sem antes haver fornecedores cadastrados no sistema.");
+                throw new IllegalArgumentException(MensagensDoSistema.SISTEMA.MSG_001_000.getCodigo() + "\n" + MensagensDoSistema.SISTEMA.MSG_001_000.getMenssagem());
             }
         } catch (IllegalArgumentException e) {
             showMessageDialog(null, e.getMessage());
@@ -150,7 +150,7 @@ public class TesteDeDesepenhoDoSistema {
                 }
                 return true;
             } else {
-                throw new IllegalArgumentException("Você não pode gerar vendas sem antes haver produtos ou usuários cadastrados.");
+                throw new IllegalArgumentException(MensagensDoSistema.SISTEMA.MSG_001_001.getCodigo() + "\n" + MensagensDoSistema.SISTEMA.MSG_001_001.getMenssagem());
             }
         } catch (IllegalArgumentException e) {
             showMessageDialog(null, e.getMessage());

@@ -56,7 +56,7 @@
                       <Component id="btnInsertUsuario" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnCadLogin" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="311" max="32767" attributes="0"/>
+                  <EmptySpace pref="261" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
@@ -87,9 +87,9 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Component id="btnInsertUsuario" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnUpdateUsuario" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnDeleteUsuario" min="-2" max="-2" attributes="0"/>
@@ -111,7 +111,7 @@
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="284" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="288" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -120,6 +120,7 @@
         <Component class="javax.swing.JButton" name="btnInsertUsuario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salvar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Clique para salvar as informa&#xe7;&#xf5;es."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsertUsuarioActionPerformed"/>
@@ -128,6 +129,7 @@
         <Component class="javax.swing.JButton" name="btnUpdateUsuario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salvar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Clique para salvar as altera&#xe7;&#xf5;es."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateUsuarioActionPerformed"/>
@@ -136,6 +138,7 @@
         <Component class="javax.swing.JButton" name="btnDeleteUsuario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir"/>
+            <Property name="toolTipText" type="java.lang.String" value="Ap&#xf3;s efetuar essa a&#xe7;&#xe3;o n&#xe3;o ser&#xe1; poss&#xed;vel reverte-la."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteUsuarioActionPerformed"/>
@@ -443,22 +446,15 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtCidade" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
-                                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="txtBairro" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
-                                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
-                                          <Component id="jLabel3" min="-2" pref="181" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="txtCidade" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
+                                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel3" min="-2" pref="181" max="-2" attributes="0"/>
+                                      <Component id="txtBairro" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
+                                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -499,19 +495,19 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtEstado" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="txtRua" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txtEstado" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="txtRua" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtPais" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="txtNumero" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="txtPais" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="txtNumero" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="jScrollPane2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -607,6 +603,7 @@
         <Component class="javax.swing.JButton" name="btnRegistroAnterior">
           <Properties>
             <Property name="text" type="java.lang.String" value="&lt;"/>
+            <Property name="toolTipText" type="java.lang.String" value="Registro anterior"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistroAnteriorActionPerformed"/>
@@ -615,6 +612,7 @@
         <Component class="javax.swing.JButton" name="btnProximoRegistro">
           <Properties>
             <Property name="text" type="java.lang.String" value="&gt;"/>
+            <Property name="toolTipText" type="java.lang.String" value="Pr&#xf3;ximo registro  "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProximoRegistroActionPerformed"/>
@@ -631,7 +629,8 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnCadLogin">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Login"/>
+            <Property name="text" type="java.lang.String" value="Dados de acesso"/>
+            <Property name="toolTipText" type="java.lang.String" value="Altere aqui as permiss&#xf5;es de acesso ao sistema."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadLoginActionPerformed"/>
