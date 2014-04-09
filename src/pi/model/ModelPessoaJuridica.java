@@ -51,7 +51,7 @@ public class ModelPessoaJuridica implements InterfaceModelContato, InterfaceMode
     }
 
     @RequiredValidation(Required = true, label = "CNPJ", MaximumValue = 50, MinimumValue = 1)
-    @RegularExpressionValidator(ValidationExpression = Regex.CNPJ, Label = "CNPJ", RegexErrorMessage = "CNPJ Inválido", EnableErrorMessage = true)
+    @RegularExpressionValidator(ValidationExpression = Regex.CNPJ, Label = "CNPJ", RegexErrorMessage = "CNPJ Inválido - 99.999.999/9999-99 ", EnableErrorMessage = true)
     @Tabela(Coluna = "CNPJ", Indice = 0)
     public String getCnpj() {
 

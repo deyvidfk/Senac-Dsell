@@ -19,8 +19,8 @@ public class Start {
      * @param args the commancreatConfigDefault line arguments
      */
     public static void main(String[] args) {
-        Start s = new Start();
-        s.new Sistema();
+        Start start = new Start();
+        Sistema sistema = start.new Sistema();
     }
 
     @SuppressWarnings("serial")
@@ -65,16 +65,15 @@ public class Start {
                     }
 
                     UserDefault us = new UserDefault();
+                    //Verifica se já existe algum usuário cadastrado
                     if (us.getStatusSistema()) {
                         FrmAutenticaLogin FrmLogin = new FrmAutenticaLogin();
-                        FrmLogin.setVisible(true);
                         FrmLogin.pack();
                         FrmLogin.setVisible(true);
                         FrmLogin.setLocationRelativeTo(null);
                         dispose();
                     } else {
-                        us.creatConfigDefault();
-
+                        us.criaUsuarioDefault();
                     }
                 }
             }.start();

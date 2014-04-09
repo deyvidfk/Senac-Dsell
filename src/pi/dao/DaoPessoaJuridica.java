@@ -35,6 +35,8 @@ public class DaoPessoaJuridica implements DaoInterface {
     public static List<ModelPessoaJuridica> getFornecedorAtivo() {
         Map<Integer, Integer> map = new HashMap<>();
         int cont;
+        if (getFornecedor() != null) {
+        
         for (int i = 0; i < getFornecedor().size(); i++) {
             cont = 0;
             for (int j = 0; j < getProduto().size(); j++) {
@@ -79,6 +81,8 @@ public class DaoPessoaJuridica implements DaoInterface {
             }
         });
         return ListaAuxiliar;
+        }
+        return null;
     }
 
     /**

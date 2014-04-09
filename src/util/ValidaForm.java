@@ -31,7 +31,6 @@ public class ValidaForm {
      */
     public static boolean isValid(Object obj) {
         Class<?> classe = obj.getClass();
-        boolean check = true;
 
         for (Method m : classe.getDeclaredMethods()) {
 
@@ -42,7 +41,7 @@ public class ValidaForm {
                     RequiredValidation annotation = m.getAnnotation(RequiredValidation.class);
                     if (annotation.Required() == true) {
                         Object object = m.invoke(obj);
-                        if (object.toString().isEmpty()) {
+                        if (object.toString().length() == 0) {
                             throw new IllegalArgumentException("O campo " + annotation.label() + " é obrigatorio.");
                         } else if (m.isAnnotationPresent(RegularExpressionValidator.class) == false) {
                             if (object.toString().length() < annotation.MinimumValue()) {
@@ -78,16 +77,15 @@ public class ValidaForm {
                 }
             }
         }
-        return check;
+        return true;
     }
 
     public static boolean isValid(String str, boolean requerid, Regex re) {
-            if (str != null && str.length() > 0  && re != null) {
-                 return TestarRegex(re, str);
-            }
-         return false;
+        if (str != null && str.length() > 0 && re != null) {
+            return TestarRegex(re, str);
+        }
+        return false;
     }
-    
     private static final Logger LOG = getLogger(ValidaForm.class.getName());
 
     private ValidaForm() {

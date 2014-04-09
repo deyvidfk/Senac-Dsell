@@ -21,11 +21,6 @@ public class Sessao {
     private static ModelSessao sessao;
     private static DaoSessao dao;
     private static List<ModelSessao> list;
-
-    public static List<ModelSessao> getSessao() {
-        dao = new DaoSessao();
-        return dao.readXml();
-    }
     private final ModelLogin dataLogin;
 
     public Sessao(ModelLogin login) {
@@ -34,7 +29,6 @@ public class Sessao {
     }
 
     public void newSessao() {
-        //user = new ModelPessoaFisica();
         ModuloAcesso acesso = new ModuloAcesso();
         CadastrarUsuario cad = new CadastrarUsuario();
         user = cad.getUserPeloId(this.dataLogin.getId());
@@ -54,6 +48,11 @@ public class Sessao {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | IllegalArgumentException | InvocationTargetException ex) {
             getLogger(Sessao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static List<ModelSessao> getSessao() {
+        dao = new DaoSessao();
+        return dao.readXml();
     }
     private static final Logger LOG = getLogger(Sessao.class.getName());
 }

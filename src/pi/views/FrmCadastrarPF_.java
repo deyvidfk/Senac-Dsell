@@ -12,10 +12,6 @@ import util.Regex;
 import static util.RegexTest.TestarRegex;
 import util.ValidaForm;
 
-/**
- *
- * @author deyvid.fk
- */
 public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
 
     private CadastrarUsuario instanceControllerCadastrarUsuario;
@@ -604,7 +600,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnUpdateUsuarioActionPerformed
 
     private void btnDeleteUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUsuarioActionPerformed
-        int selectedOption = showConfirmDialog(null, "Deseja realmente excluir esse cadastro?", "Sistema informa:", JOptionPane.YES_NO_OPTION);
+        int selectedOption = showConfirmDialog(null, "Deseja realmente excluir este cadastro?", "Sistema informa:", JOptionPane.YES_NO_OPTION);
         if (selectedOption == JOptionPane.YES_NO_OPTION) {
             int linha = jTableLoadUsers.getSelectedRow();
             instanceControllerJtable.updateJtable();
@@ -704,7 +700,6 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
             if (ProximoIndice >= 0) {
                 instanceControllerJtable.moveRecord(ProximoIndice);
                 jTableLinhaSelecionada--;
-                //selecionarLinha();
                 if (ProximoIndice <= 0) {
                     this.getBtnRegistroAnterior().setEnabled(false);
                 }
@@ -746,57 +741,67 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRadioButtonOrdenarPorNomeKeyPressed
 
     private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
-        if (ValidaForm.isValid(this.txtCpf.getText(), true, Regex.CPF) == false) {
-            this.getjTabbedDadosCadastrais().setSelectedIndex(0);
-            labCpf.setText("* CPF inválido");
-            labCpf.setForeground(Color.RED);
-        } else {
-            labCpf.setText("* CPF");
-            labCpf.setForeground(Color.green);
+        if (!this.txtCpf.getText().isEmpty()) {
+            if (ValidaForm.isValid(this.txtCpf.getText(), true, Regex.CPF) == false) {
+                this.getjTabbedDadosCadastrais().setSelectedIndex(0);
+                labCpf.setText("* CPF inválido");
+                labCpf.setForeground(Color.RED);
+            } else {
+                labCpf.setText("* CPF");
+                labCpf.setForeground(Color.green);
+            }
         }
     }//GEN-LAST:event_txtCpfFocusLost
 
     private void txtRgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRgFocusLost
-        if (TestarRegex(Regex.RG, this.txtRg.getText()) == false) {
-            this.getjTabbedDadosCadastrais().setSelectedIndex(0);
-            labRg.setText("* RG inválido");
-            labRg.setForeground(Color.RED);
-        } else {
-            labRg.setText("* RG");
-            labRg.setForeground(Color.green);
+        if (!this.txtRg.getText().isEmpty()) {
+            if (TestarRegex(Regex.RG, this.txtRg.getText()) == false) {
+                this.getjTabbedDadosCadastrais().setSelectedIndex(0);
+                labRg.setText("* RG inválido");
+                labRg.setForeground(Color.RED);
+            } else {
+                labRg.setText("* RG");
+                labRg.setForeground(Color.green);
+            }
         }
     }//GEN-LAST:event_txtRgFocusLost
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
-        if (ValidaForm.isValid(this.txtEmail.getText(), true, Regex.EMAIL) == false) {
-            this.getjTabbedDadosCadastrais().setSelectedIndex(1);
-            labEmail.setText("* E-mail inválido");
-            labEmail.setForeground(Color.RED);
-        } else {
-            labEmail.setText("* E-mail");
-            labEmail.setForeground(Color.green);
+        if (!this.txtEmail.getText().isEmpty()) {
+            if (ValidaForm.isValid(this.txtEmail.getText(), true, Regex.EMAIL) == false) {
+                this.getjTabbedDadosCadastrais().setSelectedIndex(1);
+                labEmail.setText("* E-mail inválido");
+                labEmail.setForeground(Color.RED);
+            } else {
+                labEmail.setText("* E-mail");
+                labEmail.setForeground(Color.green);
+            }
         }
     }//GEN-LAST:event_txtEmailFocusLost
 
     private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefoneFocusLost
-        if (ValidaForm.isValid(this.txtTelefone.getText(), true, Regex.TELEFONE) == false) {
-            this.getjTabbedDadosCadastrais().setSelectedIndex(1);
-            labTelefone.setText("* Telefone inválido");
-            labTelefone.setForeground(Color.RED);
-        } else {
-            labTelefone.setText("* Telefone");
-            labTelefone.setForeground(Color.green);
+        if (!this.txtTelefone.getText().isEmpty()) {
+            if (ValidaForm.isValid(this.txtTelefone.getText(), true, Regex.TELEFONE) == false) {
+                this.getjTabbedDadosCadastrais().setSelectedIndex(1);
+                labTelefone.setText("* Telefone inválido");
+                labTelefone.setForeground(Color.RED);
+            } else {
+                labTelefone.setText("* Telefone");
+                labTelefone.setForeground(Color.green);
+            }
         }
     }//GEN-LAST:event_txtTelefoneFocusLost
 
     private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
-        if (ValidaForm.isValid(this.txtCep.getText(), true, Regex.CEP) == false) {
-            this.getjTabbedDadosCadastrais().setSelectedIndex(2);
-            labCep.setText("* CEP inválido");
-            labCep.setForeground(Color.RED);
-        } else {
-            labCep.setText("* CEP");
-            labCep.setForeground(Color.green);
+        if (!this.txtCep.getText().isEmpty()) {
+            if (ValidaForm.isValid(this.txtCep.getText(), true, Regex.CEP) == false) {
+                this.getjTabbedDadosCadastrais().setSelectedIndex(2);
+                labCep.setText("* CEP inválido");
+                labCep.setForeground(Color.RED);
+            } else {
+                labCep.setText("* CEP");
+                labCep.setForeground(Color.green);
+            }
         }
     }//GEN-LAST:event_txtCepFocusLost
 
@@ -806,7 +811,6 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
         mod.setVisible(true);
 
     }//GEN-LAST:event_btnCadLoginActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarUsuario;
     private javax.swing.JButton btnCadLogin;

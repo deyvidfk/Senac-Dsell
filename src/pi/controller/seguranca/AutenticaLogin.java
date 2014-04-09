@@ -11,10 +11,9 @@ import pi.model.ModelLogin;
 public class AutenticaLogin {
 
     public AutenticaLogin() {
-
     }
 
-    public ModelLogin loginAuthentication(String username, String pass) throws GeneralSecurityException, UnsupportedEncodingException {
+    public ModelLogin validaDadosDeAcesso(String username, String pass) throws GeneralSecurityException, UnsupportedEncodingException {
         try {
             for (int i = 0; i < getLogin().size(); i++) {
                 if (getLogin().get(i).getUsername().equals(username) && getLogin().get(i).getPass().equals(pass)) {

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pi.views;
 
 import java.awt.Color;
@@ -19,10 +15,6 @@ import pi.model.ModelLogin;
 import pi.views.system.ConfigLayout;
 import static util.Time.getTime;
 
-/**
- *
- * @author deyvid.souza
- */
 public class FrmAutenticaLogin extends javax.swing.JFrame {
 
     public FrmAutenticaLogin() {
@@ -141,12 +133,12 @@ public class FrmAutenticaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void autenticaLogin() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
-        ModelLogin checkLogin;
+        ModelLogin loginCallBack;
         CadastrarLogin l = new CadastrarLogin();
-        checkLogin = l.loginAuthentication(this.getTxtNomeUsuario().getText(), this.getTxtSenhaUsuario().getText());
-        if (checkLogin != null) {
+        loginCallBack = l.autenticaLogin(this.getTxtNomeUsuario().getText(), this.getTxtSenhaUsuario().getText());
+        if (loginCallBack != null) {
             this.dispose();
-            Sessao sessao = new Sessao(checkLogin);
+            Sessao sessao = new Sessao(loginCallBack);
             sessao.newSessao();
         } else {
             this.getjLabel1().setForeground(Color.red);
@@ -181,9 +173,7 @@ public class FrmAutenticaLogin extends javax.swing.JFrame {
 
     private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
         // TODO add your handling code here
-
     }//GEN-LAST:event_txtSenhaKeyPressed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogar;
     private javax.swing.JLabel jLabel1;

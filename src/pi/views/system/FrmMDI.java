@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pi.views.system;
 
 import static java.lang.System.exit;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import static javax.swing.UIManager.setLookAndFeel;
@@ -22,10 +19,6 @@ import pi.views.FrmGerenciarModuloAcessoAoSistema;
 import static pi.views.system.Menu.RELATORIO;
 import static pi.views.system.Menu.SISTEMA;
 
-/**
- *
- * @author deyvid.fk
- */
 public final class FrmMDI extends javax.swing.JFrame {
 
     FrmCadastrarPF_ formCadastroDeUsuario;
@@ -68,41 +61,25 @@ public final class FrmMDI extends javax.swing.JFrame {
      */
     public FrmMDI(List listaMenu) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
         initComponents();
-        lookandfeel();
+        try {
+            setLookAndFeel(ConfigLayout.LookAndFeelDefault.getLookAndFeel());
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(FrmMDI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         FrmSobre formSobre = new FrmSobre();
         getDesktopPane().add(formSobre);
         menu1Visivel(listaMenu);
         lblDadosSessao.setText("Ola " + getSessao().get(0).getUser().getNome());
-
-//        formSobre.setVisible(true);
+        formSobre.setVisible(true);
     }
 
-
-    
-    
     private FrmMDI() {
         super();
     }
+    private static FrmMDI instance = new FrmMDI();
 
     public static FrmMDI getInstance() {
-        return NewSingletonHolder.INSTANCE;
-    }
-
-    private static class NewSingletonHolder {
-
-        private static final FrmMDI INSTANCE = new FrmMDI();
-
-        private NewSingletonHolder() {
-        }
-    }
-
-    public void lookandfeel() {
-        try {
-            String feed = "com.jtattoo.plaf.fast.FastLookAndFeel";
-            String feed2 = "com.jtattoo.plaf.smart.SmartLookAndFeel";
-            setLookAndFeel(feed);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-        }
+        return instance;
     }
 
     @SuppressWarnings("unchecked")
@@ -307,6 +284,7 @@ public final class FrmMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+
         frmConsultarFornecedor = new FrmConsultarFornecedor();
         getDesktopPane().add(frmConsultarFornecedor);
         frmConsultarFornecedor.pack();

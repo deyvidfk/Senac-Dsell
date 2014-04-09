@@ -24,63 +24,69 @@ import pi.views.system.Menu;
 public class UserDefault extends DaoPessoaFisica {
 
     private static final Logger LOG = getLogger(UserDefault.class.getName());
+    private String USER_LOGIN_DEFAULT = "adm";
+    private String USER_SENHA_DEFAULT = "adm";
 
     static {
         System.out.println(LOG.getName());
     }
 
-    public boolean getStatusSistema() {
-        return getUsuario().size() != 0;
+    public UserDefault() {
     }
 
-    public void creatUserDefault() {
+    public boolean getStatusSistema() {
+        return !getUsuario().isEmpty();
+    }
 
-        ModelPessoaFisica ps = new ModelPessoaFisica();
-        ps.setId(0);
-        ps.setNome("ADM");
-        ps.setRg("12.123.123-1");
-        ps.setCpf("000.000.000-00");
-        ps.setTelefone("(11) 0000-0000");
-        ps.setEmail("exemplo@exemplo.com");
-        ps.setSite("exemplo.com.br");
-        ps.setCidade("Sao Paulo");
-        ps.setEstado("Sao Paulo");
-        ps.setPais("Brasil");
-        ps.setBairro("JD");
-        ps.setRua("Rua");
-        ps.setNumero("0");
-        ps.setComplemento("complem.");
-        ps.setCep("04872-290");
-
-        ModelLogin login = new ModelLogin();
-        CadastrarLogin cadastro = new CadastrarLogin();
-        ModuloAcesso moduloAcesso = new ModuloAcesso();
-        login.setId(0);
-        login.setUsername("ADM");
+    public void criaDadosDoUsuarioDefault() {
         try {
-            login.setPass("ADM");
+            ModelPessoaFisica ps = new ModelPessoaFisica();
+            ps.setId(0);
+            ps.setNome("ADM");
+            ps.setRg("12.123.123-1");
+            ps.setCpf("000.000.000-00");
+            ps.setTelefone("(11) 0000-0000");
+            ps.setEmail("exemplo@exemplo.com");
+            ps.setSite("exemplo.com.br");
+            ps.setCidade("São Paulo");
+            ps.setEstado("SP");
+            ps.setPais("Brasil");
+            ps.setBairro("JD");
+            ps.setRua("Rua");
+            ps.setNumero("0");
+            ps.setComplemento("complem.");
+            ps.setCep("04872-290");
+
+            ModelLogin login = new ModelLogin();
+            login.setId(0);
+            login.setUsername(USER_LOGIN_DEFAULT);
+            login.setPass(USER_SENHA_DEFAULT);
 
             getUsuario().add(ps);
             createXml(getUsuario());
+
+            CadastrarLogin cadastro = new CadastrarLogin();
             cadastro.creat(login);
 
             List menu = new ArrayList<>();
             menu.add(Menu.SISTEMA);
+            menu.add(Menu.CADASTRO_GERAL);
+            ModuloAcesso moduloAcesso = new ModuloAcesso();
             moduloAcesso.addModuloAcesso(ps.getId(), menu);
-
-            showMessageDialog(null, "Configurao Default do sistema criada com sucesso. Para seguranca do sistema altere a senha padrao 'ADM'para uma senha de sua escolha. Atencao, os menus estao desativados. Ativeos e faca o login novamente. ");
         } catch (GeneralSecurityException | UnsupportedEncodingException ex) {
         }
     }
 
-    public void creatConfigDefault() {
-        creatUserDefault();
+    public void criaUsuarioDefault() {
+        criaDadosDoUsuarioDefault();
         CadastrarLogin login = new CadastrarLogin();
-        ModelLogin _callback = login.loginAuthentication("ADM", "ADM");
-        if (_callback != null) {
-            Sessao sessao = new Sessao(_callback);
+        ModelLogin loginCallBack = login.autenticaLogin(USER_LOGIN_DEFAULT, USER_SENHA_DEFAULT);
+        if (loginCallBack != null) {
+            Sessao sessao = new Sessao(loginCallBack);
             sessao.newSessao();
         }
+        showMessageDialog(null, "CONFIGURAÇÃO DEFAULT DO SISTEMA CRIADA COM SUCESSO.\n"
+                + "Para segurança do sistema altere a senha padrão para uma senha de sua escolha. \n"
+                + "Obs:  Os menus estão desativados. Altere seus dados e os Ative-os, após isso faça o logon novamente.");
     }
-
 }

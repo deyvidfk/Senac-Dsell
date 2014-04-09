@@ -15,8 +15,6 @@ public class CellRenderer extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int row, int column) {
         super.getTableCellRendererComponent(jtable, o, bln, bln1, row, column); //To change body of generated methods, choose Tools | Templates.
-
-
         if (row % 2 == 0) {
             setBackground(Color.LIGHT_GRAY);
         } else {
@@ -25,7 +23,6 @@ public class CellRenderer extends DefaultTableCellRenderer {
         if (bln) {
             setBackground(Color.CYAN);
         }
-
         return this;
     }
 }

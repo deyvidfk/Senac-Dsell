@@ -1,4 +1,3 @@
-
 package pi.controller;
 
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class CadastrarLogin extends DaoLogin {
         return false;
     }
 
-    public ModelLogin loginAuthentication(String username, String pass) {
+    public ModelLogin autenticaLogin(String username, String pass) {
         try {
             for (int i = 0; i < getLogin().size(); i++) {
                 if (getLogin().get(i).getUsername().equals(username) && getLogin().get(i).getPass().equals(pass)) {
@@ -44,5 +43,4 @@ public class CadastrarLogin extends DaoLogin {
         return null;
     }
     private static final Logger LOG = getLogger(CadastrarLogin.class.getName());
-
 }

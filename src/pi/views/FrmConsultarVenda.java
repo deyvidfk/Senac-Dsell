@@ -46,8 +46,10 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        if (getVENDAS().size() > 0) {
-            criarGrafico(graficoList);
+        if (getVENDAS() != null) {
+            if (getVENDAS().size() > 0) {
+                criarGrafico(graficoList);
+            }
         }
     }
     private static final ArrayList<ModelGrafico> graficoList = new ArrayList<>();

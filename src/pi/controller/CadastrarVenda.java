@@ -9,6 +9,7 @@ import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import static javax.swing.JOptionPane.showMessageDialog;
 import pi.dao.DaoVenda;
+import static pi.dao.DaoVenda.getVENDAS;
 import pi.model.ModelVenda;
 import static util.GeraString.getAno;
 import static util.GeraString.getMesDoAno;
@@ -53,8 +54,8 @@ public class CadastrarVenda extends DaoVenda {
      * @param ano ano
      * @return
      */
-    public static double getRendimentoVendaPorTrimestre(int m1, int m2, int m3, int ano) {
-        
+    public static double getRendimentoVendaPorTrimestre(int m1, int m2, int m3, int ano) {        
+        if(getVENDAS() != null){
         List<ModelVenda> ListaAuxiliar = new ArrayList<>(getVENDAS());
         double dindin = 0.0;
         for (int i = 0; i < ListaAuxiliar.size(); i++) {
@@ -69,6 +70,8 @@ public class CadastrarVenda extends DaoVenda {
             dindin += ListaAuxiliar.get(i).getPrecoFinal();
         }
         return dindin;
+        }
+        return 0;
     }
 
     public boolean creat(Integer txtIdProduto, Integer txtIdComprador, Double txtPreco, Integer txtDesconto) {
