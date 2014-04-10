@@ -13,7 +13,7 @@ import static util.ValidaForm.isValid;
 public class CadastrarUsuario extends DaoPessoaFisica {
 
     private static final Logger LOG = getLogger(CadastrarUsuario.class.getName());
-    
+
     public boolean creat(String cnpj, String txtRg, String txtCpf, String telefone, String email, String site, String cidade, String estado, String pais, String bairro, String rua, String numero, String complemento, String cep) {
 
         try {
@@ -77,20 +77,21 @@ public class CadastrarUsuario extends DaoPessoaFisica {
             pj.setCep(txtCep);
 
             if (isValid(pj)) {
-                getUsuario().get(id).setNome(pj.getNome());
-                getUsuario().get(id).setRg(pj.getRg());
-                getUsuario().get(id).setCpf(pj.getCpf());
-                getUsuario().get(id).setTelefone(pj.getTelefone());
-                getUsuario().get(id).setEmail(pj.getEmail());
-                getUsuario().get(id).setSite(pj.getSite());
-                getUsuario().get(id).setCidade(pj.getCidade());
-                getUsuario().get(id).setEstado(pj.getEstado());
-                getUsuario().get(id).setPais(pj.getPais());
-                getUsuario().get(id).setBairro(pj.getBairro());
-                getUsuario().get(id).setRua(pj.getRua());
-                getUsuario().get(id).setNumero(pj.getNumero());
-                getUsuario().get(id).setComplemento(pj.getComplemento());
-                getUsuario().get(id).setCep(pj.getCep());
+                int indice = obterIndice(id);
+                getUsuario().get(indice).setNome(pj.getNome());
+                getUsuario().get(indice).setRg(pj.getRg());
+                getUsuario().get(indice).setCpf(pj.getCpf());
+                getUsuario().get(indice).setTelefone(pj.getTelefone());
+                getUsuario().get(indice).setEmail(pj.getEmail());
+                getUsuario().get(indice).setSite(pj.getSite());
+                getUsuario().get(indice).setCidade(pj.getCidade());
+                getUsuario().get(indice).setEstado(pj.getEstado());
+                getUsuario().get(indice).setPais(pj.getPais());
+                getUsuario().get(indice).setBairro(pj.getBairro());
+                getUsuario().get(indice).setRua(pj.getRua());
+                getUsuario().get(indice).setNumero(pj.getNumero());
+                getUsuario().get(indice).setComplemento(pj.getComplemento());
+                getUsuario().get(indice).setCep(pj.getCep());
                 updateXml(getUsuario());
                 return true;
             }
@@ -101,5 +102,13 @@ public class CadastrarUsuario extends DaoPessoaFisica {
         }
         return false;
     }
-     
+
+    private int obterIndice(int id) {
+        for (int i = 0; i < getUsuario().size(); i++) {
+            if (getUsuario().get(i).getId() == id) {
+                return i;
+            }
+        }
+        return 0;
+    }
 }

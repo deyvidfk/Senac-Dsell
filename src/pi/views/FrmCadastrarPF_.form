@@ -111,7 +111,7 @@
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="288" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="296" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -138,7 +138,7 @@
         <Component class="javax.swing.JButton" name="btnDeleteUsuario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Excluir"/>
-            <Property name="toolTipText" type="java.lang.String" value="Ap&#xf3;s efetuar essa a&#xe7;&#xe3;o n&#xe3;o ser&#xe1; poss&#xed;vel reverte-la."/>
+            <Property name="toolTipText" type="java.lang.String" value="Ap&#xf3;s efetuar esta a&#xe7;&#xe3;o n&#xe3;o ser&#xe1; poss&#xed;vel reverte-la."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteUsuarioActionPerformed"/>
@@ -270,6 +270,8 @@
                 <Component class="javax.swing.JTextField" name="txtNome">
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeActionPerformed"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtNomeFocusLost"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomeKeyPressed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtRg">
@@ -375,11 +377,13 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTelefoneActionPerformed"/>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTelefoneFocusLost"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTelefoneKeyPressed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtEmail">
                   <Events>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtEmailFocusLost"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEmailKeyPressed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="labTelefone">

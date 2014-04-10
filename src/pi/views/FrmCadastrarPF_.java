@@ -9,35 +9,35 @@ import static javax.swing.JOptionPane.showConfirmDialog;
 import pi.controller.CadastrarUsuario;
 import pi.controller.Jtable.JtableUsuario;
 import util.Regex;
-import static util.RegexTest.TestarRegex;
 import util.ValidaForm;
 
 public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
 
     private CadastrarUsuario instanceControllerCadastrarUsuario;
-    private static int jTableLinhaSelecionada = -1;
     private JtableUsuario instanceControllerJtable;
 
     public FrmCadastrarPF_() {
         this.instanceControllerJtable = new JtableUsuario(this);
         this.instanceControllerCadastrarUsuario = new CadastrarUsuario();
         instanceControllerJtable = new JtableUsuario(this);
+
         initComponents();
-        /*// Visibilidade dos botões.*/
+
+        instanceControllerJtable.popularJtable();
+
+        // CONFIGURAÇÃO DEFAULT DO FORMULARIO
+
+        //{
         this.getBtnUpdateUsuario().setVisible(false);
         this.getBtnDeleteUsuario().setEnabled(false);
-        this.getTxtID().setText(Integer.toString(-1));
-        this.getTxtID().setVisible(true);
+//        this.getTxtID().setText(Integer.toString(-1));
+//        this.getTxtID().setVisible(true);
         this.btnCadLogin.setEnabled(false);
-        /*// Carrega a tabela com os dados cadastrados.*/
-        instanceControllerJtable.popularJtable();
+//        this.getBtnRegistroAnterior().setEnabled(false);
+        //}
+        //{
         this.getjTableLoadUsers().setRowSelectionInterval(0, 0);
-    }
-
-    public void selecionarLinha() {
-        this.getjTableLoadUsers().getSelectionModel().setSelectionInterval(FrmCadastrarPF_.jTableLinhaSelecionada, FrmCadastrarPF_.jTableLinhaSelecionada);
-        getjTableLoadUsers().setSelectionBackground(Color.CYAN);
-
+        //}
     }
 
     public void resetForm() {
@@ -139,7 +139,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
         });
 
         btnDeleteUsuario.setText("Excluir");
-        btnDeleteUsuario.setToolTipText("Após efetuar essa ação não será possível reverte-la.");
+        btnDeleteUsuario.setToolTipText("Após efetuar esta ação não será possível reverte-la.");
         btnDeleteUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteUsuarioActionPerformed(evt);
@@ -178,6 +178,16 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
+            }
+        });
+        txtNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNomeFocusLost(evt);
+            }
+        });
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeKeyPressed(evt);
             }
         });
 
@@ -288,10 +298,20 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
                 txtTelefoneFocusLost(evt);
             }
         });
+        txtTelefone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTelefoneKeyPressed(evt);
+            }
+        });
 
         txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtEmailFocusLost(evt);
+            }
+        });
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmailKeyPressed(evt);
             }
         });
 
@@ -556,7 +576,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
                         .addComponent(btnProximoRegistro)
                         .addComponent(btnRegistroAnterior)))
                 .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -590,7 +610,10 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnInsertUsuarioActionPerformed
 
     private void btnUpdateUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateUsuarioActionPerformed
-        boolean update = instanceControllerCadastrarUsuario.update(parseInt(getTxtID().getText()), this.getTxtNome().getText(), this.getTxtRg().getText(), this.getTxtCpf().getText(), this.getTxtTelefone().getText(), this.getTxtEmail().getText(), this.getTxtSite().getText(), this.getTxtCidade().getText(), this.getTxtEstado().getText(), this.getTxtPais().getText(), this.getTxtBairro().getText(), this.getTxtRua().getText(), this.getTxtNumero().getText(), this.getTxtComplemento().getText(), this.getTxtCep().getText());
+        int linha = jTableLoadUsers.getSelectedRow();
+        int id = parseInt(this.getjTableLoadUsers().getValueAt(linha, 13).toString());
+        JOptionPane.showMessageDialog(this, "linha: " + linha + "\n" + " ID: " + id);
+        boolean update = instanceControllerCadastrarUsuario.update(id, this.getTxtNome().getText(), this.getTxtRg().getText(), this.getTxtCpf().getText(), this.getTxtTelefone().getText(), this.getTxtEmail().getText(), this.getTxtSite().getText(), this.getTxtCidade().getText(), this.getTxtEstado().getText(), this.getTxtPais().getText(), this.getTxtBairro().getText(), this.getTxtRua().getText(), this.getTxtNumero().getText(), this.getTxtComplemento().getText(), this.getTxtCep().getText());
         if (update) {
             resetForm();
             instanceControllerJtable.updateJtable();
@@ -607,7 +630,6 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
         if (selectedOption == JOptionPane.YES_NO_OPTION) {
             int linha = jTableLoadUsers.getSelectedRow();
             instanceControllerJtable.updateJtable();
-//            ((ModelJTable) getjTableLoadUsers().getModel()).DeleteRow(linha); // Deleta o registro da tabela.
             instanceControllerCadastrarUsuario.delete(linha);// Deleta o registro do xml.
             resetForm();
             /*// Visibilidade dos botões.*/
@@ -642,8 +664,23 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
         this.getTxtNumero().setText(this.getjTableLoadUsers().getValueAt(linha_selecionada, 10).toString());
         this.getTxtComplemento().setText(this.getjTableLoadUsers().getValueAt(linha_selecionada, 11).toString());
         this.getTxtCep().setText(this.getjTableLoadUsers().getValueAt(linha_selecionada, 12).toString());
-        this.getTxtID().setText(Integer.toString(linha_selecionada));
+        this.getTxtID().setText(this.getjTableLoadUsers().getValueAt(linha_selecionada, 13).toString());
 
+        int indiceAtual = linha_selecionada;
+        int indiceAnterior = indiceAtual - 1;
+        int proximoIndice = indiceAtual + 1;
+        int numeroDeLinhas = getjTableLoadUsers().getRowCount() - 1;
+
+        this.getBtnRegistroAnterior().setEnabled(true);
+        this.getBtnProximoRegistro().setEnabled(true);
+
+        if (indiceAtual == 0) {
+            this.getBtnRegistroAnterior().setEnabled(false);
+        }
+
+        if (indiceAtual == numeroDeLinhas) {
+            this.getBtnProximoRegistro().setEnabled(false);
+        }
     }//GEN-LAST:event_jTableLoadUsersMouseClicked
 
     private void btnBuscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarUsuarioActionPerformed
@@ -693,10 +730,8 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtBuscarUsersKeyPressed
 
     private void btnRegistroAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroAnteriorActionPerformed
-
         int indiceAtual = this.getjTableLoadUsers().getSelectedRow();
         int indiceAnterior = indiceAtual - 1;
-        int proximoIndice = indiceAtual + 1;
         if (instanceControllerCadastrarUsuario.numeroDeRegistros() > 0) {
             this.getBtnProximoRegistro().setEnabled(true);
             this.getBtnInsertUsuario().setVisible(false);
@@ -704,28 +739,19 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
             this.getBtnUpdateUsuario().setEnabled(true);
             this.getBtnDeleteUsuario().setVisible(true);
             this.getBtnDeleteUsuario().setEnabled(true);
-//            indiceAnterior = parseInt(getTxtID().getText()) - 1;
-
             if (indiceAnterior >= 0) {
                 instanceControllerJtable.moveRecord(indiceAnterior);
-//                jTableLinhaSelecionada--;
                 this.getjTableLoadUsers().setRowSelectionInterval(indiceAnterior, indiceAnterior);
-
                 if (indiceAnterior == 0) {
-
                     this.getBtnRegistroAnterior().setEnabled(false);
-
                 }
             }
         }
     }//GEN-LAST:event_btnRegistroAnteriorActionPerformed
 
     private void btnProximoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoRegistroActionPerformed
-
         int indiceAtual = this.getjTableLoadUsers().getSelectedRow();
-        int indiceAnterior = indiceAtual - 1;
         int proximoIndice = indiceAtual + 1;
-        
         if (instanceControllerCadastrarUsuario.numeroDeRegistros() > 0) {
             this.getBtnRegistroAnterior().setEnabled(true);
             this.getBtnInsertUsuario().setVisible(false);
@@ -733,24 +759,16 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
             this.getBtnUpdateUsuario().setEnabled(true);
             this.getBtnDeleteUsuario().setVisible(true);
             this.getBtnDeleteUsuario().setEnabled(true);
-           // proximoIndice = parseInt(getTxtID().getText()) + 1;
             if (proximoIndice > 0) {
                 getjTableLoadUsers().convertRowIndexToModel(proximoIndice);
                 instanceControllerJtable.moveRecord(proximoIndice);
-//                jTableLinhaSelecionada++;
                 this.getjTableLoadUsers().setRowSelectionInterval(proximoIndice, proximoIndice);
-                //selecionarLinha();
                 if (proximoIndice == getjTableLoadUsers().getRowCount() - 1) {
                     this.getBtnProximoRegistro().setEnabled(false);
-
                 }
             }
         }
     }//GEN-LAST:event_btnProximoRegistroActionPerformed
-
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TODO updateJtable your handling code here:
-    }//GEN-LAST:event_txtIDActionPerformed
 
     private void jRadioButtonOrdenarPorNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonOrdenarPorNomeActionPerformed
         instanceControllerJtable.ordenarPorNome();
@@ -762,7 +780,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
 
     private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
         if (!this.txtCpf.getText().isEmpty()) {
-            if (ValidaForm.isValid(this.txtCpf.getText(), true, Regex.CPF) == false) {
+            if (ValidaForm.isValid(this.txtCpf.getText().trim(), true, Regex.CPF) == false) {
                 this.getjTabbedDadosCadastrais().setSelectedIndex(0);
                 labCpf.setText("* CPF inválido");
                 labCpf.setForeground(Color.RED);
@@ -775,7 +793,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
 
     private void txtRgFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRgFocusLost
         if (!this.txtRg.getText().isEmpty()) {
-            if (TestarRegex(Regex.RG, this.txtRg.getText()) == false) {
+            if (ValidaForm.isValid(this.txtRg.getText().trim(), true, Regex.RG) == false) {
                 this.getjTabbedDadosCadastrais().setSelectedIndex(0);
                 labRg.setText("* RG inválido");
                 labRg.setForeground(Color.RED);
@@ -788,7 +806,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
 
     private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
         if (!this.txtEmail.getText().isEmpty()) {
-            if (ValidaForm.isValid(this.txtEmail.getText(), true, Regex.EMAIL) == false) {
+            if (ValidaForm.isValid(this.txtEmail.getText().trim(), true, Regex.EMAIL) == false) {
                 this.getjTabbedDadosCadastrais().setSelectedIndex(1);
                 labEmail.setText("* E-mail inválido");
                 labEmail.setForeground(Color.RED);
@@ -801,7 +819,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
 
     private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefoneFocusLost
         if (!this.txtTelefone.getText().isEmpty()) {
-            if (ValidaForm.isValid(this.txtTelefone.getText(), true, Regex.TELEFONE) == false) {
+            if (ValidaForm.isValid(this.txtTelefone.getText().trim(), true, Regex.TELEFONE) == false) {
                 this.getjTabbedDadosCadastrais().setSelectedIndex(1);
                 labTelefone.setText("* Telefone inválido");
                 labTelefone.setForeground(Color.RED);
@@ -814,7 +832,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
 
     private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
         if (!this.txtCep.getText().isEmpty()) {
-            if (ValidaForm.isValid(this.txtCep.getText(), true, Regex.CEP) == false) {
+            if (ValidaForm.isValid(this.txtCep.getText().trim(), true, Regex.CEP) == false) {
                 this.getjTabbedDadosCadastrais().setSelectedIndex(2);
                 labCep.setText("* CEP inválido");
                 labCep.setForeground(Color.RED);
@@ -826,11 +844,68 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCepFocusLost
 
     private void btnCadLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadLoginActionPerformed
-        FrmGerenciarModuloAcessoAoSistema mod = new FrmGerenciarModuloAcessoAoSistema(this);
-        //getDesktopPane().add(mod);
-        mod.setVisible(true);
+//        FrmGerenciarModuloAcessoAoSistema mod = new FrmGerenciarModuloAcessoAoSistema(this);
+//        mod.setVisible(true);
+        FrmGerenciarModuloAcessoAoSistema.getInstancia().setVisible(true);
 
     }//GEN-LAST:event_btnCadLoginActionPerformed
+
+    private void txtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeFocusLost
+        if (!this.txtNome.getText().isEmpty()) {
+            if (ValidaForm.isValid(this.txtNome.getText().trim(), true, Regex.NOME_E_SOBRENOME) == false) {
+                this.getjTabbedDadosCadastrais().setSelectedIndex(0);
+                labNome.setText("* Nome inválido");
+                labNome.setForeground(Color.RED);
+            } else {
+                labNome.setText("* Nome completo");
+                labNome.setForeground(Color.green);
+            }
+        }
+    }//GEN-LAST:event_txtNomeFocusLost
+
+    private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
+        if (!this.txtNome.getText().isEmpty()) {
+            if (ValidaForm.isValid(this.txtNome.getText().trim(), true, Regex.NOME_E_SOBRENOME) == false) {
+                this.getjTabbedDadosCadastrais().setSelectedIndex(0);
+                labNome.setText("* Nome inválido");
+                labNome.setForeground(Color.RED);
+            } else {
+                labNome.setText("* Nome completo");
+                labNome.setForeground(Color.green);
+            }
+        }
+    }//GEN-LAST:event_txtNomeKeyPressed
+
+    private void txtEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyPressed
+        if (!this.txtEmail.getText().trim().isEmpty()) {
+            if (ValidaForm.isValid(this.txtEmail.getText().trim(), true, Regex.EMAIL) == false) {
+                this.getjTabbedDadosCadastrais().setSelectedIndex(1);
+                labEmail.setText("* E-mail inválido");
+                labEmail.setForeground(Color.RED);
+            } else {
+                labEmail.setText("* E-mail");
+                labEmail.setForeground(Color.green);
+            }
+        }
+    }//GEN-LAST:event_txtEmailKeyPressed
+
+    private void txtTelefoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefoneKeyPressed
+        if (!this.txtTelefone.getText().isEmpty()) {
+            if (ValidaForm.isValid(this.txtTelefone.getText(), true, Regex.TELEFONE) == false) {
+                this.getjTabbedDadosCadastrais().setSelectedIndex(1);
+                labTelefone.setText("* Telefone inválido");
+                labTelefone.setForeground(Color.RED);
+            } else {
+                labTelefone.setText("* Telefone");
+                labTelefone.setForeground(Color.green);
+            }
+        }
+    }//GEN-LAST:event_txtTelefoneKeyPressed
+
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        // TODO updateJtable your handling code here:
+    }//GEN-LAST:event_txtIDActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarUsuario;
     private javax.swing.JButton btnCadLogin;
@@ -1170,13 +1245,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
         this.txtEstado = txtEstado;
     }
 
-    public javax.swing.JTextField getTxtID() {
-        return txtID;
-    }
-
-    public void setTxtID(javax.swing.JTextField txtID) {
-        this.txtID = txtID;
-    }
+  
 
     public javax.swing.JTextField getTxtNome() {
         return txtNome;
@@ -1282,4 +1351,18 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
         return btnRegistroAnterior;
     }
     private static final Logger LOG = getLogger(FrmCadastrarPF_.class.getName());
+
+    /**
+     * @return the txtID
+     */
+    public javax.swing.JTextField getTxtID() {
+        return txtID;
+    }
+
+    /**
+     * @param txtID the txtID to set
+     */
+    public void setTxtID(javax.swing.JTextField txtID) {
+        this.txtID = txtID;
+    }
 }

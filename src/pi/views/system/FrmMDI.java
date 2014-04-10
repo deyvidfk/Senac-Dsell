@@ -76,11 +76,6 @@ public final class FrmMDI extends javax.swing.JFrame {
     private FrmMDI() {
         super();
     }
-    private static FrmMDI instance = new FrmMDI();
-
-    public static FrmMDI getInstance() {
-        return instance;
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -315,9 +310,8 @@ public final class FrmMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuLogoutActionPerformed
 
     private void subMenuModuloAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuModuloAcessoActionPerformed
-        FrmGerenciarModuloAcessoAoSistema mod = new FrmGerenciarModuloAcessoAoSistema();
-        //getDesktopPane().add(mod);
-        mod.setVisible(true);
+        FrmGerenciarModuloAcessoAoSistema.getInstancia().setVisible(rootPaneCheckingEnabled);
+
     }//GEN-LAST:event_subMenuModuloAcessoActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;

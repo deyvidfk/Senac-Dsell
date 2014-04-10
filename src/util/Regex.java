@@ -13,7 +13,11 @@ public enum Regex {
     /**
      * * String qualquer caractere é aceito
      */
-    QualquerCaractere("^([^<]|<[^>]*$)*$"),
+    QUALQUER_CARACTER("^([^<]|<[^>]*$)*$"),
+    /**
+     * * Nome e Sobrenome
+     */
+    NOME_E_SOBRENOME("^[a-zA-ZÀ-Üà-ü]+( [a-zA-ZÀ-Üà-ü]+)+$"),
     /**
      * * CPF: 223.185.357-44
      */
@@ -32,9 +36,9 @@ public enum Regex {
     CEP("^\\d{5}-\\d{3}$"),
     /**
      * TELEFONE: Formato do telefone aceito: (99) 99999-9999 Outro formato
-     * aceito: (99) 9999-9999
+     * aceito: (99) 9999-9999 / 9 9999-9999 / 99999-9999 
      */
-    TELEFONE("^(\\([0-9]{2}\\))\\s([9]{1})?([0-9]{4})-([0-9]{4})$"),
+    TELEFONE("^(\\([0-9]{2}\\))?\\s?([9]{1})?\\s?([0-9]{4})-([0-9]{4})$"),
     /**
      * * Número: 0,1,2,3,4,5,6,7,8,9,
      */

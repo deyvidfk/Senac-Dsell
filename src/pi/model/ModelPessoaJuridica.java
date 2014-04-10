@@ -38,7 +38,7 @@ public class ModelPessoaJuridica implements InterfaceModelContato, InterfaceMode
     private String site;
 
     @RequiredValidation(Required = true, label = "NOME", MaximumValue = 50, MinimumValue = 1)
-    @RegularExpressionValidator(ValidationExpression = Regex.QualquerCaractere, Label = "Nome", RegexErrorMessage = "Nome Inválido", EnableErrorMessage = true)
+    @RegularExpressionValidator(ValidationExpression = Regex.QUALQUER_CARACTER, Label = "Nome", RegexErrorMessage = "Nome Inválido", EnableErrorMessage = true)
     @Tabela(Coluna = "Nome", Indice = 1)
     public String getNome() {
         return nome;

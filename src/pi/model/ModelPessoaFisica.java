@@ -92,7 +92,7 @@ public class ModelPessoaFisica implements InterfaceModelContato, InterfaceModelE
      * @return the Coluna
      */
     @RequiredValidation(Required = true, label = "Nome", MaximumValue = 50, MinimumValue = 1)
-    @RegularExpressionValidator(ValidationExpression = Regex.QualquerCaractere, Label = "Nome", RegexErrorMessage = "Nome Inválido")
+    @RegularExpressionValidator(ValidationExpression = Regex.NOME_E_SOBRENOME, Label = "Nome", RegexErrorMessage = "Nome Inválido")
     @Tabela(Coluna = "Nome", Indice = 0)
     public String getNome() {
         return nome;

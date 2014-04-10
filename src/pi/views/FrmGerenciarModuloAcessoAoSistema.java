@@ -31,11 +31,12 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
     List menus = new ArrayList<>();
     FrmCadastrarPF_ formCadastroUser;
     int idUser;
-
     /**
      * Creates new form NewJFrame
      */
-    public FrmGerenciarModuloAcessoAoSistema() {
+    private static FrmGerenciarModuloAcessoAoSistema instancia;
+
+    private FrmGerenciarModuloAcessoAoSistema() {
         initComponents();
         this.idUser = getSessao().get(0).getUser().getId();
         this.txtLogin.setText(getSessao().get(0).getUser().getNome());
@@ -43,9 +44,15 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
         this.lblSistema.setVisible(false);
     }
 
+    public static synchronized FrmGerenciarModuloAcessoAoSistema getInstancia() {
+        if (instancia == null) {
+            instancia = new FrmGerenciarModuloAcessoAoSistema();
+        }
+        return instancia;
+    }
+
     public FrmGerenciarModuloAcessoAoSistema(FrmCadastrarPF_ frm) {
         initComponents();
-
         this.formCadastroUser = frm;
         this.idUser = parseInt(formCadastroUser.getTxtID().getText());
 
@@ -81,6 +88,8 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setType(java.awt.Window.Type.POPUP);
 
         jLabel5.setText("Senha");
 
@@ -188,6 +197,7 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSistemaActionPerformed
