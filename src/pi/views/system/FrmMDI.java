@@ -10,7 +10,7 @@ import static javax.swing.UIManager.setLookAndFeel;
 import javax.swing.UnsupportedLookAndFeelException;
 import static pi.controller.seguranca.Sessao.getSessao;
 import pi.views.FrmAutenticaLogin;
-import pi.views.FrmCadastrarPF_;
+import pi.views.FrmCadastrarPF;
 import pi.views.FrmCadastrarPJ;
 import pi.views.FrmCadastrarVenda;
 import pi.views.FrmConsultarFornecedor;
@@ -21,7 +21,7 @@ import static pi.views.system.Menu.SISTEMA;
 
 public final class FrmMDI extends javax.swing.JFrame {
 
-    FrmCadastrarPF_ formCadastroDeUsuario;
+    FrmCadastrarPF formCadastroDeUsuario;
     FrmCadastrarPJ formCadastroPJ;
     FrmCadastrarVenda Comprarprodutos;
     FrmConsultarFornecedor frmConsultarFornecedor;
@@ -243,7 +243,7 @@ public final class FrmMDI extends javax.swing.JFrame {
 
     private void menuPfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPfActionPerformed
 
-        formCadastroDeUsuario = new FrmCadastrarPF_();
+        formCadastroDeUsuario = new FrmCadastrarPF();
         if (!formCadastroDeUsuario.isVisible()) {
             getDesktopPane().add(formCadastroDeUsuario);
             formCadastroDeUsuario.setVisible(rootPaneCheckingEnabled);
@@ -270,12 +270,12 @@ public final class FrmMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuSobreActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-//        Comprarprodutos = new FrmCadastrarVenda();
-//        if (!Comprarprodutos.isVisible()) {
-//            getDesktopPane().add(Comprarprodutos);
-//            Comprarprodutos.setVisible(true);
-//            this.setLocationRelativeTo(null);
-//        }
+        Comprarprodutos = new FrmCadastrarVenda();
+        if (!Comprarprodutos.isVisible()) {
+            getDesktopPane().add(Comprarprodutos);
+            Comprarprodutos.setVisible(true);
+            this.setLocationRelativeTo(null);
+        }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -310,8 +310,8 @@ public final class FrmMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_subMenuLogoutActionPerformed
 
     private void subMenuModuloAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuModuloAcessoActionPerformed
-        FrmGerenciarModuloAcessoAoSistema.getInstancia().setVisible(rootPaneCheckingEnabled);
-
+        FrmGerenciarModuloAcessoAoSistema mod = new FrmGerenciarModuloAcessoAoSistema();
+        mod.setVisible(true);
     }//GEN-LAST:event_subMenuModuloAcessoActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;

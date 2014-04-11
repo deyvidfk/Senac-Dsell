@@ -14,7 +14,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.table.AbstractTableModel;
 import static pi.dao.DaoPessoaFisica.getUsuario;
 import pi.model.ModelPessoaFisica;
-import pi.views.FrmCadastrarPF_;
+import pi.views.FrmCadastrarPF;
 import util.jTable.CellRenderer;
 import util.jTable.ModelJTable;
 
@@ -24,12 +24,12 @@ public class JtableUsuario {
      * PROPRIEDADES
      */
     private static ModelJTable _modelJtable;
-    private static FrmCadastrarPF_ _viewForm;
+    private static FrmCadastrarPF _viewForm;
 
     /**
      * CONSTRUTOR DA CLASSE
      */
-    public JtableUsuario(FrmCadastrarPF_ ViewUsuario) {
+    public JtableUsuario(FrmCadastrarPF ViewUsuario) {
         setViewFrm(ViewUsuario);
     }
 
@@ -136,11 +136,11 @@ public class JtableUsuario {
     /**
      * GETTERS E SETTERS *
      */
-    private pi.views.FrmCadastrarPF_ getViewForm() {
+    private pi.views.FrmCadastrarPF getViewForm() {
         return _viewForm;
     }
 
-    private void setViewFrm(FrmCadastrarPF_ ViewFrmFornecedor) {
+    private void setViewFrm(FrmCadastrarPF ViewFrmFornecedor) {
         JtableUsuario._viewForm = ViewFrmFornecedor;
     }
 

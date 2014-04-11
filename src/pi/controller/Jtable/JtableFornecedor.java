@@ -48,7 +48,6 @@ public class JtableFornecedor {
             this.getViewFrm().getjTableFornecedor().setModel(tabela);
             this.getViewFrm().getjTableFornecedor().setDefaultRenderer(Object.class, new CellRenderer());
         } catch (Exception e) {
-            showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
             getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
 

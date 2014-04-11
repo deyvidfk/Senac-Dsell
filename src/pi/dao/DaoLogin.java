@@ -12,9 +12,8 @@ public class DaoLogin implements DaoInterface {
     private static List<ModelLogin> _login;
 
     public static List<ModelLogin> getLogin() {
-        return unmodifiableList(DaoLogin._login);
+        return DaoLogin._login;
     }
-
     private final Source CONEXAO_DB;
     private final XStream XSTREAM;
     private final String FILE_XML;
@@ -45,6 +44,9 @@ public class DaoLogin implements DaoInterface {
     public void updateXml(List<?> data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    private static final Logger LOG = getLogger(DaoLogin.class.getName());
 
+    public static List<ModelLogin> getLogins() {
+        return (DaoLogin._login);
+    }
+    private static final Logger LOG = getLogger(DaoLogin.class.getName());
 }

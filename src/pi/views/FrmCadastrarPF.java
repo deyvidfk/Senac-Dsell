@@ -1,22 +1,26 @@
 package pi.views;
 
 import java.awt.Color;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.KeyEvent;
 import static java.lang.Integer.parseInt;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showConfirmDialog;
 import pi.controller.CadastrarUsuario;
 import pi.controller.Jtable.JtableUsuario;
+import util.TextTransfer;
 import util.Regex;
 import util.ValidaForm;
 
-public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
+public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
 
     private CadastrarUsuario instanceControllerCadastrarUsuario;
     private JtableUsuario instanceControllerJtable;
 
-    public FrmCadastrarPF_() {
+    public FrmCadastrarPF() {
         this.instanceControllerJtable = new JtableUsuario(this);
         this.instanceControllerCadastrarUsuario = new CadastrarUsuario();
         instanceControllerJtable = new JtableUsuario(this);
@@ -85,6 +89,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
         labRg = new javax.swing.JLabel();
         labCpf = new javax.swing.JLabel();
         labValidacao = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         txtTelefone = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
@@ -160,6 +165,11 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
                 jTableLoadUsersMouseClicked(evt);
             }
         });
+        jTableLoadUsers.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTableLoadUsersKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableLoadUsers);
 
         txtBuscarUsers.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -230,6 +240,13 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
 
         labValidacao.setText("Por favor, preencha os campos marcados com \"*\"");
 
+        jButton1.setText("Copy");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -248,7 +265,9 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(labValidacao, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(290, 290, 290)
+                                .addGap(114, 114, 114)
+                                .addComponent(jButton1)
+                                .addGap(103, 103, 103)
                                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
@@ -283,7 +302,10 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel13)
                         .addComponent(labValidacao, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jTabbedDadosCadastrais.addTab("Dados *", jPanel2);
@@ -336,14 +358,14 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 1038, Short.MAX_VALUE)
+                    .addComponent(txtEmail)
+                    .addComponent(txtSite)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labTelefone)
                             .addComponent(labEmail)
                             .addComponent(jLabel11))
-                        .addGap(0, 744, Short.MAX_VALUE))
-                    .addComponent(txtEmail)
-                    .addComponent(txtSite))
+                        .addGap(0, 744, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -361,7 +383,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSite, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         jTabbedDadosCadastrais.addTab("Cotato *", jPanel3);
@@ -439,9 +461,9 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4))
                         .addGap(10, 10, 10)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labCep)
                             .addComponent(jLabel14)
-                            .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labCep))
                         .addGap(0, 119, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -479,7 +501,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
                             .addComponent(txtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jTabbedDadosCadastrais.addTab("Endereço", jPanel4);
@@ -612,7 +634,6 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
     private void btnUpdateUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateUsuarioActionPerformed
         int linha = jTableLoadUsers.getSelectedRow();
         int id = parseInt(this.getjTableLoadUsers().getValueAt(linha, 13).toString());
-        JOptionPane.showMessageDialog(this, "linha: " + linha + "\n" + " ID: " + id);
         boolean update = instanceControllerCadastrarUsuario.update(id, this.getTxtNome().getText(), this.getTxtRg().getText(), this.getTxtCpf().getText(), this.getTxtTelefone().getText(), this.getTxtEmail().getText(), this.getTxtSite().getText(), this.getTxtCidade().getText(), this.getTxtEstado().getText(), this.getTxtPais().getText(), this.getTxtBairro().getText(), this.getTxtRua().getText(), this.getTxtNumero().getText(), this.getTxtComplemento().getText(), this.getTxtCep().getText());
         if (update) {
             resetForm();
@@ -667,8 +688,6 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
         this.getTxtID().setText(this.getjTableLoadUsers().getValueAt(linha_selecionada, 13).toString());
 
         int indiceAtual = linha_selecionada;
-        int indiceAnterior = indiceAtual - 1;
-        int proximoIndice = indiceAtual + 1;
         int numeroDeLinhas = getjTableLoadUsers().getRowCount() - 1;
 
         this.getBtnRegistroAnterior().setEnabled(true);
@@ -844,10 +863,8 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCepFocusLost
 
     private void btnCadLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadLoginActionPerformed
-//        FrmGerenciarModuloAcessoAoSistema mod = new FrmGerenciarModuloAcessoAoSistema(this);
-//        mod.setVisible(true);
-        FrmGerenciarModuloAcessoAoSistema.getInstancia().setVisible(true);
-
+        FrmGerenciarModuloAcessoAoSistema mod = new FrmGerenciarModuloAcessoAoSistema(this);
+        mod.setVisible(true);
     }//GEN-LAST:event_btnCadLoginActionPerformed
 
     private void txtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNomeFocusLost
@@ -906,6 +923,13 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
         // TODO updateJtable your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        TextTransfer trans = new TextTransfer();
+        trans.setClipboardContents(getTxtNome().getText() + "\t" + getTxtCpf().getText() + "\t" + getTxtRg().getText() + "\t" + getTxtTelefone().getText() + "\t" + getTxtEmail().getText() + "\t" + getTxtCidade().getText() + "\t" + getTxtEstado().getText() + "\t" + getTxtPais().getText() + "\t" + getTxtBairro().getText() + "\t" + getTxtRua().getText() + "\t" + getTxtNumero().getText() + "\t" + getTxtCep().getText() + "\t" + getTxtComplemento().getText() + "\t");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTableLoadUsersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableLoadUsersKeyPressed
+    }//GEN-LAST:event_jTableLoadUsersKeyPressed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarUsuario;
     private javax.swing.JButton btnCadLogin;
@@ -914,6 +938,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnProximoRegistro;
     private javax.swing.JButton btnRegistroAnterior;
     private javax.swing.JButton btnUpdateUsuario;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -1245,8 +1270,6 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
         this.txtEstado = txtEstado;
     }
 
-  
-
     public javax.swing.JTextField getTxtNome() {
         return txtNome;
     }
@@ -1350,7 +1373,7 @@ public final class FrmCadastrarPF_ extends javax.swing.JInternalFrame {
     private javax.swing.JButton getBtnRegistroAnterior() {
         return btnRegistroAnterior;
     }
-    private static final Logger LOG = getLogger(FrmCadastrarPF_.class.getName());
+    private static final Logger LOG = getLogger(FrmCadastrarPF.class.getName());
 
     /**
      * @return the txtID

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pi.views;
 
 import static java.lang.Double.parseDouble;
@@ -12,19 +8,12 @@ import pi.controller.CadastrarProduto;
 import static pi.controller.CadastrarProduto.searchRecordSize;
 import pi.controller.Jtable.JtableProduto;
 
-/**
- *
- * @author deyvid.fk
- */
 public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
 
     private CadastrarProduto obj;
     private final JtableProduto instanceJtable;
     private final FrmCadastrarPJ FrmFornecedor;
 
-    /**
-     * Creates new form FrmCadastrarProd
-     */
     public FrmCadastrarProd(FrmCadastrarPJ Frm) {
         this.FrmFornecedor = Frm;
         this.obj = new CadastrarProduto();
@@ -35,6 +24,7 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
         this.instanceJtable = new JtableProduto(this);
         this.instanceJtable.searchRecord(parseInt(Frm.getTxtID().getText()));
         this.setVisible(true);
+        instanceJtable.popularJtable();
     }
 
     //
@@ -336,6 +326,11 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(jTableProduto);
 
         jButton2.setText("Imprimir tudo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -406,7 +401,7 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -429,9 +424,7 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtGarantiaActionPerformed
 
     private void btnInsertProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertProdActionPerformed
-
         if (!this.getTxtNome().getText().isEmpty()) {
-
             getObj().creat(
                     parseInt(this.getTxtIdFornecedor().getText()),
                     this.getTxtNome().getText(),
@@ -452,11 +445,10 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbFiltroCategoriaActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if (!this.txtBuscar.getText().isEmpty()) {
-            instanceJtable.searchRecord(this.getTxtBuscar().getText(), parseInt(this.FrmFornecedor.getTxtID().getText()));
+        if (!this.txtBuscar.getText().trim().isEmpty()) {
+            instanceJtable.searchRecord(this.getTxtBuscar().getText().trim(), parseInt(this.FrmFornecedor.getTxtID().getText().trim()));
         } else {
             instanceJtable.popularJtable();
-
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -465,7 +457,6 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboCategoria1ActionPerformed
 
     private void jTableProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProdutoMouseClicked
-
         /*// Visibilidade dos botões.*/
         int linha_selecionada = jTableProduto.getSelectedRow();
         this.getTxtNome().setText(jTableProduto.getValueAt(linha_selecionada, 0).toString());
@@ -474,9 +465,12 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
         this.getTxtPreco().setText(jTableProduto.getValueAt(linha_selecionada, 3).toString());
         this.getTxtDesc().setText(jTableProduto.getValueAt(linha_selecionada, 4).toString());
         this.getTxtDescricao().setText(jTableProduto.getValueAt(linha_selecionada, 5).toString());
-        this.getTxtGarantia().setText(jTableProduto.getValueAt(linha_selecionada, 6).toString());
-
     }//GEN-LAST:event_jTableProdutoMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnInsertProd;

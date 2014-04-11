@@ -30,8 +30,6 @@ public class CadastrarFornecedor extends DaoPessoaJuridica {
             if (isValid(pj)) {
                 getFornecedor().add(pj);
                 createXml(getFornecedor());
-
-
                 return true;
             }
         } catch (Exception e) {

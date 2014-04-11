@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import javax.swing.JOptionPane;
 import static org.jfree.chart.ChartFactory.createBarChart3D;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -37,6 +36,10 @@ public class FrmConsultarFornecedor extends javax.swing.JInternalFrame {
         cboCidade.setEnabled(false);
         cboFiltro2.setEnabled(false);
         this.setVisible(true);
+        if (getFornecedor() == null) {
+            ckbFiltro.setEnabled(false);
+            jButton1.setEnabled(false);
+        }
     }
 
     @Override
@@ -59,36 +62,9 @@ public class FrmConsultarFornecedor extends javax.swing.JInternalFrame {
         }
     }
 
-//    @Override
-//    public void paint(Graphics g) {
-//        super.paint(g);
-//
-//
-//
-//        /**
-//         * Grafico com os fornecedores ativos e inativos no sistema. Ativos =
-//         * Fornecedores com produtos cadastrados no sistema. Inativos =
-//         * Fornecedores sem produtos cadastrados no sistema.
-//         */
-//        if (getFornecedor() != null) {
-//            ModelGrafico grafico;
-//            grafico = new ModelGrafico();
-//            ArrayList<ModelGrafico> list = new ArrayList<>();
-//            grafico.setLabel("Fornecedores com produtos cadastrados no sistema");
-//            grafico.setTitle("Ativos");
-//            grafico.setValue2(getFornecedorAtivo().size());
-//            list.add(grafico);
-//            grafico = new ModelGrafico();
-//            grafico.setLabel("Fornecedores com produtos cadastrados no sistema");
-//            grafico.setTitle("Inativos");
-//            grafico.setValue2(getForInativos().size());
-//            list.add(grafico);
-//            this.criaGrafico(list, "Fornecedores");
-//        }
-//    }
     private CategoryDataset createDataset(ArrayList<ModelGrafico> dados) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for (ModelGrafico modelGrafico : dados) { 
+        for (ModelGrafico modelGrafico : dados) {
             dataset.addValue(modelGrafico.getValue2(), modelGrafico.getLabel(), modelGrafico.getTitle());
         }
         return dataset;

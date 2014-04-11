@@ -28,15 +28,12 @@ import pi.views.system.Menu;
  */
 public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
 
-    List menus = new ArrayList<>();
-    FrmCadastrarPF_ formCadastroUser;
-    int idUser;
-    /**
-     * Creates new form NewJFrame
-     */
     private static FrmGerenciarModuloAcessoAoSistema instancia;
+    private List menus = new ArrayList<>();
+    private static FrmCadastrarPF formCadastrarPF;
+    private static int idUser;
 
-    private FrmGerenciarModuloAcessoAoSistema() {
+    public FrmGerenciarModuloAcessoAoSistema() {
         initComponents();
         this.idUser = getSessao().get(0).getUser().getId();
         this.txtLogin.setText(getSessao().get(0).getUser().getNome());
@@ -44,25 +41,11 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
         this.lblSistema.setVisible(false);
     }
 
-    public static synchronized FrmGerenciarModuloAcessoAoSistema getInstancia() {
-        if (instancia == null) {
-            instancia = new FrmGerenciarModuloAcessoAoSistema();
-        }
-        return instancia;
-    }
-
-    public FrmGerenciarModuloAcessoAoSistema(FrmCadastrarPF_ frm) {
+    public FrmGerenciarModuloAcessoAoSistema(FrmCadastrarPF frm) {
         initComponents();
-        this.formCadastroUser = frm;
-        this.idUser = parseInt(formCadastroUser.getTxtID().getText());
-
-    }
-
-    public FrmGerenciarModuloAcessoAoSistema(int id) {
-        initComponents();
-
-        this.idUser = id;
-
+        FrmGerenciarModuloAcessoAoSistema.formCadastrarPF = frm;
+        this.idUser = parseInt(formCadastrarPF.getTxtID().getText());
+        this.txtLogin.setText(frm.getTxtNome().getText());
     }
 
     /**
@@ -213,10 +196,13 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         ModelLogin login = new ModelLogin();
+
         CadastrarLogin cadastro = new CadastrarLogin();
         ModuloAcesso moduloAcesso = new ModuloAcesso();
+        List lista = new ArrayList<>();
         login.setId(this.idUser);
         login.setUsername(txtLogin.getText());
+        lista.add(login);
         try {
             login.setPass(txtSenha.getText());
             cadastro.creat(login);

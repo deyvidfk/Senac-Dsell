@@ -48,10 +48,6 @@ public class CadastrarProduto {
         return 0;
     }
 
-    private boolean validarDados(ModelProduto usu) {
-        return isValid(usu);
-    }
-
     public boolean creat(int txtIdFornecedor, String txtNome, String txtCategoria, String txtMarca, String txtModelo, String txtTipo, String txtCor, Double txtPreco, Integer txtDesconto, String txtGarantia) {
         try {
             ModelProduto prod = new ModelProduto();
@@ -69,7 +65,7 @@ public class CadastrarProduto {
             prod.setGarantia(txtGarantia);
             prod.setDataFrabricacao("01/01/2000");
             prod.setDataValidade("01/01/2000");
-            if (validarDados(prod)) {
+            if (isValid(prod)) {
                 getProduto().add(prod);
                 insertIntoXml(getProduto());
                 return true;

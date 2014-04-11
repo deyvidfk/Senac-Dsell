@@ -98,7 +98,7 @@ public class ModelLogin {
      * @return the modulo
      */
     public List<ModelModuloAcesso> getModulo() {
-        return unmodifiableList(modulo);
+        return modulo;
     }
 
     /**

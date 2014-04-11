@@ -7,9 +7,12 @@ package util.jTable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
+import javax.annotation.Resource;
 import javax.swing.table.AbstractTableModel;
+import pi.controller.MensagensDoSistema;
 
 /**
  *
@@ -22,7 +25,7 @@ public class ModelJTable extends AbstractTableModel {
     private final Class<?> classe;
 
     public ModelJTable(List<?> lista) {
-        if (!lista.isEmpty()) {
+        if (lista != null && !lista.isEmpty()) {
             this.lista = lista;
             this.classe = lista.get(0).getClass();
         } else {
@@ -61,6 +64,7 @@ public class ModelJTable extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int linha, int coluna) {
+
         try {
             Object objeto = lista.get(linha);
             for (Method metodo : classe.getDeclaredMethods()) {
@@ -72,9 +76,9 @@ public class ModelJTable extends AbstractTableModel {
                 }
             }
         } catch (SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            return "Erro";
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);       
         }
-        return "";
+       return MensagensDoSistema.SISTEMA.MSG_003_000.getCodigo() + " : " + MensagensDoSistema.SISTEMA.MSG_003_000.getMenssagem();
     }
     private static final Logger LOG = getLogger(ModelJTable.class.getName());
 }

@@ -103,7 +103,7 @@ public class TesteDeDesepenhoDoSistema {
 
     public boolean creatProduto(int valor) {
         try {
-            if (getFornecedor().size() > 0) {
+            if (getFornecedor() != null && getFornecedor().size() > 0) {
                 Random ramdom = new Random();
                 instanceControllerCadastrarPrdoduto = new CadastrarProduto();
                 for (int i = 0; i <= valor; i++) {
