@@ -165,11 +165,7 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
                 jTableLoadUsersMouseClicked(evt);
             }
         });
-        jTableLoadUsers.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTableLoadUsersKeyPressed(evt);
-            }
-        });
+    
         jScrollPane1.setViewportView(jTableLoadUsers);
 
         txtBuscarUsers.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -185,11 +181,7 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
             }
         });
 
-        txtNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeActionPerformed(evt);
-            }
-        });
+     
         txtNome.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNomeFocusLost(evt);
@@ -201,11 +193,7 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
             }
         });
 
-        txtRg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRgActionPerformed(evt);
-            }
-        });
+    
         txtRg.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtRgFocusLost(evt);
@@ -214,11 +202,6 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
 
         jLabel13.setText("Razão Social");
 
-        txtCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCpfActionPerformed(evt);
-            }
-        });
         txtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtCpfFocusLost(evt);
@@ -226,11 +209,7 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
         });
 
         txtID.setEditable(false);
-        txtID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIDActionPerformed(evt);
-            }
-        });
+
 
         labNome.setText("* Nome/Sobrenome");
 
@@ -310,11 +289,7 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
 
         jTabbedDadosCadastrais.addTab("Dados *", jPanel2);
 
-        txtTelefone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefoneActionPerformed(evt);
-            }
-        });
+      
         txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtTelefoneFocusLost(evt);
@@ -344,12 +319,7 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
         jLabel11.setText("Site");
 
         txtSite.setEnabled(false);
-        txtSite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSiteActionPerformed(evt);
-            }
-        });
-
+     
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -388,12 +358,6 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
 
         jTabbedDadosCadastrais.addTab("Cotato *", jPanel3);
 
-        txtCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCidadeActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Bairro");
 
         jLabel4.setText("Rua");
@@ -401,12 +365,6 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
         jLabel6.setText("Cidade");
 
         jLabel7.setText("Estado");
-
-        txtEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEstadoActionPerformed(evt);
-            }
-        });
 
         jLabel8.setText("Pais");
 
@@ -528,12 +486,7 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
                 jRadioButtonOrdenarPorNomeActionPerformed(evt);
             }
         });
-        jRadioButtonOrdenarPorNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jRadioButtonOrdenarPorNomeKeyPressed(evt);
-            }
-        });
-
+      
         btnCadLogin.setText("Dados de acesso");
         btnCadLogin.setToolTipText("Altere aqui as permissões de acesso ao sistema.");
         btnCadLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -703,6 +656,9 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTableLoadUsersMouseClicked
 
     private void btnBuscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarUsuarioActionPerformed
+        if (instanceControllerJtable == null) {
+            instanceControllerJtable = new JtableUsuario(this);
+        }
         if (!this.getTxtBuscarUsers().getText().trim().isEmpty()) {
             instanceControllerJtable.searchRecord(this.getTxtBuscarUsers().getText());
         } else {
@@ -710,34 +666,6 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
             getjTableLoadUsers().setBackground(Color.white);
         }
     }//GEN-LAST:event_btnBuscarUsuarioActionPerformed
-
-    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
-        // TODO updateJtable your handling code here:
-    }//GEN-LAST:event_txtNomeActionPerformed
-
-    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
-        // TODO updateJtable your handling code here:
-    }//GEN-LAST:event_txtCpfActionPerformed
-
-    private void txtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneActionPerformed
-        // TODO updateJtable your handling code here:
-    }//GEN-LAST:event_txtTelefoneActionPerformed
-
-    private void txtSiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSiteActionPerformed
-        // TODO updateJtable your handling code here:
-    }//GEN-LAST:event_txtSiteActionPerformed
-
-    private void txtCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCidadeActionPerformed
-        // TODO updateJtable your handling code here:
-    }//GEN-LAST:event_txtCidadeActionPerformed
-
-    private void txtEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstadoActionPerformed
-        // TODO updateJtable your handling code here:
-    }//GEN-LAST:event_txtEstadoActionPerformed
-
-    private void txtRgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRgActionPerformed
-        // TODO updateJtable your handling code here:
-    }//GEN-LAST:event_txtRgActionPerformed
 
     private void txtBuscarUsersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarUsersKeyPressed
         if (!this.getTxtBuscarUsers().getText().trim().isEmpty()) {
@@ -792,10 +720,6 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
     private void jRadioButtonOrdenarPorNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonOrdenarPorNomeActionPerformed
         instanceControllerJtable.ordenarPorNome();
     }//GEN-LAST:event_jRadioButtonOrdenarPorNomeActionPerformed
-
-    private void jRadioButtonOrdenarPorNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jRadioButtonOrdenarPorNomeKeyPressed
-        // TODO updateJtable your handling code here:
-    }//GEN-LAST:event_jRadioButtonOrdenarPorNomeKeyPressed
 
     private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
         if (!this.txtCpf.getText().isEmpty()) {
@@ -919,17 +843,10 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtTelefoneKeyPressed
 
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TODO updateJtable your handling code here:
-    }//GEN-LAST:event_txtIDActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         TextTransfer trans = new TextTransfer();
         trans.setClipboardContents(getTxtNome().getText() + "\t" + getTxtCpf().getText() + "\t" + getTxtRg().getText() + "\t" + getTxtTelefone().getText() + "\t" + getTxtEmail().getText() + "\t" + getTxtCidade().getText() + "\t" + getTxtEstado().getText() + "\t" + getTxtPais().getText() + "\t" + getTxtBairro().getText() + "\t" + getTxtRua().getText() + "\t" + getTxtNumero().getText() + "\t" + getTxtCep().getText() + "\t" + getTxtComplemento().getText() + "\t");
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTableLoadUsersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableLoadUsersKeyPressed
-    }//GEN-LAST:event_jTableLoadUsersKeyPressed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarUsuario;
     private javax.swing.JButton btnCadLogin;

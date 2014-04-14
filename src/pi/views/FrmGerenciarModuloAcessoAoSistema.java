@@ -205,7 +205,7 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
         lista.add(login);
         try {
             login.setPass(txtSenha.getText());
-            cadastro.creat(login);
+            cadastro.cadastrar(login);
             moduloAcesso.addModuloAcesso(this.idUser, menus);
             showMessageDialog(this, "Configuracoes salvas com sucesso!");
             this.dispose();

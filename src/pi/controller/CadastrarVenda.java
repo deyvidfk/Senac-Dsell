@@ -17,33 +17,7 @@ import static util.Time.getDate;
 
 public class CadastrarVenda extends DaoVenda {
 
-    /**
-     * Define o trimestre do ano que deseja obter a quantidade de vendas
-     * realizadas.
-     *
-     * @param m1 1º mês
-     * @param m2 2º mês
-     * @param m3 3º mês
-     * @param ano ano
-     * @return
-     */
-    public static int getQuantVendaPorTrimestre(int m1, int m2, int m3, int ano) {
-
-        double dindin = 0.0;
-        List<ModelVenda> listaAuxiliar = new ArrayList<>(getVENDAS());
-        for (int i = 0; i < listaAuxiliar.size(); i++) {
-            while (listaAuxiliar.get(i).getMes() == m1 || listaAuxiliar.get(i).getMes() == m2 || listaAuxiliar.get(i).getMes() == m3 && listaAuxiliar.get(i).getAno() == 2_013) {
-                listaAuxiliar.remove(i);
-                if (i == listaAuxiliar.size()) {
-                    break;
-                }
-            }
-        }
-        for (int i = 0; i < listaAuxiliar.size(); i++) {
-            dindin += listaAuxiliar.get(i).getPrecoFinal();
-        }
-        return listaAuxiliar.size();
-    }
+    private static final Logger LOG = getLogger(CadastrarVenda.class.getName());
 
     /**
      * Define o trimestre do ano que desejar obter a rentabilidade.
@@ -54,27 +28,28 @@ public class CadastrarVenda extends DaoVenda {
      * @param ano ano
      * @return
      */
-    public static double getRendimentoVendaPorTrimestre(int m1, int m2, int m3, int ano) {        
-        if(getVENDAS() != null){
-        List<ModelVenda> ListaAuxiliar = new ArrayList<>(getVENDAS());
-        double dindin = 0.0;
-        for (int i = 0; i < ListaAuxiliar.size(); i++) {
-            while (ListaAuxiliar.get(i).getMes() == m1 && ListaAuxiliar.get(i).getAno() == ano || ListaAuxiliar.get(i).getMes() == m2 && ListaAuxiliar.get(i).getAno() == ano || ListaAuxiliar.get(i).getMes() == m3 && ListaAuxiliar.get(i).getAno() == ano) {              
-                ListaAuxiliar.remove(i);
-                if (i == ListaAuxiliar.size()) {
-                    break;
+    public static double getRendimentoVendaPorTrimestre(int m1, int m2, int m3, int ano) {
+        if (getVENDAS() != null) {
+            List<ModelVenda> vendas = new ArrayList<>(getVENDAS());
+            double rendimento = 0.0;
+            for (int i = 0; i < vendas.size(); i++) {
+                while (vendas.get(i).getMes() == m1 && vendas.get(i).getAno() == ano || vendas.get(i).getMes() == m2 && vendas.get(i).getAno() == ano || vendas.get(i).getMes() == m3 && vendas.get(i).getAno() == ano) {
+                    vendas.remove(i);
+                    if (i == vendas.size()) {
+                        break;
+                    }
                 }
             }
-        }
-        for (int i = 0; i < ListaAuxiliar.size(); i++) {
-            dindin += ListaAuxiliar.get(i).getPrecoFinal();
-        }
-        return dindin;
+
+            for (ModelVenda modelVenda : vendas) {
+                rendimento += modelVenda.getPrecoFinal();
+            }
+            return rendimento;
         }
         return 0;
     }
 
-    public boolean creat(Integer txtIdProduto, Integer txtIdComprador, Double txtPreco, Integer txtDesconto) {
+    public boolean cadastrar(Integer txtIdProduto, Integer txtIdComprador, Double txtPreco, Integer txtDesconto) {
         try {
             ModelVenda instancePJ = new ModelVenda();
             int newId = (getVENDAS().size() - 1) + 1;
@@ -97,5 +72,4 @@ public class CadastrarVenda extends DaoVenda {
         }
         return false;
     }
-    private static final Logger LOG = getLogger(CadastrarVenda.class.getName());
 }

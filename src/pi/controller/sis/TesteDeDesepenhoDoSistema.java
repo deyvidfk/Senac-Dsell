@@ -142,7 +142,7 @@ public class TesteDeDesepenhoDoSistema {
                 instanceControllerCadastrarVendas = new CadastrarVenda();
                 Random ramdom = new Random();
                 for (int i = 0; i < valor; i++) {
-                    instanceControllerCadastrarVendas.creat(
+                    instanceControllerCadastrarVendas.cadastrar(
                             ramdom.nextInt(ramdom.nextInt(getProduto().size()) + 1),
                             ramdom.nextInt(ramdom.nextInt(getUsuario().size()) + 1),
                             instanceControllerGerarString.getPrecoQualquer(),

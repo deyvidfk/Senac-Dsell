@@ -13,7 +13,7 @@ import static util.ValidaForm.isValid;
 
 public class CadastrarLogin extends DaoLogin {
 
-    public boolean creat(ModelLogin login) {
+    public boolean cadastrar(ModelLogin login) {
         try {
             if (isValid(login)) {
                 for (int i = 0; i < getLogin().size(); i++) {
@@ -36,16 +36,5 @@ public class CadastrarLogin extends DaoLogin {
         return false;
     }
 
-    public ModelLogin autenticaLogin(String username, String pass) {
-        try {
-            for (int i = 0; i < getLogin().size(); i++) {
-                if (getLogin().get(i).getUsername().equals(username) && getLogin().get(i).getPass().equals(pass)) {
-                    return getLogin().get(i);
-                }
-            }
-        } catch (IOException | GeneralSecurityException e) {
-        }
-        return null;
-    }
     private static final Logger LOG = getLogger(CadastrarLogin.class.getName());
 }

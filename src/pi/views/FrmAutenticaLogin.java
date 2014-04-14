@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import static javax.swing.UIManager.setLookAndFeel;
 import javax.swing.UnsupportedLookAndFeelException;
+import pi.controller.AutenticarAcessoAoSistema;
 import pi.controller.CadastrarLogin;
 import pi.controller.seguranca.Sessao;
 import pi.model.ModelLogin;
@@ -134,7 +135,7 @@ public class FrmAutenticaLogin extends javax.swing.JFrame {
 
     private void autenticaLogin() throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
         ModelLogin loginCallBack;
-        CadastrarLogin l = new CadastrarLogin();
+        AutenticarAcessoAoSistema l = new AutenticarAcessoAoSistema();
         loginCallBack = l.autenticaLogin(this.getTxtNomeUsuario().getText(), this.getTxtSenhaUsuario().getText());
         if (loginCallBack != null) {
             this.dispose();

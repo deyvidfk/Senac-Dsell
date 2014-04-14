@@ -29,9 +29,9 @@ public class TesteDeDesepenhoDoSistema {
     public boolean creatUser(int valor) {
         try {
             instanceControllerCadastrarUsuario = new CadastrarUsuario();
-            for (int i = 0; i <= valor; i++) {
+            for (int i = 0; i < valor; i++) {
 
-                boolean cr = instanceControllerCadastrarUsuario.creat(
+                instanceControllerCadastrarUsuario.creat(
                         instanceControllerGerarString.getNomeQualquer(),
                         instanceControllerGerarString.getRg(),
                         instanceControllerGerarString.getCpf(),
@@ -133,7 +133,7 @@ public class TesteDeDesepenhoDoSistema {
                 instanceControllerCadastrarVendas = new CadastrarVenda();
                 Random ramdom = new Random();
                 for (int i = 0; i < valor; i++) {
-                    instanceControllerCadastrarVendas.creat(
+                    instanceControllerCadastrarVendas.cadastrar(
                             ramdom.nextInt(ramdom.nextInt(CadastrarProduto.getProduto().size()) + 1),
                             ramdom.nextInt(ramdom.nextInt(CadastrarUsuario.getUsuario().size()) + 1),
                             instanceControllerGerarString.getPrecoQualquer(),

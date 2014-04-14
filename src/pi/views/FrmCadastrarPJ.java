@@ -17,20 +17,17 @@ import pi.model.ModelPessoaJuridica;
 import util.jTable.ModelJTable;
 
 public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
-
-    private CadastrarFornecedor instanceControllerCadastrarFornecedor;
+    private final CadastrarFornecedor instanceControllerCadastrarFornecedor;
     private final JtableFornecedor instanceControllerJtable;
     private int jTableLinhaSelecionada = -1;
     private List<pi.model.ModelPessoaJuridica> fornecedor;
     private ModelJTable model;
 
-    /**
-     * Creates new form FrmCadastrarPJ
-     */
     public FrmCadastrarPJ() {
+        initComponents();
         this.instanceControllerCadastrarFornecedor = new CadastrarFornecedor();
         this.instanceControllerJtable = new JtableFornecedor(this);
-        initComponents();
+       
         this.getBtnUpdateEmpresa().setVisible(false);
         this.getBtnDeletePJ().setVisible(false);
         this.getTxtID().setVisible(true);
@@ -656,16 +653,14 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
         this.getTxtNumero().setText(jTableFornecedor.getValueAt(linha_selecionada, 11).toString());
         this.getTxtComplemento().setText(jTableFornecedor.getValueAt(linha_selecionada, 12).toString());
         this.getTxtCep().setText(jTableFornecedor.getValueAt(linha_selecionada, 13).toString());
-//        this.getTxtID().setText(jTableFornecedor.getValueAt(linha_selecionada, 14).toString());
+
     }//GEN-LAST:event_jTableFornecedorMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
         if (!this.getTxtBuscar().getText().trim().isEmpty()) {
             instanceControllerJtable.searchRecord(this.getTxtBuscar().getText());
-
         } else {
-
             instanceControllerJtable.popularJtable();
             getjTableFornecedor().setBackground(Color.white);
         }
@@ -875,11 +870,6 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
     public CadastrarFornecedor getInstanceControllerCadastrarFornecedor() {
         return instanceControllerCadastrarFornecedor;
     }
-
-    public void setInstanceControllerCadastrarFornecedor(CadastrarFornecedor InstanceControllerCadastrarFornecedor) {
-        this.instanceControllerCadastrarFornecedor = InstanceControllerCadastrarFornecedor;
-    }
-
     public javax.swing.JButton getBtnBuscar() {
         return btnBuscar;
     }

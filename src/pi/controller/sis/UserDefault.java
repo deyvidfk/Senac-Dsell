@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import static javax.swing.JOptionPane.showMessageDialog;
+import pi.controller.AutenticarAcessoAoSistema;
 import pi.controller.CadastrarLogin;
 import pi.controller.MensagensDoSistema;
 import pi.controller.seguranca.ModuloAcesso;
@@ -67,7 +68,7 @@ public class UserDefault extends DaoPessoaFisica {
             createXml(getUsuario());
 
             CadastrarLogin cadastro = new CadastrarLogin();
-            cadastro.creat(login);
+            cadastro.cadastrar(login);
 
             List menu = new ArrayList<>();
             menu.add(Menu.SISTEMA);
@@ -80,7 +81,7 @@ public class UserDefault extends DaoPessoaFisica {
 
     public void criaUsuarioDefault() {
         criaDadosDoUsuarioDefault();
-        CadastrarLogin login = new CadastrarLogin();
+        AutenticarAcessoAoSistema login = new AutenticarAcessoAoSistema();
         ModelLogin loginCallBack = login.autenticaLogin(USER_LOGIN_DEFAULT, USER_SENHA_DEFAULT);
         if (loginCallBack != null) {
             Sessao sessao = new Sessao(loginCallBack);
