@@ -30,7 +30,6 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
         instanceControllerJtable.popularJtable();
 
         // CONFIGURAÇÃO DEFAULT DO FORMULARIO
-
         //{
         this.getBtnUpdateUsuario().setVisible(false);
         this.getBtnDeleteUsuario().setEnabled(false);
@@ -586,7 +585,7 @@ public final class FrmCadastrarPF extends javax.swing.JInternalFrame {
 
     private void btnUpdateUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateUsuarioActionPerformed
         int linha = jTableLoadUsers.getSelectedRow();
-        int id = parseInt(this.getjTableLoadUsers().getValueAt(linha, 13).toString());
+        String id = this.getjTableLoadUsers().getValueAt(linha, 13).toString();
         boolean update = instanceControllerCadastrarUsuario.update(id, this.getTxtNome().getText(), this.getTxtRg().getText(), this.getTxtCpf().getText(), this.getTxtTelefone().getText(), this.getTxtEmail().getText(), this.getTxtSite().getText(), this.getTxtCidade().getText(), this.getTxtEstado().getText(), this.getTxtPais().getText(), this.getTxtBairro().getText(), this.getTxtRua().getText(), this.getTxtNumero().getText(), this.getTxtComplemento().getText(), this.getTxtCep().getText());
         if (update) {
             resetForm();

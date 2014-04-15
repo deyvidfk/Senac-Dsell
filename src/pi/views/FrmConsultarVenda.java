@@ -28,7 +28,6 @@ import static pi.dao.DaoPessoaJuridica.getFornecedorAtivo;
 import static pi.dao.DaoVenda.getVENDAS;
 import pi.model.ModelGrafico;
 
-
 public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
 
     public FrmConsultarVenda() {
@@ -263,7 +262,7 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
             return "decréscimo";
         }
     }
-    
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         popularGrafico();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -273,7 +272,7 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
     }
 
     public void popularGrafico() {
-        if (CadastrarVenda.getVENDAS() != null &&  CadastrarVenda.getVENDAS().size() > 0) {
+        if (CadastrarVenda.getVENDAS() != null && CadastrarVenda.getVENDAS().size() > 0) {
             /* Obtém filtro (Ano) */
             int ano = Integer.parseInt(cboAno.getSelectedItem().toString());
             /* End*/

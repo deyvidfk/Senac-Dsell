@@ -18,7 +18,7 @@ import util.jTable.Tabela;
 public class ModelPessoaFisica implements InterfaceModelContato, InterfaceModelEndereco {
 
     private String idUser;
-    private int id;
+    private String id;
     private int bonus;
     private String apelido;
     private String cpf;
@@ -125,14 +125,13 @@ public class ModelPessoaFisica implements InterfaceModelContato, InterfaceModelE
 
     @RequiredValidation(Required = true, label = "ID", MaximumValue = 50, MinimumValue = 1)
     @Tabela(Coluna = "ID", Indice = 13)
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
-        if (id >= 0) {
-            this.id = id;
-        }
+    public void setId(String id) {
+
+        this.id = id;
     }
 
     public int getBonus() {

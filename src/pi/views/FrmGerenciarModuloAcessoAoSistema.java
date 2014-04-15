@@ -31,7 +31,7 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
     private static FrmGerenciarModuloAcessoAoSistema instancia;
     private List menus = new ArrayList<>();
     private static FrmCadastrarPF formCadastrarPF;
-    private static int idUser;
+    private static String idUser;
 
     public FrmGerenciarModuloAcessoAoSistema() {
         initComponents();
@@ -44,7 +44,7 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
     public FrmGerenciarModuloAcessoAoSistema(FrmCadastrarPF frm) {
         initComponents();
         FrmGerenciarModuloAcessoAoSistema.formCadastrarPF = frm;
-        this.idUser = parseInt(formCadastrarPF.getTxtID().getText());
+        this.idUser = formCadastrarPF.getTxtID().getText();
         this.txtLogin.setText(frm.getTxtNome().getText());
     }
 
@@ -244,7 +244,7 @@ public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : getInstalledLookAndFeels()) {

@@ -31,17 +31,17 @@ public class Sessao {
     public void newSessao() {
         ModuloAcesso acesso = new ModuloAcesso();
         CadastrarUsuario cad = new CadastrarUsuario();
-        user = cad.getUserPeloId(this.dataLogin.getId());
+        user = cad.getUserPeloId(0);
         sessao = new ModelSessao();
         sessao.setIdSessao(randomUUID().toString());
         sessao.setUser(user);
-        sessao.setHora(getTime().toString());
+        sessao.setHora(getTime());
         list.add(sessao);
         dao = new DaoSessao();
         dao.createXml(list);
         FrmMDI frmMdi;
         try {
-            frmMdi = new FrmMDI(acesso.getModuloAcesso(this.dataLogin.getId()));
+            frmMdi = new FrmMDI(acesso.getModuloAcesso(user.getId()));
             frmMdi.pack();
             frmMdi.setVisible(true);
             frmMdi.setLocationRelativeTo(null);

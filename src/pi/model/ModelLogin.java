@@ -26,7 +26,7 @@ import util.anotacao.RequiredValidation;
  */
 public class ModelLogin {
 
-    private int id;
+    private String id;
     private String username;
     private String pass;
     private String email;
@@ -111,14 +111,14 @@ public class ModelLogin {
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     /**
      * @return the id
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
     private static final Logger LOG = getLogger(ModelLogin.class.getName());

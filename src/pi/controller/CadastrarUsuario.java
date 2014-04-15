@@ -1,5 +1,6 @@
 package pi.controller;
 
+import static java.util.UUID.randomUUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
@@ -17,7 +18,8 @@ public class CadastrarUsuario extends DaoPessoaFisica {
     public boolean creat(String cnpj, String txtRg, String txtCpf, String telefone, String email, String site, String cidade, String estado, String pais, String bairro, String rua, String numero, String complemento, String cep) {
 
         try {
-            int newId = (getUsuario().size() - 1) + 1;
+
+            String newId = randomUUID().toString();
             ModelPessoaFisica pj = new ModelPessoaFisica();
             pj.setId(newId);
             pj.setNome(cnpj);
@@ -57,7 +59,7 @@ public class CadastrarUsuario extends DaoPessoaFisica {
         deleteXml(id);
     }
 
-    public boolean update(int id, String txtNome, String txtRg, String txtCpf, String txtTelefone, String txtEmail, String txtSite, String txtCidade, String txtEstado, String txtPais, String txtBairro, String txtRua, String txtNumero, String txtComplemento, String txtCep) {
+    public boolean update(String id, String txtNome, String txtRg, String txtCpf, String txtTelefone, String txtEmail, String txtSite, String txtCidade, String txtEstado, String txtPais, String txtBairro, String txtRua, String txtNumero, String txtComplemento, String txtCep) {
         try {
             ModelPessoaFisica pj = new ModelPessoaFisica();
             pj.setId(id);
@@ -103,9 +105,9 @@ public class CadastrarUsuario extends DaoPessoaFisica {
         return false;
     }
 
-    private int obterIndice(int id) {
+    private int obterIndice(String id) {
         for (int i = 0; i < getUsuario().size(); i++) {
-            if (getUsuario().get(i).getId() == id) {
+            if (getUsuario().get(i).getId().equals(id)) {
                 return i;
             }
         }

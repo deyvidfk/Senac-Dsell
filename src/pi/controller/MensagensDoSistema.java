@@ -14,8 +14,8 @@ public class MensagensDoSistema {
 
         // 000_0_ SISTEMA
         MSG_000_0("CONFIGURAÇÃO DEFAULT DO SISTEMA CRIADA COM SUCESSO.\n"
-        + "Para segurança do sistema altere a senha padrão para uma senha de sua escolha. \n"
-        + "Obs:  Os menus estão desativados. Altere seus dados e os Ative-os, após isso faça o logon novamente.", "COD: 000_0"),
+                + "Para segurança do sistema altere a senha padrão para uma senha de sua escolha. \n"
+                + "Obs:  Os menus estão desativados. Altere seus dados e os Ative-os, após isso faça o logon novamente.", "COD: 000_0"),
         // 000_1_ CADASTRO
         MSG_001_000("Você não pode cadastrar produtos sem antes haver fornecedores cadastrados no sistema.", "COD: 001_000"),
         MSG_001_001("Você não pode gerar vendas sem antes haver produtos cadastrados.", "COD: 001_001"),

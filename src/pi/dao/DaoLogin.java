@@ -1,7 +1,6 @@
 package pi.dao;
 
 import com.thoughtworks.xstream.XStream;
-import static java.util.Collections.unmodifiableList;
 import java.util.List;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;

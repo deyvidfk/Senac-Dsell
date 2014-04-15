@@ -17,6 +17,7 @@ import pi.model.ModelPessoaJuridica;
 import util.jTable.ModelJTable;
 
 public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
+
     private final CadastrarFornecedor instanceControllerCadastrarFornecedor;
     private final JtableFornecedor instanceControllerJtable;
     private int jTableLinhaSelecionada = -1;
@@ -27,7 +28,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
         initComponents();
         this.instanceControllerCadastrarFornecedor = new CadastrarFornecedor();
         this.instanceControllerJtable = new JtableFornecedor(this);
-       
+
         this.getBtnUpdateEmpresa().setVisible(false);
         this.getBtnDeletePJ().setVisible(false);
         this.getTxtID().setVisible(true);
@@ -870,6 +871,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
     public CadastrarFornecedor getInstanceControllerCadastrarFornecedor() {
         return instanceControllerCadastrarFornecedor;
     }
+
     public javax.swing.JButton getBtnBuscar() {
         return btnBuscar;
     }

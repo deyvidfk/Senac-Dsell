@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pi.dao;
 
 import com.thoughtworks.xstream.XStream;
@@ -18,69 +14,60 @@ import static pi.controller.CadastrarProduto.getProduto;
 import static pi.dao.DaoPessoaJuridica.getFornecedor;
 import pi.model.ModelPessoaJuridica;
 
-/**
- *
- * @author deyvid.fk
- */
 public class DaoPessoaJuridica implements DaoInterface {
 
     private static List<ModelPessoaJuridica> _pessoaJuridica;
 
-    /**
-     * Lista dos fornecedores ativos, ordenados por quantidade de produtos.
-     *
-     * @return
-     */
     @SuppressWarnings("unchecked")
     public static List<ModelPessoaJuridica> getFornecedorAtivo() {
         Map<Integer, Integer> map = new HashMap<>();
         int cont;
         if (getFornecedor() != null) {
-        
-        for (int i = 0; i < getFornecedor().size(); i++) {
-            cont = 0;
-            for (int j = 0; j < getProduto().size(); j++) {
-                if (getFornecedor().get(i).getId() == getProduto().get(j).getIdFornecedor()) {
-                    if (map.containsKey(i)) {
-                        map.remove(i);
-                        map.put(i, cont++);
-                    } else {
-                        map.put(i, cont++);
+
+            for (int i = 0; i < getFornecedor().size(); i++) {
+                cont = 0;
+                for (int j = 0; j < getProduto().size(); j++) {
+                    if (getFornecedor().get(i).getId() == getProduto().get(j).getIdFornecedor()) {
+                        if (map.containsKey(i)) {
+                            map.remove(i);
+                            map.put(i, cont++);
+                        } else {
+                            map.put(i, cont++);
+                        }
                     }
                 }
+                // Atribuindo os produos aos fornecedores;
+                getFornecedor().get(i).setQtdProduto(cont);
             }
-            // Atribuindo os produos aos fornecedores;
-            getFornecedor().get(i).setQtdProduto(cont);
-        }
 
-        List<ModelPessoaJuridica> ListaAuxiliar = new ArrayList<>(getFornecedor());
+            List<ModelPessoaJuridica> ListaAuxiliar = new ArrayList<>(getFornecedor());
 
-        for (int i = 0; i < ListaAuxiliar.size(); i++) {
-            if (i == ListaAuxiliar.size()) {
-                i--;
-                if (i > ListaAuxiliar.size() && ListaAuxiliar.get(i).getQtdProduto() == 0) {
+            for (int i = 0; i < ListaAuxiliar.size(); i++) {
+                if (i == ListaAuxiliar.size()) {
+                    i--;
+                    if (i > ListaAuxiliar.size() && ListaAuxiliar.get(i).getQtdProduto() == 0) {
+                        ListaAuxiliar.remove(i);
+                    }
+                    break;
+                }
+                while (i < ListaAuxiliar.size() && ListaAuxiliar.get(i).getQtdProduto() == 0) {
                     ListaAuxiliar.remove(i);
                 }
-                break;
+                if (i > ListaAuxiliar.size()) {
+                    ListaAuxiliar.get(i).setQuant(ListaAuxiliar.size());
+                }
             }
-            while (i < ListaAuxiliar.size() && ListaAuxiliar.get(i).getQtdProduto() == 0) {
-                ListaAuxiliar.remove(i);
-            }
-            if (i > ListaAuxiliar.size()) {
-                ListaAuxiliar.get(i).setQuant(ListaAuxiliar.size());
-            }
-        }
 
-        /* Ordena os fornecedores pela quantidade de produtos, em ordem decrescente. */
-        sort(ListaAuxiliar, new Comparator() {
-            @Override
-            public int compare(Object o1, Object o2) {
-                ModelPessoaJuridica p1 = (ModelPessoaJuridica) o1;
-                ModelPessoaJuridica p2 = (ModelPessoaJuridica) o2;
-                return p1.getQtdProduto() < p2.getQtdProduto() ? +1 : (p1.getQtdProduto() > p2.getQtdProduto() ? -1 : 0);
-            }
-        });
-        return ListaAuxiliar;
+            /* Ordena os fornecedores pela quantidade de produtos, em ordem decrescente. */
+            sort(ListaAuxiliar, new Comparator() {
+                @Override
+                public int compare(Object o1, Object o2) {
+                    ModelPessoaJuridica p1 = (ModelPessoaJuridica) o1;
+                    ModelPessoaJuridica p2 = (ModelPessoaJuridica) o2;
+                    return p1.getQtdProduto() < p2.getQtdProduto() ? +1 : (p1.getQtdProduto() > p2.getQtdProduto() ? -1 : 0);
+                }
+            });
+            return ListaAuxiliar;
         }
         return null;
     }
@@ -165,13 +152,7 @@ public class DaoPessoaJuridica implements DaoInterface {
         return ListaAuxiliar;
     }
 
-    /**
-     * Lista de fornecedores.
-     *
-     * @return
-     */
     public static List<ModelPessoaJuridica> getFornecedor() {
-        // return unmodifiableList(DaoPessoaJuridica._pessoaJuridica);
         return (DaoPessoaJuridica._pessoaJuridica);
     }
 

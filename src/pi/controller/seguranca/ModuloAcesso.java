@@ -10,7 +10,7 @@ import pi.views.system.Menu;
 
 public class ModuloAcesso {
 
-    public void addModuloAcesso(int idUser, List menu) {
+    public void addModuloAcesso(String idUser, List menu) {
         List<ModelModuloAcesso> list;
         list = new ArrayList<>();
 
@@ -24,13 +24,13 @@ public class ModuloAcesso {
         dao.createXml(list);
     }
 
-    protected List getModuloAcesso(int idUser) {
+    protected List getModuloAcesso(String idUser) {
         DaoModuloAcesso dao = new DaoModuloAcesso();
         List<ModelModuloAcesso> menus;
         menus = (List<ModelModuloAcesso>) dao.readXml();
 
         for (ModelModuloAcesso moduloAcesso : menus) {
-            if (moduloAcesso.getIdUser() == idUser) {
+            if (moduloAcesso.getIdUser().equals(idUser)) {
                 return moduloAcesso.getModulo();
             }
         }

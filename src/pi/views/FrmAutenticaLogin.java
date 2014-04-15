@@ -10,7 +10,6 @@ import static java.util.logging.Logger.getLogger;
 import static javax.swing.UIManager.setLookAndFeel;
 import javax.swing.UnsupportedLookAndFeelException;
 import pi.controller.AutenticarAcessoAoSistema;
-import pi.controller.CadastrarLogin;
 import pi.controller.seguranca.Sessao;
 import pi.model.ModelLogin;
 import pi.views.system.ConfigLayout;

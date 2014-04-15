@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
+import javax.swing.ImageIcon;
 import static javax.swing.UIManager.setLookAndFeel;
 import javax.swing.UnsupportedLookAndFeelException;
 import static pi.controller.seguranca.Sessao.getSessao;
@@ -21,6 +22,7 @@ import static pi.views.system.Menu.SISTEMA;
 
 public final class FrmMDI extends javax.swing.JFrame {
 
+    ImageIcon image;
     FrmCadastrarPF formCadastroDeUsuario;
     FrmCadastrarPJ formCadastroPJ;
     FrmCadastrarVenda Comprarprodutos;
@@ -63,6 +65,7 @@ public final class FrmMDI extends javax.swing.JFrame {
         initComponents();
         try {
             setLookAndFeel(ConfigLayout.LookAndFeelDefault.getLookAndFeel());
+
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(FrmMDI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,6 +78,7 @@ public final class FrmMDI extends javax.swing.JFrame {
 
     private FrmMDI() {
         super();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -83,9 +87,12 @@ public final class FrmMDI extends javax.swing.JFrame {
 
         desktopPane = new javax.swing.JDesktopPane();
         lblDadosSessao = new javax.swing.JLabel();
+        backg = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         menuPj = new javax.swing.JMenuItem();
         menuPf = new javax.swing.JMenuItem();
@@ -96,18 +103,20 @@ public final class FrmMDI extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        subMenuSobre = new javax.swing.JMenuItem();
-        subMenuLogout = new javax.swing.JMenuItem();
         subMenuModuloAcesso = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblDadosSessao.setText("Dados da Sessao");
         desktopPane.add(lblDadosSessao);
-        lblDadosSessao.setBounds(820, 20, 380, 50);
+        lblDadosSessao.setBounds(1050, 10, 170, 30);
+
+        backg.setText("jLabel1");
+        desktopPane.add(backg);
+        backg.setBounds(180, 80, 1070, 590);
 
         fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
+        fileMenu.setText("...");
 
         exitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         exitMenuItem.setMnemonic('x');
@@ -118,6 +127,22 @@ public final class FrmMDI extends javax.swing.JFrame {
             }
         });
         fileMenu.add(exitMenuItem);
+
+        jMenuItem2.setText("Logout");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem2);
+
+        jMenuItem6.setText("Sobre");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem6);
 
         menuBar.add(fileMenu);
 
@@ -186,22 +211,6 @@ public final class FrmMDI extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem1);
 
-        subMenuSobre.setText("Sobre");
-        subMenuSobre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subMenuSobreActionPerformed(evt);
-            }
-        });
-        jMenu3.add(subMenuSobre);
-
-        subMenuLogout.setText("Logout");
-        subMenuLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subMenuLogoutActionPerformed(evt);
-            }
-        });
-        jMenu3.add(subMenuLogout);
-
         subMenuModuloAcesso.setText("Modulo Acesso");
         subMenuModuloAcesso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,15 +269,6 @@ public final class FrmMDI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void subMenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuSobreActionPerformed
-        formSobre = new FrmSobre();
-        if (!formSobre.isVisible()) {
-            getDesktopPane().add(formSobre);
-            formSobre.setVisible(true);
-            this.setLocationRelativeTo(null);
-        }
-    }//GEN-LAST:event_subMenuSobreActionPerformed
-
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         Comprarprodutos = new FrmCadastrarVenda();
         if (!Comprarprodutos.isVisible()) {
@@ -298,7 +298,12 @@ public final class FrmMDI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void subMenuLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuLogoutActionPerformed
+    private void subMenuModuloAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuModuloAcessoActionPerformed
+        FrmGerenciarModuloAcessoAoSistema mod = new FrmGerenciarModuloAcessoAoSistema();
+        mod.setVisible(true);
+    }//GEN-LAST:event_subMenuModuloAcessoActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         FrmLogin = new FrmAutenticaLogin();
         if (!FrmLogin.isActive()) {
             FrmLogin.pack();
@@ -307,13 +312,19 @@ public final class FrmMDI extends javax.swing.JFrame {
             FrmLogin.setTxtNomeUsuario(getSessao().get(0).getUser().getNome());
             dispose();
         }
-    }//GEN-LAST:event_subMenuLogoutActionPerformed
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void subMenuModuloAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMenuModuloAcessoActionPerformed
-        FrmGerenciarModuloAcessoAoSistema mod = new FrmGerenciarModuloAcessoAoSistema();
-        mod.setVisible(true);
-    }//GEN-LAST:event_subMenuModuloAcessoActionPerformed
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        formSobre = new FrmSobre();
+        if (!formSobre.isVisible()) {
+            getDesktopPane().add(formSobre);
+            formSobre.setVisible(true);
+            this.setLocationRelativeTo(null);
+        }
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel backg;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
@@ -322,16 +333,16 @@ public final class FrmMDI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JLabel lblDadosSessao;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuPf;
     private javax.swing.JMenuItem menuPj;
-    private javax.swing.JMenuItem subMenuLogout;
     private javax.swing.JMenuItem subMenuModuloAcesso;
-    private javax.swing.JMenuItem subMenuSobre;
     // End of variables declaration//GEN-END:variables
 
     public javax.swing.JDesktopPane getDesktopPane() {

@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.UUID.randomUUID;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -26,8 +27,9 @@ import pi.views.system.Menu;
 public class UserDefault extends DaoPessoaFisica {
 
     private static final Logger LOG = getLogger(UserDefault.class.getName());
-    private String USER_LOGIN_DEFAULT = "adm";
-    private String USER_SENHA_DEFAULT = "adm";
+    private final String USER_LOGIN_DEFAULT = "adm";
+    private final String USER_SENHA_DEFAULT = "adm";
+    private final String USER_ID_DEFAULT = randomUUID().toString();
 
     static {
         System.out.println(LOG.getName());
@@ -43,7 +45,7 @@ public class UserDefault extends DaoPessoaFisica {
     public void criaDadosDoUsuarioDefault() {
         try {
             ModelPessoaFisica ps = new ModelPessoaFisica();
-            ps.setId(0);
+            ps.setId(USER_ID_DEFAULT);
             ps.setNome("ADM");
             ps.setRg("12.123.123-1");
             ps.setCpf("000.000.000-00");
@@ -60,7 +62,7 @@ public class UserDefault extends DaoPessoaFisica {
             ps.setCep("04872-290");
 
             ModelLogin login = new ModelLogin();
-            login.setId(0);
+            login.setId(USER_ID_DEFAULT);
             login.setUsername(USER_LOGIN_DEFAULT);
             login.setPass(USER_SENHA_DEFAULT);
 
@@ -73,6 +75,7 @@ public class UserDefault extends DaoPessoaFisica {
             List menu = new ArrayList<>();
             menu.add(Menu.SISTEMA);
             menu.add(Menu.CADASTRO_GERAL);
+            menu.add(Menu.CADASTRO);
             ModuloAcesso moduloAcesso = new ModuloAcesso();
             moduloAcesso.addModuloAcesso(ps.getId(), menu);
         } catch (GeneralSecurityException | UnsupportedEncodingException ex) {

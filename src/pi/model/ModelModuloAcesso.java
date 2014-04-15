@@ -16,7 +16,7 @@ import pi.views.system.Menu;
  */
 public class ModelModuloAcesso {
 
-    private int idUser;
+    private String idUser;
     private int flag;
     private List<Menu> modulo;
 
@@ -37,14 +37,14 @@ public class ModelModuloAcesso {
     /**
      * @return the idUser
      */
-    public int getIdUser() {
+    public String getIdUser() {
         return idUser;
     }
 
     /**
      * @param idUser the idUser to set
      */
-    public void setIdUser(int idUser) {
+    public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
 

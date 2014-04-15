@@ -4,7 +4,6 @@
  */
 package util;
 
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
@@ -15,17 +14,18 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+
 /**
  *
  * @author User-001
  */
 public class EncryptData {
-        private static final char[] PASSWORD = "enfldsgbnlsngdlksdsgm".toCharArray();
+
+    private static final char[] PASSWORD = "enfldsgbnlsngdlksdsgm".toCharArray();
     private static final byte[] SALT = {
         (byte) 0xde, (byte) 0x33, (byte) 0x10, (byte) 0x12,
-        (byte) 0xde, (byte) 0x33, (byte) 0x10, (byte) 0x12,
-    };
-    
+        (byte) 0xde, (byte) 0x33, (byte) 0x10, (byte) 0x12,};
+
     protected static String encrypt(String property) throws GeneralSecurityException, UnsupportedEncodingException {
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
         SecretKey key = keyFactory.generateSecret(new PBEKeySpec(PASSWORD));
@@ -33,10 +33,12 @@ public class EncryptData {
         pbeCipher.init(Cipher.ENCRYPT_MODE, key, new PBEParameterSpec(SALT, 20));
         return base64Encode(pbeCipher.doFinal(property.getBytes("UTF-8")));
     }
+
     protected static String base64Encode(byte[] bytes) {
         // NB: This class is internal, and you probably should use another impl
         return new BASE64Encoder().encode(bytes);
     }
+
     protected static String decrypt(String property) throws GeneralSecurityException, IOException {
         SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
         SecretKey key = keyFactory.generateSecret(new PBEKeySpec(PASSWORD));
@@ -49,5 +51,5 @@ public class EncryptData {
         // NB: This class is internal, and you probably should use another impl
         return new BASE64Decoder().decodeBuffer(property);
     }
-  
+
 }

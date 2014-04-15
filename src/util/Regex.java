@@ -36,7 +36,7 @@ public enum Regex {
     CEP("^\\d{5}-\\d{3}$"),
     /**
      * TELEFONE: Formato do telefone aceito: (99) 99999-9999 Outro formato
-     * aceito: (99) 9999-9999 / 9 9999-9999 / 99999-9999 
+     * aceito: (99) 9999-9999 / 9 9999-9999 / 99999-9999
      */
     TELEFONE("^(\\([0-9]{2}\\))?\\s?([9]{1})?\\s?([0-9]{4})-([0-9]{4})$"),
     /**
