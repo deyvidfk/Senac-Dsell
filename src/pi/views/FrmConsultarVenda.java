@@ -21,7 +21,7 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import pi.controller.CadastrarVenda;
 import static pi.controller.CadastrarVenda.getRendimentoVendaPorTrimestre;
-import pi.controller.report.CreateReport;
+import pi.controller.relatorios.CriarRelatorio;
 import static pi.dao.DaoPessoaJuridica.getForInativos;
 import static pi.dao.DaoPessoaJuridica.getFornecedor;
 import static pi.dao.DaoPessoaJuridica.getFornecedorAtivo;
@@ -202,7 +202,7 @@ public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
             parametros.put("TOTAL_REGISTRO", getFornecedor().size());
             ArrayList list = new ArrayList<>();
             list.add("");
-            Thread relport = new Thread(new CreateReport(list, CreateReport.Templates.TMPL_VENDAS_GRAFICO, parametros), "Thread: Imprimir Fornecedor");
+            Thread relport = new Thread(new CriarRelatorio(list, CriarRelatorio.Templates.TMPL_VENDAS_GRAFICO, parametros), "Thread: Imprimir Fornecedor");
             relport.start();
 
             CadastrarVenda venda = new CadastrarVenda();

@@ -15,7 +15,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-import pi.controller.report.CreateReport;
+import pi.controller.relatorios.CriarRelatorio;
 import static pi.dao.DaoPessoaJuridica.getForInativos;
 import static pi.dao.DaoPessoaJuridica.getFornecedor;
 import static pi.dao.DaoPessoaJuridica.getFornecedorAtivo;
@@ -208,14 +208,14 @@ public class FrmConsultarFornecedor extends javax.swing.JInternalFrame {
         switch (cboFiltro2.getSelectedIndex()) {
             case 0:
                 start();
-                Thread relport = new Thread(new CreateReport(getFornecedorAtivo(), CreateReport.Templates.TMPL_FORNECEDOR_CADASTRO_RESUMIDO, null), "Thread: Imprimir Fornecedor");
+                Thread relport = new Thread(new CriarRelatorio(getFornecedorAtivo(), CriarRelatorio.Templates.TMPL_FORNECEDOR_CADASTRO_RESUMIDO, null), "Thread: Imprimir Fornecedor");
                 relport.start();
                 stop();
                 log += getTime() + " | Relatório com " + getFornecedorAtivo().size() + "   fornecedor(es) gerado em: " + elapsedTime() + " ms." + '\n';
                 break;
             case 1:
                 start();
-                Thread relport1 = new Thread(new CreateReport(getForInativos(), CreateReport.Templates.TMPL_FORNECEDOR_CADASTRO_RESUMIDO, null), "Thread: Imprimir Fornecedor");
+                Thread relport1 = new Thread(new CriarRelatorio(getForInativos(), CriarRelatorio.Templates.TMPL_FORNECEDOR_CADASTRO_RESUMIDO, null), "Thread: Imprimir Fornecedor");
                 relport1.start();
                 stop();
                 log += getTime() + " | Relatório com " + getForInativos().size() + "   fornecedor(es) gerado em: " + elapsedTime() + " ms." + '\n';
@@ -226,7 +226,7 @@ public class FrmConsultarFornecedor extends javax.swing.JInternalFrame {
                 parametros.put("QUANT_FORNECEDORES_ATIVOS", getFornecedorAtivo().size());
                 parametros.put("TOTAL_REGISTRO", getFornecedor().size());
                 start();
-                Thread relport2 = new Thread(new CreateReport(getFornecedor(), CreateReport.Templates.TMPL_FORNECEDOR_CADASTRO_COMPLETO, parametros), "Thread: Imprimir Fornecedor");
+                Thread relport2 = new Thread(new CriarRelatorio(getFornecedor(), CriarRelatorio.Templates.TMPL_FORNECEDOR_CADASTRO_COMPLETO, parametros), "Thread: Imprimir Fornecedor");
                 relport2.start();
                 stop();
                 log += getTime() + " | Relatório com " + getFornecedor().size() + "   fornecedor(es) gerado em: " + elapsedTime() + " ms." + '\n';

@@ -12,7 +12,7 @@ import static javax.swing.JOptionPane.showConfirmDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 import pi.controller.CadastrarFornecedor;
 import pi.controller.Jtable.JtableFornecedor;
-import pi.controller.report.CreateReport;
+import pi.controller.relatorios.CriarRelatorio;
 import pi.model.ModelPessoaJuridica;
 import util.jTable.ModelJTable;
 
@@ -805,7 +805,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
             ListaAuxiliar.clear(); // Limpa a lista para adicionar somente o registro selecionado.
             ListaAuxiliar.add(pi.controller.CadastrarFornecedor.getFornecedor().get(parseInt(getTxtID().getText()))); // Passa o id do cadastro.
             if (ListaAuxiliar.size() == 1) { // Verifica se a lista realmente contem somente 1 registro.
-                CreateReport relport = new CreateReport(ListaAuxiliar, CreateReport.Templates.TMPL_FORNECEDOR_CADASTRO_RESUMIDO, null); // Passa a lista contendo somente um registro.
+                CriarRelatorio relport = new CriarRelatorio(ListaAuxiliar, CriarRelatorio.Templates.TMPL_FORNECEDOR_CADASTRO_RESUMIDO, null); // Passa a lista contendo somente um registro.
                 new Thread(relport).start();
             }
         }

@@ -8,9 +8,9 @@ import static java.util.logging.Logger.getLogger;
 import static pi.dao.DaoLogin.getLogin;
 import pi.model.ModelLogin;
 
-public class AutenticaLogin {
+public class AutenticarLogin {
 
-    public AutenticaLogin() {
+    public AutenticarLogin() {
     }
 
     public ModelLogin validaDadosDeAcesso(String username, String pass) throws GeneralSecurityException, UnsupportedEncodingException {
@@ -24,5 +24,5 @@ public class AutenticaLogin {
         }
         return null;
     }
-    private static final Logger LOG = getLogger(AutenticaLogin.class.getName());
+    private static final Logger LOG = getLogger(AutenticarLogin.class.getName());
 }

@@ -1,4 +1,4 @@
-package pi.controller.report;
+package pi.controller.relatorios;
 
 import static java.lang.Thread.sleep;
 import java.sql.SQLException;
@@ -21,7 +21,7 @@ import net.sf.jasperreports.view.JasperViewer;
  * A CLASSE CRIA RELATORIO ULTILIZANDO UMA THREAD.
  *
  */
-public class CreateReport implements Runnable {
+public class CriarRelatorio implements Runnable {
 
     /**
      * LISTA DE DADOS
@@ -36,7 +36,7 @@ public class CreateReport implements Runnable {
      */
     private final HashMap<String, Object> param;
 
-    public CreateReport(List list, String fileNameTemplate, HashMap param) {
+    public CriarRelatorio(List list, String fileNameTemplate, HashMap param) {
         this.dados = list;
         this.fileName = fileNameTemplate;
         this.param = param;
@@ -52,7 +52,7 @@ public class CreateReport implements Runnable {
             newReport();
         } catch (JRException | SQLException | InterruptedException ex) {
             showMessageDialog(null, ex.getMessage(), null, JOptionPane.ERROR_MESSAGE);
-            getLogger(CreateReport.class.getName()).log(Level.SEVERE, null, ex);
+            getLogger(CriarRelatorio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -83,5 +83,5 @@ public class CreateReport implements Runnable {
         public static final String TMPL_VENDAS_GRAFICO = "tmp_venda.jrxml";
 
     }
-    private static final Logger LOG = getLogger(CreateReport.class.getName());
+    private static final Logger LOG = getLogger(CriarRelatorio.class.getName());
 }
