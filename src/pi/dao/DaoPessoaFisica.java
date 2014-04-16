@@ -6,10 +6,6 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import pi.model.ModelPessoaFisica;
 
-/**
- *
- * @author deyvid.fk
- */
 public class DaoPessoaFisica implements DaoInterface {
 
     private static List<ModelPessoaFisica> _pessoaJuridica;

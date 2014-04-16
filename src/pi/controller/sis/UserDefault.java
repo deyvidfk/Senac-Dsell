@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pi.controller.sis;
 
 import java.io.UnsupportedEncodingException;
@@ -76,6 +71,9 @@ public class UserDefault extends DaoPessoaFisica {
             menu.add(Menu.SISTEMA);
             menu.add(Menu.CADASTRO_GERAL);
             menu.add(Menu.CADASTRO);
+            menu.add(Menu.RELATORIO_GERAL);
+            menu.add(Menu.RELATORIO);
+            menu.add(Menu.CONSULTA);
             ModuloAcesso moduloAcesso = new ModuloAcesso();
             moduloAcesso.addModuloAcesso(ps.getId(), menu);
         } catch (GeneralSecurityException | UnsupportedEncodingException ex) {
@@ -89,7 +87,9 @@ public class UserDefault extends DaoPessoaFisica {
         if (loginCallBack != null) {
             Sessao sessao = new Sessao(loginCallBack);
             sessao.newSessao();
+
         }
+
         showMessageDialog(null, MensagensDoSistema.SISTEMA.MSG_000_0.getCodigo() + "\n" + MensagensDoSistema.SISTEMA.MSG_000_0.getMenssagem());
     }
 }

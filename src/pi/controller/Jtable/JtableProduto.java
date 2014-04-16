@@ -6,8 +6,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
-import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.showMessageDialog;
 import pi.controller.CadastrarProduto;
 import static pi.controller.CadastrarProduto.getProduto;
 import pi.model.ModelProduto;
@@ -70,9 +68,6 @@ public class JtableProduto {
         return this.getViewFrm().getjTableProduto().getModel().getRowCount();
     }
 
-    /**
-     * POPULA A TABELA "JTable" COM OS DADOS
-     */
     public void popularJtable() {
         ordenarPorNome();
         try {
@@ -80,7 +75,6 @@ public class JtableProduto {
             this.getViewFrm().getjTableProduto().setModel(tabela);
             this.getViewFrm().getjTableProduto().setDefaultRenderer(Object.class, new CellRenderer());
         } catch (Exception e) {
-            showMessageDialog(null, e.getMessage(), null, JOptionPane.ERROR_MESSAGE);
             getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
     }
@@ -114,6 +108,7 @@ public class JtableProduto {
                 this.getViewFrm().getjTableProduto().setModel(getModelJtable());
             }
         } catch (Exception e) {
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }
@@ -126,6 +121,7 @@ public class JtableProduto {
                 this.getViewFrm().getjTableProduto().setModel(getModelJtable());
             }
         } catch (Exception e) {
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }
@@ -133,9 +129,11 @@ public class JtableProduto {
     public void searchRecord(int idFornecedor) {
         produto = new CadastrarProduto();
         try {
-            setModelJtable(new ModelJTable(produto.searchRecord(idFornecedor)));
-            this.getViewFrm().getjTableProduto().setModel(getModelJtable());
+            ModelJTable tabela = new ModelJTable(produto.searchRecord(idFornecedor));
+            this.getViewFrm().getjTableProduto().setModel(tabela);
+            this.getViewFrm().getjTableProduto().setDefaultRenderer(Object.class, new CellRenderer());
         } catch (Exception e) {
+            getLogger(Resource.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }

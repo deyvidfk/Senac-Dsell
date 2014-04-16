@@ -33,19 +33,16 @@ public class CadastrarProduto {
     }
 
     public static int searchRecordSize(int idFornecedor) {
-        if (!getProduto().isEmpty()) {
-            CadastrarProduto.listaAuxiliar = new ArrayList<>(getProduto());
-            CadastrarProduto.listaAuxiliar.clear();
-            for (int index = 0; index < getProduto().size(); index++) {
-                if (getProduto().get(index).getIdFornecedor() == idFornecedor) {
-                    if (getProduto().size() > 0) {
-                        CadastrarProduto.listaAuxiliar.add(getProduto().get(index));
-                    }
+        int cont = 0;
+        if (getProduto() != null && !getProduto().isEmpty()) {
+            for (int i = 0; i < getProduto().size(); i++) {
+                if (getProduto().get(i).getIdFornecedor() == idFornecedor) {
+                    cont++;
                 }
             }
-            return CadastrarProduto.listaAuxiliar.size();
+            return cont;
         }
-        return 0;
+        return cont;
     }
 
     public boolean creat(int txtIdFornecedor, String txtNome, String txtCategoria, String txtMarca, String txtModelo, String txtTipo, String txtCor, Double txtPreco, Integer txtDesconto, String txtGarantia) {
@@ -94,14 +91,11 @@ public class CadastrarProduto {
     }
 
     public List<ModelProduto> searchRecord(int idFornecedor) {
+        CadastrarProduto.listaAuxiliar = new ArrayList<>();
         try {
-            CadastrarProduto.listaAuxiliar = new ArrayList<>(getProduto());
-            CadastrarProduto.listaAuxiliar.clear();
-            for (int index = 0; index < getProduto().size(); index++) {
-                if (getProduto().get(index).getIdFornecedor() == idFornecedor) {
-                    if (getProduto().size() > 0) {
-                        CadastrarProduto.listaAuxiliar.add(getProduto().get(index));
-                    }
+            for (int i = 0; i < getProduto().size(); i++) {
+                if (getProduto().get(i).getIdFornecedor() == idFornecedor) {
+                    CadastrarProduto.listaAuxiliar.add(getProduto().get(i));
                 }
             }
         } catch (Exception e) {
@@ -113,16 +107,12 @@ public class CadastrarProduto {
 
     public List<ModelProduto> searchRecord(String Output, int idFornecedor) {
         try {
-            if (!Output.isEmpty()) {
+            if (Output != null && !Output.isEmpty()) {
                 String txtOutput = Output.toUpperCase(Locale.ROOT);
-                CadastrarProduto.listaAuxiliar = new ArrayList<>(getProduto());
-                CadastrarProduto.listaAuxiliar.clear();
-                for (int index = 0; index < getProduto().size(); index++) {
-                    if (getProduto().get(index).getNome().toUpperCase(Locale.ROOT).contains(txtOutput) && getProduto().get(index).getIdFornecedor() == idFornecedor) {
-
-                        if (getProduto().size() > 0) {
-                            CadastrarProduto.listaAuxiliar.add(getProduto().get(index));
-                        }
+                CadastrarProduto.listaAuxiliar = new ArrayList<>();
+                for (int i = 0; i < getProduto().size(); i++) {
+                    if (getProduto().get(i).getNome().toUpperCase(Locale.ROOT).contains(txtOutput) && getProduto().get(i).getIdFornecedor() == idFornecedor) {
+                        CadastrarProduto.listaAuxiliar.add(getProduto().get(i));
                     }
                 }
             }
@@ -136,15 +126,12 @@ public class CadastrarProduto {
 
     public List<ModelProduto> searchRecordFiltro(String Output, int idFornecedor) {
         try {
-            if (!Output.isEmpty()) {
+            if (Output != null && !Output.isEmpty()) {
                 String txtOutput = Output.toUpperCase(Locale.ROOT);
-                CadastrarProduto.listaAuxiliar = new ArrayList<>(getProduto());
-                CadastrarProduto.listaAuxiliar.clear();
-                for (int index = 0; index < getProduto().size(); index++) {
-                    if (getProduto().get(index).getCategoria().toUpperCase(Locale.ROOT).equals(txtOutput) && getProduto().get(index).getIdFornecedor() == idFornecedor) {
-                        if (getProduto().size() > 0) {
-                            CadastrarProduto.listaAuxiliar.add(getProduto().get(index));
-                        }
+                CadastrarProduto.listaAuxiliar = new ArrayList<>();
+                for (int i = 0; i < getProduto().size(); i++) {
+                    if (getProduto().get(i).getCategoria().toUpperCase(Locale.ROOT).equals(txtOutput) && getProduto().get(i).getIdFornecedor() == idFornecedor) {
+                        CadastrarProduto.listaAuxiliar.add(getProduto().get(i));
                     }
                 }
             }

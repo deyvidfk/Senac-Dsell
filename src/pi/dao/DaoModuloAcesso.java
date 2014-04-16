@@ -7,10 +7,6 @@ import static java.util.logging.Logger.getLogger;
 import pi.model.ModelModuloAcesso;
 import pi.model.ModelPessoaFisica;
 
-/**
- *
- * @author User-001
- */
 public class DaoModuloAcesso implements DaoInterface {
 
     private static List<ModelModuloAcesso> _moduloAcesso;

@@ -549,6 +549,7 @@
         </Container>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jScrollPane2MouseClicked"/>
             <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="jScrollPane2ComponentAdded"/>
           </Events>
 

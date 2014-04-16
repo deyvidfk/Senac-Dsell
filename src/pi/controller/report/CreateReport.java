@@ -82,8 +82,6 @@ public class CreateReport implements Runnable {
         public static final String TMPL_FORNECEDOR_CADASTRO_COMPLETO = "tpm_fornecedor_geral.jrxml";
         public static final String TMPL_VENDAS_GRAFICO = "tmp_venda.jrxml";
 
-        private Templates() {
-        }
     }
     private static final Logger LOG = getLogger(CreateReport.class.getName());
 }

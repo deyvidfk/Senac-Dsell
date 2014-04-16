@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package util;
 
 import java.io.IOException;
@@ -17,10 +13,6 @@ import javax.crypto.spec.PBEParameterSpec;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
-/**
- *
- * @author User-001
- */
 public class EncriptString {
 
     private static final char[] PASSWORD = "enfldsgbnlsngdlksdsgm".toCharArray();

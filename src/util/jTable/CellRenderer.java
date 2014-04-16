@@ -7,10 +7,6 @@ import static java.util.logging.Logger.getLogger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-/**
- * @author Deyvid Franklin
- * @version 3.1
- */
 @SuppressWarnings("serial")
 public class CellRenderer extends DefaultTableCellRenderer {
 

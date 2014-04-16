@@ -10,10 +10,6 @@ import static util.RegexTest.TestarRegex;
 import util.anotacao.RegularExpressionValidator;
 import util.anotacao.RequiredValidation;
 
-/**
- *
- * @author deyvid.souza
- */
 public class ValidaForm {
 
     /**

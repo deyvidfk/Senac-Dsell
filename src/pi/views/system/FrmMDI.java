@@ -1,7 +1,6 @@
 package pi.views.system;
 
 import static java.lang.System.exit;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,13 +32,17 @@ public final class FrmMDI extends javax.swing.JFrame {
     FrmSobre formSobre;
     String menu;
 
-    public void menu1Visivel(List<Menu> m) {
+    private void checarAcessoAosMenus(List<Menu> m) {
         jMenu1.setVisible(false);
         jMenu2.setVisible(false);
         jMenu3.setVisible(false);
         jMenu4.setVisible(false);
-        for (int i = 0; i < m.size(); i++) {
-            switch (m.get(i)) {
+        jMenu4.setVisible(false);
+        for (Menu m1 : m) {
+            switch (m1) {
+                case CONSULTA:
+                    this.jMenu4.setVisible(true);
+                    break;
                 case SISTEMA:
                     this.jMenu3.setVisible(true);
                     break;
@@ -61,22 +64,21 @@ public final class FrmMDI extends javax.swing.JFrame {
     /**
      * Creates new form FrmMDI
      */
-    public FrmMDI(List listaMenu) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
+    public FrmMDI(List listaMenu) {
         initComponents();
         try {
             setLookAndFeel(ConfigLayout.LookAndFeelDefault.getLookAndFeel());
-
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(FrmMDI.class.getName()).log(Level.SEVERE, null, ex);
         }
         FrmSobre formSobre = new FrmSobre();
         getDesktopPane().add(formSobre);
-        menu1Visivel(listaMenu);
+        checarAcessoAosMenus(listaMenu);
         lblDadosSessao.setText("Olá " + getSessao().get(0).getUser().getNome());
         formSobre.setVisible(true);
     }
 
-    private FrmMDI() {
+    public FrmMDI() {
         super();
 
     }
@@ -87,7 +89,6 @@ public final class FrmMDI extends javax.swing.JFrame {
 
         desktopPane = new javax.swing.JDesktopPane();
         lblDadosSessao = new javax.swing.JLabel();
-        backg = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -110,10 +111,6 @@ public final class FrmMDI extends javax.swing.JFrame {
         lblDadosSessao.setText("Dados da Sessao");
         desktopPane.add(lblDadosSessao);
         lblDadosSessao.setBounds(1050, 10, 170, 30);
-
-        backg.setText("jLabel1");
-        desktopPane.add(backg);
-        backg.setBounds(180, 80, 1070, 590);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("...");
@@ -324,7 +321,6 @@ public final class FrmMDI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel backg;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;

@@ -10,19 +10,28 @@ import pi.controller.Jtable.JtableProduto;
 
 public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
 
-    private CadastrarProduto obj;
+    private CadastrarProduto produto;
     private final JtableProduto instanceJtable;
     private final FrmCadastrarPJ FrmFornecedor;
 
     public FrmCadastrarProd(FrmCadastrarPJ Frm) {
         this.FrmFornecedor = Frm;
-        this.obj = new CadastrarProduto();
+        this.produto = new CadastrarProduto();
         initComponents();
         this.getTxtIdFornecedor().setText(Frm.getTxtID().getText());
         this.getTxtFornecedor().setText(Frm.getTxtRazaoS().getText());
         this.lblTotalDeRegistros.setText(Integer.toString(searchRecordSize(parseInt(Frm.getTxtID().getText()))));
         this.instanceJtable = new JtableProduto(this);
         this.instanceJtable.searchRecord(parseInt(Frm.getTxtID().getText()));
+        this.setVisible(true);
+//        instanceJtable.popularJtable();
+    }
+
+    public FrmCadastrarProd(JtableProduto instanceJtable, FrmCadastrarPJ FrmFornecedor) {
+        this.FrmFornecedor = FrmFornecedor;
+        this.produto = new CadastrarProduto();
+        initComponents();
+        this.instanceJtable = new JtableProduto(this);
         this.setVisible(true);
         instanceJtable.popularJtable();
     }
@@ -425,7 +434,7 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
 
     private void btnInsertProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertProdActionPerformed
         if (!this.getTxtNome().getText().isEmpty()) {
-            getObj().creat(
+            getProduto().creat(
                     parseInt(this.getTxtIdFornecedor().getText()),
                     this.getTxtNome().getText(),
                     this.getCboCategoria().getSelectedItem().toString(),
@@ -447,8 +456,6 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if (!this.txtBuscar.getText().trim().isEmpty()) {
             instanceJtable.searchRecord(this.getTxtBuscar().getText().trim(), parseInt(this.FrmFornecedor.getTxtID().getText().trim()));
-        } else {
-            instanceJtable.popularJtable();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -602,12 +609,12 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
         this.txtFornecedor = txtFornecedor;
     }
 
-    public CadastrarProduto getObj() {
-        return obj;
+    public CadastrarProduto getProduto() {
+        return produto;
     }
 
-    public void setObj(CadastrarProduto obj) {
-        this.obj = obj;
+    public void setProduto(CadastrarProduto obj) {
+        this.produto = obj;
     }
 
     public javax.swing.JButton getBtnInsertProd() {

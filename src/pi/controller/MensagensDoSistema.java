@@ -25,8 +25,8 @@ public class MensagensDoSistema {
         MSG_002_002("Não há dados para montar o grafico", "COD: 002_002"),
         // 000_3_ ERRO
         MSG_003_000("Erro ao escrever dados na tabela", "COD: 003_000");
-        private String codigo;
-        private String menssagem;
+        private final String codigo;
+        private final String menssagem;
 
         SISTEMA(String menssagem, String codigo) {
             this.menssagem = menssagem;

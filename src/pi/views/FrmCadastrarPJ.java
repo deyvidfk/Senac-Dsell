@@ -401,6 +401,11 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
 
         jTabbedDadosCadastrais.addTab("Endereço", jPanel4);
 
+        jScrollPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane2MouseClicked(evt);
+            }
+        });
         jScrollPane2.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 jScrollPane2ComponentAdded(evt);
@@ -569,7 +574,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtBuscar)
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)))
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -653,8 +658,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
         this.getTxtRua().setText(jTableFornecedor.getValueAt(linha_selecionada, 10).toString());
         this.getTxtNumero().setText(jTableFornecedor.getValueAt(linha_selecionada, 11).toString());
         this.getTxtComplemento().setText(jTableFornecedor.getValueAt(linha_selecionada, 12).toString());
-        this.getTxtCep().setText(jTableFornecedor.getValueAt(linha_selecionada, 13).toString());
-
+        this.getTxtID().setText(jTableFornecedor.getValueAt(linha_selecionada, 13).toString());
     }//GEN-LAST:event_jTableFornecedorMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -812,10 +816,15 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtIDActionPerformed
 
     private void btnCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadProdutoActionPerformed
-        FrmCadastrarProd prod = new FrmCadastrarProd(this);
-        getDesktopPane().add(prod);
+        FrmCadastrarProd frmCadastroProduto = new FrmCadastrarProd(this);
+        getDesktopPane().add(frmCadastroProduto);
         moveToBack();
     }//GEN-LAST:event_btnCadProdutoActionPerformed
+
+    private void jScrollPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane2MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCadProduto;

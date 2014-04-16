@@ -17,7 +17,7 @@ public class CadastrarLogin extends DaoLogin {
         try {
             if (isValid(login)) {
                 for (int i = 0; i < getLogin().size(); i++) {
-                    if (getLogin().get(i).getId() == login.getId()) {
+                    if (getLogin().get(i).getId().equals(login.getId())) {
                         DaoLogin.getLogin().get(i).setUsername(login.getUsername());
                         DaoLogin.getLogin().get(i).setPass(login.getPass());
                         DaoLogin.getLogin().get(i).setModulo(login.getModulo());

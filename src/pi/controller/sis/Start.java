@@ -13,7 +13,7 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 import pi.views.FrmAutenticaLogin;
 
-public class Start {
+public final class Start {
 
     /**
      * @param args the commancreatConfigDefault line arguments
@@ -72,6 +72,7 @@ public class Start {
                         FrmLogin.setVisible(true);
                         FrmLogin.setLocationRelativeTo(null);
                         dispose();
+
                     } else {
                         us.criaUsuarioDefault();
                     }

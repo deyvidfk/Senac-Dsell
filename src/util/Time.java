@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package util;
 
 import java.text.SimpleDateFormat;
@@ -9,10 +5,6 @@ import java.util.Date;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 
-/**
- *
- * @author User-001
- */
 public class Time {
 
     public static String getDate() {

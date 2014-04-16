@@ -21,7 +21,7 @@ public class DaoLogin implements DaoInterface {
         this.FILE_XML = "dsell-db-security.xml";
         this.XSTREAM = new XStream();
         this.CONEXAO_DB = new Source();
-        DaoLogin._login = readXml();
+        _login = readXml();
     }
 
     @Override

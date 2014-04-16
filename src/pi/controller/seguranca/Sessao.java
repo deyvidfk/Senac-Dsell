@@ -17,10 +17,10 @@ import static util.Time.getTime;
 
 public class Sessao {
 
-    private static ModelPessoaFisica user;
-    private static ModelSessao sessao;
+    private ModelPessoaFisica user;
+    private ModelSessao sessao;
     private static DaoSessao dao;
-    private static List<ModelSessao> list;
+    private final List<ModelSessao> list;
     private final ModelLogin dataLogin;
 
     public Sessao(ModelLogin login) {
@@ -45,7 +45,7 @@ public class Sessao {
             frmMdi.pack();
             frmMdi.setVisible(true);
             frmMdi.setLocationRelativeTo(null);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | IllegalArgumentException | InvocationTargetException ex) {
+        } catch (IllegalArgumentException ex) {
             getLogger(Sessao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -10,10 +10,6 @@ import javax.annotation.Resource;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 
-/**
- *
- * @author deyvid.souza
- */
 public class RegexTest {
 
     public static boolean TestarRegex(Regex expressao, String str) {
