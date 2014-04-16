@@ -19,7 +19,7 @@ import util.jTable.ModelJTable;
 public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
 
     private final CadastrarFornecedor instanceControllerCadastrarFornecedor;
-    private final JtableFornecedor instanceControllerJtable;
+    private JtableFornecedor instanceControllerJtable;
     private int jTableLinhaSelecionada = -1;
     private List<pi.model.ModelPessoaJuridica> fornecedor;
     private ModelJTable model;
@@ -460,6 +460,11 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
+        btnBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnBuscarKeyPressed(evt);
+            }
+        });
 
         btnInsertEmpresa.setText("Salvar");
         btnInsertEmpresa.addActionListener(new java.awt.event.ActionListener() {
@@ -483,6 +488,11 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
         });
 
         btnProximoRegistro.setText(">");
+        btnProximoRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProximoRegistroMouseClicked(evt);
+            }
+        });
         btnProximoRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProximoRegistroActionPerformed(evt);
@@ -662,7 +672,9 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTableFornecedorMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        if (instanceControllerJtable == null) {
+            instanceControllerJtable = new JtableFornecedor(this);
+        }
         if (!this.getTxtBuscar().getText().trim().isEmpty()) {
             instanceControllerJtable.searchRecord(this.getTxtBuscar().getText());
         } else {
@@ -746,31 +758,58 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDeletePJActionPerformed
 
     private void txtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyPressed
+        if (instanceControllerJtable == null) {
+            instanceControllerJtable = new JtableFornecedor(this);
+        }
+        if (!this.getTxtBuscar().getText().trim().isEmpty()) {
+            instanceControllerJtable.searchRecord(this.getTxtBuscar().getText());
+        } else {
+            instanceControllerJtable.popularJtable();
+            getjTableFornecedor().setBackground(Color.white);
+        }
     }//GEN-LAST:event_txtBuscarKeyPressed
 
     private void btnProximoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoRegistroActionPerformed
-    }//GEN-LAST:event_btnProximoRegistroActionPerformed
+        int indiceAtual = this.getjTableFornecedor().getSelectedRow();
+        int proximoIndice = indiceAtual + 1;
 
-    private void btnRegistroAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroAnteriorActionPerformed
-
-        if (getFornecedor().size() > 0) {
-            this.getBtnProximoRegistro().setEnabled(true);
-            this.getBtnLinkProduto().setVisible(true);
+        if (instanceControllerCadastrarFornecedor.numeroDeRegistros() > 0) {
+            this.getBtnRegistroAnterior().setEnabled(true);
             this.getBtnInsertEmpresa().setVisible(false);
             this.getBtnUpdateEmpresa().setVisible(true);
             this.getBtnUpdateEmpresa().setEnabled(true);
             this.getBtnDeletePJ().setVisible(true);
             this.getBtnDeletePJ().setEnabled(true);
-            int ProximoIndice = parseInt(getTxtID().getText()) - 1;
-            if (ProximoIndice >= 0) {
-                instanceControllerJtable.moveRecord(ProximoIndice);
-                jTableLinhaSelecionada--;
-                atualizarLinhaSelecionada();
-                if (ProximoIndice <= 0) {
+            if (proximoIndice > 0) {
+                getjTableFornecedor().convertRowIndexToModel(proximoIndice);
+                instanceControllerJtable.moveRecord(proximoIndice);
+                this.getjTableFornecedor().setRowSelectionInterval(proximoIndice, proximoIndice);
+                if (proximoIndice == getjTableFornecedor().getRowCount() - 1) {
+                    this.getBtnProximoRegistro().setEnabled(false);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_btnProximoRegistroActionPerformed
+
+    private void btnRegistroAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroAnteriorActionPerformed
+
+        int indiceAtual = this.getjTableFornecedor().getSelectedRow();
+        int indiceAnterior = indiceAtual - 1;
+        if (instanceControllerCadastrarFornecedor.numeroDeRegistros() > 0) {
+            this.getBtnProximoRegistro().setEnabled(true);
+            this.getBtnInsertEmpresa().setVisible(false);
+            this.getBtnUpdateEmpresa().setVisible(true);
+            this.getBtnUpdateEmpresa().setEnabled(true);
+            this.getBtnDeletePJ().setVisible(true);
+            this.getBtnDeletePJ().setEnabled(true);
+            if (indiceAnterior >= 0) {
+                instanceControllerJtable.moveRecord(indiceAnterior);
+                this.getjTableFornecedor().setRowSelectionInterval(indiceAnterior, indiceAnterior);
+                if (indiceAnterior == 0) {
                     this.getBtnRegistroAnterior().setEnabled(false);
                 }
             }
-
         }
     }//GEN-LAST:event_btnRegistroAnteriorActionPerformed
 
@@ -824,6 +863,22 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
     private void jScrollPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jScrollPane2MouseClicked
+
+    private void btnProximoRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProximoRegistroMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProximoRegistroMouseClicked
+
+    private void btnBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarKeyPressed
+        if (instanceControllerJtable == null) {
+            instanceControllerJtable = new JtableFornecedor(this);
+        }
+        if (!this.getTxtBuscar().getText().trim().isEmpty()) {
+            instanceControllerJtable.searchRecord(this.getTxtBuscar().getText());
+        } else {
+            instanceControllerJtable.popularJtable();
+            getjTableFornecedor().setBackground(Color.white);
+        }
+    }//GEN-LAST:event_btnBuscarKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

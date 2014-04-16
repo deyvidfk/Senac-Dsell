@@ -120,16 +120,14 @@ public class JtableFornecedor {
     public void searchRecord(String Output) {
         if (!Output.isEmpty()) {
             String txtOutput = Output.toUpperCase(Locale.ROOT);
-            ArrayList<ModelPessoaJuridica> ListaAuxiliar = new ArrayList<>(getFornecedor());
-            ListaAuxiliar.clear();
+            ArrayList<ModelPessoaJuridica> listaAuxiliar = new ArrayList<>();
+
             for (int index = 0; index < getFornecedor().size(); index++) {
-                if (getFornecedor().get(index).getCnpj().toUpperCase(Locale.ROOT).contains(txtOutput) || getFornecedor().get(index).getCnpj().toUpperCase(Locale.ROOT).contains(txtOutput)) {
-                    if (getFornecedor().size() > 0) {
-                        ListaAuxiliar.add(getFornecedor().get(index));
-                    }
+                if (getFornecedor().get(index).getNome().toUpperCase(Locale.ROOT).contains(txtOutput) || getFornecedor().get(index).getCnpj().toUpperCase(Locale.ROOT).contains(txtOutput)) {
+                    listaAuxiliar.add(getFornecedor().get(index));
                 }
             }
-            setModelJtable(new ModelJTable(ListaAuxiliar));
+            setModelJtable(new ModelJTable(listaAuxiliar));
             this.getViewFrm().getjTableFornecedor().setModel(getModelJtable());
         }
     }

@@ -23,6 +23,10 @@ public class CadastrarFornecedor extends DaoPessoaJuridica {
     public CadastrarFornecedor() {
     }
 
+    public int numeroDeRegistros() {
+        return getFornecedor().size();
+    }
+
     public boolean creat(ModelPessoaJuridica pj) {
         try {
             int newId = (getFornecedor().size() - 1) + 1;

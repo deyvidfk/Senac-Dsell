@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package util.jTable;
 
 import java.lang.reflect.InvocationTargetException;
@@ -14,10 +10,6 @@ import javax.annotation.Resource;
 import javax.swing.table.AbstractTableModel;
 import pi.controller.MensagensDoSistema;
 
-/**
- *
- * @author Usuário
- */
 public class ModelJTable extends AbstractTableModel {
 
     private static final long serialVersionUID = 1L;
