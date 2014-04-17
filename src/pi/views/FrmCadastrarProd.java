@@ -20,9 +20,10 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
         initComponents();
         this.getTxtIdFornecedor().setText(Frm.getTxtID().getText());
         this.getTxtFornecedor().setText(Frm.getTxtRazaoS().getText());
-        this.lblTotalDeRegistros.setText(Integer.toString(searchRecordSize(parseInt(Frm.getTxtID().getText()))));
+        Integer totalDeRegistros = searchRecordSize(Frm.getTxtID().getText());
+        this.lblTotalDeRegistros.setText(totalDeRegistros.toString());
         this.instanceJtable = new JtableProduto(this);
-        this.instanceJtable.searchRecord(parseInt(Frm.getTxtID().getText()));
+        this.instanceJtable.searchRecord(Frm.getTxtID().getText());
         this.setVisible(true);
 //        instanceJtable.popularJtable();
     }
@@ -435,7 +436,7 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
     private void btnInsertProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertProdActionPerformed
         if (!this.getTxtNome().getText().isEmpty()) {
             getProduto().creat(
-                    parseInt(this.getTxtIdFornecedor().getText()),
+                    this.getTxtIdFornecedor().getText(),
                     this.getTxtNome().getText(),
                     this.getCboCategoria().getSelectedItem().toString(),
                     this.getTxtMarca().getText(),
@@ -450,12 +451,12 @@ public final class FrmCadastrarProd extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnInsertProdActionPerformed
 
     private void cmbFiltroCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFiltroCategoriaActionPerformed
-        instanceJtable.searchRecordFiltro(this.getCboCategoria().getSelectedItem().toString(), parseInt(this.FrmFornecedor.getTxtID().getText()));
+        instanceJtable.searchRecordFiltro(this.getCboCategoria().getSelectedItem().toString(), this.FrmFornecedor.getTxtID().getText());
     }//GEN-LAST:event_cmbFiltroCategoriaActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if (!this.txtBuscar.getText().trim().isEmpty()) {
-            instanceJtable.searchRecord(this.getTxtBuscar().getText().trim(), parseInt(this.FrmFornecedor.getTxtID().getText().trim()));
+            instanceJtable.searchRecord(this.getTxtBuscar().getText().trim(), this.FrmFornecedor.getTxtID().getText().trim());
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 

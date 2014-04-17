@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pi.views;
 
 import static java.awt.EventQueue.invokeLater;
 import java.io.UnsupportedEncodingException;
-import static java.lang.Integer.parseInt;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +16,6 @@ import static pi.controller.seguranca.Sessao.getSessao;
 import pi.model.ModelLogin;
 import pi.views.system.Menu;
 
-/**
- *
- * @author Deyvid
- */
 public class FrmGerenciarModuloAcessoAoSistema extends javax.swing.JFrame {
 
     private static FrmGerenciarModuloAcessoAoSistema instancia;

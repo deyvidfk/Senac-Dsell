@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.UUID.randomUUID;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -18,13 +17,14 @@ import static pi.dao.DaoPessoaFisica.getUsuario;
 import pi.model.ModelLogin;
 import pi.model.ModelPessoaFisica;
 import pi.views.system.Menu;
+import util.GerarID;
 
 public class UserDefault extends DaoPessoaFisica {
 
     private static final Logger LOG = getLogger(UserDefault.class.getName());
     private final String USER_LOGIN_DEFAULT = "adm";
     private final String USER_SENHA_DEFAULT = "adm";
-    private final String USER_ID_DEFAULT = randomUUID().toString();
+    private final String USER_ID_DEFAULT = new GerarID().getId();
 
     static {
         System.out.println(LOG.getName());

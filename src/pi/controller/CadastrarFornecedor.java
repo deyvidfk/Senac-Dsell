@@ -10,6 +10,7 @@ import static pi.controller.CadastrarProduto.searchRecordSize;
 import pi.controller.Jtable.JtableFornecedor;
 import pi.dao.DaoPessoaJuridica;
 import pi.model.ModelPessoaJuridica;
+import util.GerarID;
 import static util.ValidaForm.isValid;
 
 public class CadastrarFornecedor extends DaoPessoaJuridica {
@@ -29,7 +30,7 @@ public class CadastrarFornecedor extends DaoPessoaJuridica {
 
     public boolean creat(ModelPessoaJuridica pj) {
         try {
-            int newId = (getFornecedor().size() - 1) + 1;
+            String newId = new GerarID().getId();
             pj.setId(newId);
             if (isValid(pj)) {
                 getFornecedor().add(pj);
@@ -49,13 +50,13 @@ public class CadastrarFornecedor extends DaoPessoaJuridica {
      *
      * @param id
      */
-    public void delete(int id) {
+    public void delete(String id) {
         try {
             if (searchRecordSize(id) == 0) {
-                deleteXml(id);
+                //   deleteXml(id);
                 /*Exclui o registro da tabela.*/
                 JtableFornecedor table = new JtableFornecedor();
-                table.deleteRow(id);
+                //  table.deleteRow(id);
             } else {
                 /* Exceção!
                  * As regras de negocio do sistema não permitiram excluir o registro, caso contenha dependências. */
@@ -76,7 +77,7 @@ public class CadastrarFornecedor extends DaoPessoaJuridica {
         return false;
     }
 
-    public ModelPessoaJuridica passagem(int id, String txtCnpj, String txtRazaoSocial, String txtSetorDeAtuacao, String txtTelefone, String txtEmail, String txtSite, String txtCidade, String txtEstado, String txtPais, String txtBairro, String txtRua, String txtNumero, String txtComplemento, String txtCep) {
+    public ModelPessoaJuridica passagem(String id, String txtCnpj, String txtRazaoSocial, String txtSetorDeAtuacao, String txtTelefone, String txtEmail, String txtSite, String txtCidade, String txtEstado, String txtPais, String txtBairro, String txtRua, String txtNumero, String txtComplemento, String txtCep) {
         ModelPessoaJuridica instancePJ = new ModelPessoaJuridica();
         instancePJ.setId(id);
         instancePJ.setCnpj(txtCnpj);

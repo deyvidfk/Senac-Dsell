@@ -1,16 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pi.views.system;
 
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 
-/**
- *
- * @author deyvid.fk
- */
 public class FrmSobre extends javax.swing.JInternalFrame {
 
     /**

@@ -23,10 +23,6 @@ import static util.Chronometer.start;
 import static util.Chronometer.stop;
 import static util.Time.getDate;
 
-/**
- *
- * @author deyvid.fk
- */
 public class FrmDesepenhoDoSistema extends javax.swing.JInternalFrame {
 
     private static final TesteDeDesepenhoDoSistema TESTE_SISTEMA = new TesteDeDesepenhoDoSistema();
