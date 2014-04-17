@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <Properties>
+    <Property name="closable" type="boolean" value="true"/>
+    <Property name="iconifiable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="true"/>
+  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
@@ -29,7 +35,7 @@
                   <Component id="btnInsertUsuario" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnCadLogin" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="87" max="32767" attributes="0"/>
+              <EmptySpace pref="266" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -84,7 +90,7 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="27" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="259" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
