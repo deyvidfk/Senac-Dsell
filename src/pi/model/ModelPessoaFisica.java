@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pi.model;
 
 import java.util.logging.Logger;
@@ -7,6 +11,10 @@ import util.anotacao.RegularExpressionValidator;
 import util.anotacao.RequiredValidation;
 import util.jTable.Tabela;
 
+/**
+ * @author deyvid.fk
+ * @version 2.0
+ */
 public class ModelPessoaFisica implements InterfaceModelContato, InterfaceModelEndereco {
 
     private String idUser;

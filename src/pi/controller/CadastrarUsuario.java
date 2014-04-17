@@ -1,5 +1,6 @@
 package pi.controller;
 
+import static java.util.UUID.randomUUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
@@ -8,7 +9,6 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import pi.dao.DaoPessoaFisica;
 import pi.model.ModelPessoaFisica;
-import util.GerarID;
 import static util.ValidaForm.isValid;
 
 public class CadastrarUsuario extends DaoPessoaFisica {
@@ -19,7 +19,7 @@ public class CadastrarUsuario extends DaoPessoaFisica {
 
         try {
 
-            String newId = new GerarID().getId();
+            String newId = randomUUID().toString();
             ModelPessoaFisica pj = new ModelPessoaFisica();
             pj.setId(newId);
             pj.setNome(cnpj);

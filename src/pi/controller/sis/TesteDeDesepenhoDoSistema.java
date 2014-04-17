@@ -16,8 +16,11 @@ import static pi.dao.DaoPessoaFisica.getUsuario;
 import static pi.dao.DaoPessoaJuridica.getFornecedor;
 import pi.model.ModelPessoaJuridica;
 import util.GeraString;
-import util.GerarID;
 
+/**
+ *
+ * @author deyvid.fk
+ */
 public class TesteDeDesepenhoDoSistema {
 
     private static final GeraString instanceControllerGerarString = new GeraString();
@@ -72,7 +75,7 @@ public class TesteDeDesepenhoDoSistema {
             instanceControllerCadastrarFornecedor = new CadastrarFornecedor();
             for (int i = 0; i <= valor; i++) {
                 ModelPessoaJuridica passagem = instanceControllerCadastrarFornecedor.passagem(
-                        new GerarID().getId(),
+                        -1,
                         instanceControllerGerarString.getCnpj(),
                         instanceControllerGerarString.getEmpresaQualquer(),
                         instanceControllerGerarString.getStringQualquer(),
@@ -102,12 +105,10 @@ public class TesteDeDesepenhoDoSistema {
         try {
             if (getFornecedor() != null && getFornecedor().size() > 0) {
                 Random ramdom = new Random();
-
                 instanceControllerCadastrarPrdoduto = new CadastrarProduto();
                 for (int i = 0; i <= valor; i++) {
-                    int id = ramdom.nextInt(getFornecedor().size());
                     instanceControllerCadastrarPrdoduto.creat(
-                            getFornecedor().get(id).getId(),
+                            ramdom.nextInt(getFornecedor().size()),
                             instanceControllerGerarString.getNomePordutoQualquer(),
                             instanceControllerGerarString.getStringQualquer(),
                             instanceControllerGerarString.getStringQualquer(),

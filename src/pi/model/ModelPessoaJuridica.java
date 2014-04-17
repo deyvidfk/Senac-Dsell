@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pi.model;
 
 import java.util.logging.Logger;
@@ -7,9 +11,15 @@ import util.anotacao.RegularExpressionValidator;
 import util.anotacao.RequiredValidation;
 import util.jTable.Tabela;
 
+/**
+ *
+ * @author deyvid.fk
+ */
+// If you want you can define the order in which the fields are written
+// Optional
 public class ModelPessoaJuridica implements InterfaceModelContato, InterfaceModelEndereco {
 
-    private String id;
+    private int id;
     private String nome;
     private String cnpj;
     private String setorDeAtuacao;
@@ -66,14 +76,14 @@ public class ModelPessoaJuridica implements InterfaceModelContato, InterfaceMode
     }
 
     @Tabela(Coluna = "ID", Indice = 13)
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
-
-        this.id = id;
-
+    public void setId(int id) {
+        if (id >= 0) {
+            this.id = id;
+        }
     }
 
     public int getQtdProduto() {

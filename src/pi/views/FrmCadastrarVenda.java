@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pi.views;
 
 import static java.lang.Integer.parseInt;
@@ -5,6 +9,10 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import pi.controller.Jtable.JtableVenda;
 
+/**
+ *
+ * @author deyvid.fk
+ */
 public class FrmCadastrarVenda extends javax.swing.JInternalFrame {
 
     private final JtableVenda instanceControllerJtable;

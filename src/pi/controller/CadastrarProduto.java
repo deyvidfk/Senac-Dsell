@@ -32,11 +32,11 @@ public class CadastrarProduto {
         return getProduto().get(id).getNome();
     }
 
-    public static int searchRecordSize(String idFornecedor) {
+    public static int searchRecordSize(int idFornecedor) {
         int cont = 0;
         if (getProduto() != null && !getProduto().isEmpty()) {
             for (int i = 0; i < getProduto().size(); i++) {
-                if (getProduto().get(i).getIdFornecedor().equals(idFornecedor)) {
+                if (getProduto().get(i).getIdFornecedor() == idFornecedor) {
                     cont++;
                 }
             }
@@ -45,7 +45,7 @@ public class CadastrarProduto {
         return cont;
     }
 
-    public boolean creat(String txtIdFornecedor, String txtNome, String txtCategoria, String txtMarca, String txtModelo, String txtTipo, String txtCor, Double txtPreco, Integer txtDesconto, String txtGarantia) {
+    public boolean creat(int txtIdFornecedor, String txtNome, String txtCategoria, String txtMarca, String txtModelo, String txtTipo, String txtCor, Double txtPreco, Integer txtDesconto, String txtGarantia) {
         try {
             ModelProduto prod = new ModelProduto();
             int newId = (getProduto().size() - 1) + 1;
@@ -90,11 +90,11 @@ public class CadastrarProduto {
         DAO_PROD.updateXml(getProduto());
     }
 
-    public List<ModelProduto> searchRecord(String idFornecedor) {
+    public List<ModelProduto> searchRecord(int idFornecedor) {
         CadastrarProduto.listaAuxiliar = new ArrayList<>();
         try {
             for (int i = 0; i < getProduto().size(); i++) {
-                if (getProduto().get(i).getIdFornecedor().equals(idFornecedor)) {
+                if (getProduto().get(i).getIdFornecedor() == idFornecedor) {
                     CadastrarProduto.listaAuxiliar.add(getProduto().get(i));
                 }
             }
@@ -105,13 +105,13 @@ public class CadastrarProduto {
         return unmodifiableList(CadastrarProduto.listaAuxiliar);
     }
 
-    public List<ModelProduto> searchRecord(String Output, String idFornecedor) {
+    public List<ModelProduto> searchRecord(String Output, int idFornecedor) {
         try {
             if (Output != null && !Output.isEmpty()) {
                 String txtOutput = Output.toUpperCase(Locale.ROOT);
                 CadastrarProduto.listaAuxiliar = new ArrayList<>();
                 for (int i = 0; i < getProduto().size(); i++) {
-                    if (getProduto().get(i).getNome().toUpperCase(Locale.ROOT).contains(txtOutput) && getProduto().get(i).getIdFornecedor().equals(idFornecedor)) {
+                    if (getProduto().get(i).getNome().toUpperCase(Locale.ROOT).contains(txtOutput) && getProduto().get(i).getIdFornecedor() == idFornecedor) {
                         CadastrarProduto.listaAuxiliar.add(getProduto().get(i));
                     }
                 }
@@ -124,13 +124,13 @@ public class CadastrarProduto {
         return unmodifiableList(CadastrarProduto.listaAuxiliar);
     }
 
-    public List<ModelProduto> searchRecordFiltro(String Output, String idFornecedor) {
+    public List<ModelProduto> searchRecordFiltro(String Output, int idFornecedor) {
         try {
             if (Output != null && !Output.isEmpty()) {
                 String txtOutput = Output.toUpperCase(Locale.ROOT);
                 CadastrarProduto.listaAuxiliar = new ArrayList<>();
                 for (int i = 0; i < getProduto().size(); i++) {
-                    if (getProduto().get(i).getCategoria().toUpperCase(Locale.ROOT).equals(txtOutput) && getProduto().get(i).getIdFornecedor().equals(idFornecedor)) {
+                    if (getProduto().get(i).getCategoria().toUpperCase(Locale.ROOT).equals(txtOutput) && getProduto().get(i).getIdFornecedor() == idFornecedor) {
                         CadastrarProduto.listaAuxiliar.add(getProduto().get(i));
                     }
                 }

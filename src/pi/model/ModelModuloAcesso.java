@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pi.model;
 
 import static java.util.Collections.unmodifiableList;
@@ -6,6 +10,10 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import pi.views.system.Menu;
 
+/**
+ *
+ * @author User-001
+ */
 public class ModelModuloAcesso {
 
     private String idUser;

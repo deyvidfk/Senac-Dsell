@@ -6,6 +6,10 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import pi.model.ModelProduto;
 
+/**
+ *
+ * @author deyvid.fk
+ */
 public final class DaoProduto implements DaoInterface {
 
     private static List<ModelProduto> _produto;

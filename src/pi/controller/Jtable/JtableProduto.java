@@ -100,7 +100,7 @@ public class JtableProduto {
 
     }
 
-    public void searchRecord(String Output, String idFornecedor) {
+    public void searchRecord(String Output, int idFornecedor) {
         try {
             if (!Output.isEmpty()) {
                 produto = new CadastrarProduto();
@@ -113,7 +113,7 @@ public class JtableProduto {
 
     }
 
-    public void searchRecordFiltro(String Output, String idFornecedor) {
+    public void searchRecordFiltro(String Output, int idFornecedor) {
         produto = new CadastrarProduto();
         try {
             if (!Output.isEmpty()) {
@@ -126,7 +126,7 @@ public class JtableProduto {
 
     }
 
-    public void searchRecord(String idFornecedor) {
+    public void searchRecord(int idFornecedor) {
         produto = new CadastrarProduto();
         try {
             ModelJTable tabela = new ModelJTable(produto.searchRecord(idFornecedor));

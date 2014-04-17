@@ -1,7 +1,9 @@
 package pi.controller.seguranca;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.UUID.randomUUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
@@ -11,7 +13,6 @@ import pi.model.ModelLogin;
 import pi.model.ModelPessoaFisica;
 import pi.model.ModelSessao;
 import pi.views.system.FrmMDI;
-import util.GerarID;
 import static util.Time.getTime;
 
 public class Sessao {
@@ -32,7 +33,7 @@ public class Sessao {
         CadastrarUsuario cad = new CadastrarUsuario();
         user = cad.getUserPeloId(0);
         sessao = new ModelSessao();
-        sessao.setIdSessao(new GerarID().getId());
+        sessao.setIdSessao(randomUUID().toString());
         sessao.setUser(user);
         sessao.setHora(getTime());
         list.add(sessao);

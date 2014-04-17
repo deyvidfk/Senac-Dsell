@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pi.model;
 
 import static java.lang.Math.floor;
@@ -5,6 +9,10 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import util.jTable.Tabela;
 
+/**
+ *
+ * @author deyvid.fk
+ */
 public class ModelVenda {
 
     private int id;

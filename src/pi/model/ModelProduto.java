@@ -1,13 +1,21 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pi.model;
 
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import util.jTable.Tabela;
 
+/**
+ *
+ * @author deyvid.fk
+ */
 public class ModelProduto {
 
     private int id;
-    private String idFornecedor;
+    private int idFornecedor;
     private String categoria;
     private String nome;
     private String descricao;
@@ -190,14 +198,14 @@ public class ModelProduto {
         }
     }
 
-    public String getIdFornecedor() {
+    public int getIdFornecedor() {
         return idFornecedor;
     }
 
-    public void setIdFornecedor(String idFornecedor) {
-
-        this.idFornecedor = idFornecedor;
-
+    public void setIdFornecedor(int idFornecedor) {
+        if (idFornecedor >= 0) {
+            this.idFornecedor = idFornecedor;
+        }
     }
 
     public String getCategoria() {

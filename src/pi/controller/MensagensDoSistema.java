@@ -1,5 +1,13 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pi.controller;
 
+/**
+ *
+ * @author deyvid.souza
+ */
 public class MensagensDoSistema {
 
     public enum SISTEMA {
