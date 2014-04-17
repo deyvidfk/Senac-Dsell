@@ -2,7 +2,6 @@ package pi.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.UUID.randomUUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
@@ -13,6 +12,7 @@ import static pi.dao.DaoVenda.getVENDAS;
 import pi.model.ModelVenda;
 import static util.GeraString.getAno;
 import static util.GeraString.getMesDoAno;
+import util.GerarID;
 import static util.Time.getDate;
 
 public class CadastrarVenda extends DaoVenda {
@@ -54,7 +54,7 @@ public class CadastrarVenda extends DaoVenda {
             ModelVenda instancePJ = new ModelVenda();
             int newId = (getVENDAS().size() - 1) + 1;
             instancePJ.setId(newId);
-            instancePJ.Guid = randomUUID().toString();
+            instancePJ.Guid = new GerarID().getId();
             instancePJ.setIdProduto(txtIdProduto);
             instancePJ.setIdComprador(txtIdComprador);
             instancePJ.setPreco(txtPreco);

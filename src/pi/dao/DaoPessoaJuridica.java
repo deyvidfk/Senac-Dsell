@@ -27,7 +27,7 @@ public class DaoPessoaJuridica implements DaoInterface {
             for (int i = 0; i < getFornecedor().size(); i++) {
                 cont = 0;
                 for (int j = 0; j < getProduto().size(); j++) {
-                    if (getFornecedor().get(i).getId() == getProduto().get(j).getIdFornecedor()) {
+                    if (getFornecedor().get(i).getId().equals(getProduto().get(j).getIdFornecedor())) {
                         if (map.containsKey(i)) {
                             map.remove(i);
                             map.put(i, cont++);
@@ -84,7 +84,7 @@ public class DaoPessoaJuridica implements DaoInterface {
         for (int i = 0; i < getFornecedor().size(); i++) {
             cont = 0;
             for (int j = 0; j < getProduto().size(); j++) {
-                if (getFornecedor().get(i).getId() == getProduto().get(j).getIdFornecedor()) {
+                if (getFornecedor().get(i).getId().equals(getProduto().get(j).getIdFornecedor())) {
                     if (map.containsKey(i)) {
                         map.remove(i);
                         map.put(i, cont++);

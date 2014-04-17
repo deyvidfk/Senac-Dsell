@@ -1,13 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pi.model;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
-import static java.util.Collections.unmodifiableList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,10 +15,6 @@ import util.Regex;
 import util.anotacao.RegularExpressionValidator;
 import util.anotacao.RequiredValidation;
 
-/**
- *
- * @author deyvid.souza
- */
 public class ModelLogin {
 
     private String id;

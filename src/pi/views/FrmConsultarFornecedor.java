@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pi.views;
 
 import java.awt.Graphics;
@@ -25,10 +21,6 @@ import static util.Chronometer.start;
 import static util.Chronometer.stop;
 import static util.Time.getTime;
 
-/**
- *
- * @author deyvid.fasouza
- */
 public class FrmConsultarFornecedor extends javax.swing.JInternalFrame {
 
     public FrmConsultarFornecedor() {

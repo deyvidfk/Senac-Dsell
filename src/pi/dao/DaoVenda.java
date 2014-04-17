@@ -8,10 +8,6 @@ import static java.util.logging.Logger.getLogger;
 import static pi.dao.DaoVenda.getVENDAS;
 import pi.model.ModelVenda;
 
-/**
- *
- * @author deyvid.fk
- */
 public class DaoVenda implements DaoInterface {
 
     private final static Source CONEXAO_DB = new Source();

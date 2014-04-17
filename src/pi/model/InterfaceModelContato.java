@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package pi.model;
 
-/**
- *
- * @author deyvid.souza
- */
 public interface InterfaceModelContato {
 
     String getEmail();

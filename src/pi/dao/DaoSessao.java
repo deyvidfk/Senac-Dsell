@@ -6,10 +6,6 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import pi.model.ModelSessao;
 
-/**
- *
- * @author User-001
- */
 public final class DaoSessao implements DaoInterface {
 
     private static List<ModelSessao> _sessao;

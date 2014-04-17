@@ -686,7 +686,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
     private void btnInsertEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertEmpresaActionPerformed
 
         if (!this.getTxtRazaoS().getText().isEmpty() && !this.getTxtCnpj().getText().isEmpty() && !this.getTxtEmail().getText().isEmpty()) {
-            ModelPessoaJuridica passagem = instanceControllerCadastrarFornecedor.passagem(0, this.getTxtCnpj().getText(),
+            ModelPessoaJuridica passagem = instanceControllerCadastrarFornecedor.passagem(null, this.getTxtCnpj().getText(),
                     this.getTxtRazaoS().getText(),
                     this.getTxtSetorAt().getText(),
                     this.getTxtTelefone().getText(),
@@ -714,7 +714,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
 
     private void btnUpdateEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateEmpresaActionPerformed
         ModelPessoaJuridica passagem = instanceControllerCadastrarFornecedor.passagem(
-                parseInt(getTxtID().getText()),
+                getTxtID().getText(),
                 this.getTxtCnpj().getText(),
                 this.getTxtRazaoS().getText(),
                 this.getTxtSetorAt().getText(),
@@ -746,7 +746,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
         int selectedOption = showConfirmDialog(null, "Deseja realmente excluir este cadastro?", "Sistema informa:", JOptionPane.YES_NO_OPTION);
         if (selectedOption == JOptionPane.YES_NO_OPTION) {
             int linha = jTableFornecedor.getSelectedRow();
-            instanceControllerCadastrarFornecedor.delete(linha); // Deleta o registro do xml.
+            //instanceControllerCadastrarFornecedor.delete(linha); // Deleta o registro do xml.
             resetForm();
             /*// Visibilidade dos botões.*/
             this.getBtnInsertEmpresa().setVisible(true);
