@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import static javax.swing.JOptionPane.showMessageDialog;
-import com.senac.pi.dao.DaoProduto;
-import com.senac.pi.model.ModelProduto;
+import com.senac.pi.model.dao.DaoProduto;
+import com.senac.pi.model.vo.ModelProduto;
 import static com.senac.util.ValidaForm.isValid;
 
 public class CadastrarProduto {

@@ -1,4 +1,4 @@
-package com.senac.pi.dao;
+package com.senac.pi.model.dao;
 
 import java.util.List;
 

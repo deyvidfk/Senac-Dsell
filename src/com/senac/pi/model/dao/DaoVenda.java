@@ -1,12 +1,12 @@
-package com.senac.pi.dao;
+package com.senac.pi.model.dao;
 
 import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import static com.senac.pi.dao.DaoVenda.getVENDAS;
-import com.senac.pi.model.ModelVenda;
+import static com.senac.pi.model.dao.DaoVenda.getVENDAS;
+import com.senac.pi.model.vo.ModelVenda;
 
 public class DaoVenda implements DaoInterface {
 

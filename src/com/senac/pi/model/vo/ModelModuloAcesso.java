@@ -1,4 +1,4 @@
-package com.senac.pi.model;
+package com.senac.pi.model.vo;
 
 import static java.util.Collections.unmodifiableList;
 import java.util.List;

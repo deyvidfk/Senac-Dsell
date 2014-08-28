@@ -1,4 +1,4 @@
-package com.senac.pi.model;
+package com.senac.pi.model.vo;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import static javax.swing.JOptionPane.showMessageDialog;
-import com.senac.pi.dao.DaoLogin;
-import com.senac.pi.model.ModelLogin;
+import com.senac.pi.model.dao.DaoLogin;
+import com.senac.pi.model.vo.ModelLogin;
 import static com.senac.util.ValidaForm.isValid;
 
 public class CadastrarLogin extends DaoLogin {

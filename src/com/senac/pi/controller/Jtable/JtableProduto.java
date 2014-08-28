@@ -8,7 +8,7 @@ import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import com.senac.pi.controller.CadastrarProduto;
 import static com.senac.pi.controller.CadastrarProduto.getProduto;
-import com.senac.pi.model.ModelProduto;
+import com.senac.pi.model.vo.ModelProduto;
 import com.senac.pi.views.FrmCadastrarProd;
 import com.senac.util.jTable.CellRenderer;
 import com.senac.util.jTable.ModelJTable;

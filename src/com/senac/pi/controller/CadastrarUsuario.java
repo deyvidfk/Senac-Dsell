@@ -6,8 +6,8 @@ import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
-import com.senac.pi.dao.DaoPessoaFisica;
-import com.senac.pi.model.ModelPessoaFisica;
+import com.senac.pi.model.dao.DaoPessoaFisica;
+import com.senac.pi.model.vo.ModelPessoaFisica;
 import com.senac.util.GerarID;
 import static com.senac.util.ValidaForm.isValid;
 

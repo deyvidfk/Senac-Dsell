@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import com.senac.pi.controller.CadastrarVenda;
-import static com.senac.pi.dao.DaoVenda.getVENDAS;
+import static com.senac.pi.model.dao.DaoVenda.getVENDAS;
 import com.senac.pi.views.FrmCadastrarVenda;
 import com.senac.util.jTable.CellRenderer;
 import com.senac.util.jTable.ModelJTable;

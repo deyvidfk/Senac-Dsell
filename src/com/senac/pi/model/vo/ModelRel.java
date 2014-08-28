@@ -1,4 +1,4 @@
-package com.senac.pi.model;
+package com.senac.pi.model.vo;
 
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;

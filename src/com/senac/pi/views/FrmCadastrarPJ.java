@@ -13,7 +13,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import com.senac.pi.controller.CadastrarFornecedor;
 import com.senac.pi.controller.Jtable.JtableFornecedor;
 import com.senac.pi.controller.relatorios.CriarRelatorio;
-import com.senac.pi.model.ModelPessoaJuridica;
+import com.senac.pi.model.vo.ModelPessoaJuridica;
 import com.senac.util.jTable.ModelJTable;
 
 public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
@@ -21,7 +21,7 @@ public final class FrmCadastrarPJ extends javax.swing.JInternalFrame {
     private final CadastrarFornecedor instanceControllerCadastrarFornecedor;
     private JtableFornecedor instanceControllerJtable;
     private int jTableLinhaSelecionada = -1;
-    private List<com.senac.pi.model.ModelPessoaJuridica> fornecedor;
+    private List<com.senac.pi.model.vo.ModelPessoaJuridica> fornecedor;
     private ModelJTable model;
 
     public FrmCadastrarPJ() {

@@ -1,10 +1,10 @@
-package com.senac.pi.dao;
+package com.senac.pi.model.dao;
 
 import com.thoughtworks.xstream.XStream;
 import java.util.List;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import com.senac.pi.model.ModelLogin;
+import com.senac.pi.model.vo.ModelLogin;
 
 public class DaoLogin implements DaoInterface {
 

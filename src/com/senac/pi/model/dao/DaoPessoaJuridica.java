@@ -1,4 +1,4 @@
-package com.senac.pi.dao;
+package com.senac.pi.model.dao;
 
 import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import static com.senac.pi.controller.CadastrarProduto.getProduto;
-import static com.senac.pi.dao.DaoPessoaJuridica.getFornecedor;
-import com.senac.pi.model.ModelPessoaJuridica;
+import static com.senac.pi.model.dao.DaoPessoaJuridica.getFornecedor;
+import com.senac.pi.model.vo.ModelPessoaJuridica;
 
 public class DaoPessoaJuridica implements DaoInterface {
 

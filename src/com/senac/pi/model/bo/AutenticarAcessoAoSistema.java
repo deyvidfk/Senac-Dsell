@@ -1,5 +1,6 @@
-package com.senac.pi.controller;
+package com.senac.pi.model.bo;
 
+import com.senac.pi.controller.CadastrarLogin;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.logging.Level;
@@ -7,7 +8,7 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import static javax.swing.JOptionPane.showMessageDialog;
-import com.senac.pi.model.ModelLogin;
+import com.senac.pi.model.vo.ModelLogin;
 
 public class AutenticarAcessoAoSistema {
 

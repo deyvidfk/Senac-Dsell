@@ -1,4 +1,4 @@
-package com.senac.pi.model;
+package com.senac.pi.model.vo;
 
 import static java.lang.Math.floor;
 import java.util.logging.Logger;

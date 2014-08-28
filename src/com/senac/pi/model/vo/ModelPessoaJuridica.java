@@ -1,5 +1,7 @@
-package com.senac.pi.model;
+package com.senac.pi.model.vo;
 
+import com.senac.pi.model.InterfaceModelContato;
+import com.senac.pi.model.InterfaceModelEndereco;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import com.senac.util.Regex;

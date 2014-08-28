@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import javax.swing.table.AbstractTableModel;
-import com.senac.pi.controller.MensagensDoSistema;
+import com.senac.pi.model.bo.MensagensDoSistema;
 
 public class ModelJTable extends AbstractTableModel {
 

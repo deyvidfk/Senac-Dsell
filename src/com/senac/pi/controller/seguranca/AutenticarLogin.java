@@ -5,8 +5,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import static com.senac.pi.dao.DaoLogin.getLogin;
-import com.senac.pi.model.ModelLogin;
+import static com.senac.pi.model.dao.DaoLogin.getLogin;
+import com.senac.pi.model.vo.ModelLogin;
 
 public class AutenticarLogin {
 

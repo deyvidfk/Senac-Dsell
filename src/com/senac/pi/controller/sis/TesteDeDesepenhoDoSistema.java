@@ -11,10 +11,10 @@ import com.senac.pi.controller.CadastrarProduto;
 import static com.senac.pi.controller.CadastrarProduto.getProduto;
 import com.senac.pi.controller.CadastrarUsuario;
 import com.senac.pi.controller.CadastrarVenda;
-import com.senac.pi.controller.MensagensDoSistema;
-import static com.senac.pi.dao.DaoPessoaFisica.getUsuario;
-import static com.senac.pi.dao.DaoPessoaJuridica.getFornecedor;
-import com.senac.pi.model.ModelPessoaJuridica;
+import com.senac.pi.model.bo.MensagensDoSistema;
+import static com.senac.pi.model.dao.DaoPessoaFisica.getUsuario;
+import static com.senac.pi.model.dao.DaoPessoaJuridica.getFornecedor;
+import com.senac.pi.model.vo.ModelPessoaJuridica;
 import com.senac.util.GeraString;
 import com.senac.util.GerarID;
 

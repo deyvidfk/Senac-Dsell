@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import com.senac.pi.dao.DaoModuloAcesso;
-import com.senac.pi.model.ModelModuloAcesso;
+import com.senac.pi.model.dao.DaoModuloAcesso;
+import com.senac.pi.model.vo.ModelModuloAcesso;
 import com.senac.pi.views.system.Menu;
 
 public class ModuloAcesso {

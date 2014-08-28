@@ -1,24 +1,25 @@
-package com.senac.pi.dao;
+package com.senac.pi.model.dao;
 
 import com.thoughtworks.xstream.XStream;
 import java.util.List;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import com.senac.pi.model.ModelSessao;
+import com.senac.pi.model.vo.ModelModuloAcesso;
+import com.senac.pi.model.vo.ModelPessoaFisica;
 
-public final class DaoSessao implements DaoInterface {
+public class DaoModuloAcesso implements DaoInterface {
 
-    private static List<ModelSessao> _sessao;
+    private static List<ModelModuloAcesso> _moduloAcesso;
 
     private final Source CONEXAO_DB;
     private final XStream XSTREAM;
     private final String FILE_XML;
 
-    public DaoSessao() {
-        this.FILE_XML = "dsell-db-sessao.xml";
+    public DaoModuloAcesso() {
+        this.FILE_XML = "dsell-db-pessoa-fisica-modulo-acesso.xml";
         this.XSTREAM = new XStream();
         this.CONEXAO_DB = new Source();
-        _sessao = readXml();
+        _moduloAcesso = (List<ModelModuloAcesso>) readXml();
     }
 
     @Override
@@ -27,9 +28,8 @@ public final class DaoSessao implements DaoInterface {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public List<ModelSessao> readXml() {
-        return (List<ModelSessao>) XSTREAM.fromXML(CONEXAO_DB.readXml(this.FILE_XML));
+    public List<?> readXml() {
+        return (List<ModelPessoaFisica>) XSTREAM.fromXML(CONEXAO_DB.readXml(this.FILE_XML));
     }
 
     @Override
@@ -41,5 +41,5 @@ public final class DaoSessao implements DaoInterface {
     public void deleteXml(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    private static final Logger LOG = getLogger(DaoSessao.class.getName());
+    private static final Logger LOG = getLogger(DaoModuloAcesso.class.getName());
 }

@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import static javax.swing.UIManager.setLookAndFeel;
 import javax.swing.UnsupportedLookAndFeelException;
-import com.senac.pi.controller.AutenticarAcessoAoSistema;
+import com.senac.pi.model.bo.AutenticarAcessoAoSistema;
 import com.senac.pi.controller.seguranca.Sessao;
-import com.senac.pi.model.ModelLogin;
+import com.senac.pi.model.vo.ModelLogin;
 import com.senac.pi.views.system.ConfigLayout;
 import static com.senac.util.Time.getTime;
 

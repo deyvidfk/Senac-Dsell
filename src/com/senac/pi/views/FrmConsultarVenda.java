@@ -22,11 +22,11 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import com.senac.pi.controller.CadastrarVenda;
 import static com.senac.pi.controller.CadastrarVenda.getRendimentoVendaPorTrimestre;
 import com.senac.pi.controller.relatorios.CriarRelatorio;
-import static com.senac.pi.dao.DaoPessoaJuridica.getForInativos;
-import static com.senac.pi.dao.DaoPessoaJuridica.getFornecedor;
-import static com.senac.pi.dao.DaoPessoaJuridica.getFornecedorAtivo;
-import static com.senac.pi.dao.DaoVenda.getVENDAS;
-import com.senac.pi.model.ModelGrafico;
+import static com.senac.pi.model.dao.DaoPessoaJuridica.getForInativos;
+import static com.senac.pi.model.dao.DaoPessoaJuridica.getFornecedor;
+import static com.senac.pi.model.dao.DaoPessoaJuridica.getFornecedorAtivo;
+import static com.senac.pi.model.dao.DaoVenda.getVENDAS;
+import com.senac.pi.model.vo.ModelGrafico;
 
 public final class FrmConsultarVenda extends javax.swing.JInternalFrame {
 

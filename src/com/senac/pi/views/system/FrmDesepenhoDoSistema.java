@@ -16,7 +16,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import com.senac.pi.controller.sis.TesteDeDesepenhoDoSistema;
-import com.senac.pi.model.ModelGrafico;
+import com.senac.pi.model.vo.ModelGrafico;
 import com.senac.pi.views.FrmConsultarFornecedor;
 import static com.senac.util.Chronometer.elapsedTime;
 import static com.senac.util.Chronometer.start;
