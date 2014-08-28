@@ -11,18 +11,6 @@ import java.io.IOException;
 
 public final class TextTransfer implements ClipboardOwner {
 
-    public static void main(String... aArguments) throws UnsupportedFlavorException {
-        TextTransfer textTransfer = new TextTransfer();
-
-        //display what is currently on the clipboard
-        System.out.println("Clipboard contains:" + textTransfer.getClipboardContents());
-
-        //change the contents and then re-display
-        textTransfer.setClipboardContents("blah, blah, blah");
-        System.out.println("Clipboard contains:" + textTransfer.getClipboardContents());
-
-    }
-
     /**
      * Empty implementation of the ClipboardOwner interface.
      */
