@@ -6,7 +6,7 @@ import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
-import com.senac.pi.controller.CadastrarVenda;
+import com.senac.pi.model.bo.CadastrarVenda;
 import static com.senac.pi.model.dao.DaoVenda.getVENDAS;
 import com.senac.pi.views.FrmCadastrarVenda;
 import com.senac.util.jTable.CellRenderer;

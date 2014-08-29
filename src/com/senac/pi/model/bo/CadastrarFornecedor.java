@@ -1,4 +1,4 @@
-package com.senac.pi.controller;
+package com.senac.pi.model.bo;
 
 import com.senac.pi.model.bo.MensagensDoSistema;
 import java.util.logging.Level;
@@ -7,7 +7,7 @@ import static java.util.logging.Logger.getLogger;
 import javax.annotation.Resource;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
-import static com.senac.pi.controller.CadastrarProduto.searchRecordSize;
+import static com.senac.pi.model.bo.CadastrarProduto.searchRecordSize;
 import com.senac.pi.controller.Jtable.JtableFornecedor;
 import com.senac.pi.model.dao.DaoPessoaJuridica;
 import com.senac.pi.model.vo.ModelPessoaJuridica;

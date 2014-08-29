@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
 import static javax.swing.JOptionPane.showMessageDialog;
 import com.senac.pi.model.bo.AutenticarAcessoAoSistema;
-import com.senac.pi.controller.CadastrarLogin;
+import com.senac.pi.model.bo.CadastrarLogin;
 import com.senac.pi.model.bo.MensagensDoSistema;
 import com.senac.pi.controller.seguranca.ModuloAcesso;
 import com.senac.pi.controller.seguranca.Sessao;

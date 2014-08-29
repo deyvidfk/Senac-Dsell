@@ -10,7 +10,7 @@ import static java.util.logging.Logger.getLogger;
 import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.UIManager.getInstalledLookAndFeels;
 import static javax.swing.UIManager.setLookAndFeel;
-import com.senac.pi.controller.CadastrarLogin;
+import com.senac.pi.model.bo.CadastrarLogin;
 import com.senac.pi.controller.seguranca.ModuloAcesso;
 import static com.senac.pi.controller.seguranca.Sessao.getSessao;
 import com.senac.pi.model.vo.ModelLogin;

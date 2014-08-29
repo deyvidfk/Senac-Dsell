@@ -1,4 +1,4 @@
-package com.senac.pi.controller;
+package com.senac.pi.model.bo;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;

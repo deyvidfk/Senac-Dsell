@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import com.senac.pi.controller.CadastrarUsuario;
+import com.senac.pi.model.bo.CadastrarUsuario;
 import com.senac.pi.model.dao.DaoSessao;
 import com.senac.pi.model.vo.ModelLogin;
 import com.senac.pi.model.vo.ModelPessoaFisica;

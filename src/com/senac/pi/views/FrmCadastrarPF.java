@@ -11,7 +11,7 @@ import static java.util.logging.Logger.getLogger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showConfirmDialog;
 import static javax.swing.JOptionPane.showConfirmDialog;
-import com.senac.pi.controller.CadastrarUsuario;
+import com.senac.pi.model.bo.CadastrarUsuario;
 import com.senac.pi.controller.Jtable.JtableUsuario;
 import com.senac.util.Regex;
 import com.senac.util.TextTransfer;

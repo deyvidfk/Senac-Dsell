@@ -1,4 +1,4 @@
-package com.senac.pi.controller;
+package com.senac.pi.model.bo;
 
 import java.util.ArrayList;
 import static java.util.Collections.unmodifiableList;

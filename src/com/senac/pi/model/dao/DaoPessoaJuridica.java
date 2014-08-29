@@ -10,7 +10,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import static com.senac.pi.controller.CadastrarProduto.getProduto;
+import static com.senac.pi.model.bo.CadastrarProduto.getProduto;
 import static com.senac.pi.model.dao.DaoPessoaJuridica.getFornecedor;
 import com.senac.pi.model.vo.ModelPessoaJuridica;
 

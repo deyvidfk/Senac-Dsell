@@ -4,8 +4,8 @@ import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.util.logging.Logger;
 import static java.util.logging.Logger.getLogger;
-import com.senac.pi.controller.CadastrarProduto;
-import static com.senac.pi.controller.CadastrarProduto.searchRecordSize;
+import com.senac.pi.model.bo.CadastrarProduto;
+import static com.senac.pi.model.bo.CadastrarProduto.searchRecordSize;
 import com.senac.pi.controller.Jtable.JtableProduto;
 
 public final class FrmCadastrarProd extends javax.swing.JInternalFrame {

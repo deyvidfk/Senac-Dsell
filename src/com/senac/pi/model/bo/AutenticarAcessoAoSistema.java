@@ -1,6 +1,5 @@
 package com.senac.pi.model.bo;
 
-import com.senac.pi.controller.CadastrarLogin;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.logging.Level;
